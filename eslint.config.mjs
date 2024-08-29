@@ -50,6 +50,7 @@ export default typescriptEslint.config(
             { pattern: '@app/**', group: 'internal' },
             { pattern: '@api/**', group: 'internal' },
             { pattern: '@components/**', group: 'internal' },
+            { pattern: '@store/**', group: 'internal' },
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
         },

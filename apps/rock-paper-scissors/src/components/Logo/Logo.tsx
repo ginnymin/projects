@@ -1,11 +1,17 @@
-import type { FC, PropsWithChildren } from 'react';
+import Image from 'next/image';
+import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 
-import styles from './Logo.module.scss';
+import LogoSVG from './logo.svg';
 
-type Props = {
-  property?: string;
-};
+type Props = HTMLAttributes<HTMLImageElement>;
 
-export const Logo: FC<PropsWithChildren<Props>> = ({ children }) => {
-  return <div className={styles.className}>{children}</div>;
+export const Logo: FC<PropsWithChildren<Props>> = ({ ...props }) => {
+  return (
+    <Image
+      {...props}
+      src={LogoSVG}
+      alt="ROCK PAPER SCISSORS LIZARD SPOCK"
+      priority
+    />
+  );
 };

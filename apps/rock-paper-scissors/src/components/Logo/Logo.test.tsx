@@ -4,8 +4,10 @@ import { Logo } from '.';
 
 describe('Components: Logo', () => {
   it('should render', () => {
-    render(<Logo>This is a test</Logo>);
+    render(<Logo />);
 
-    expect(screen.getByText(/This is a test/)).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'ROCK PAPER SCISSORS LIZARD SPOCK' })
+    ).toBeVisible();
   });
 });

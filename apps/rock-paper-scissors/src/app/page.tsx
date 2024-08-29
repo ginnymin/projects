@@ -1,5 +1,7 @@
-const Home = () => {
-  return <>Hello World</>;
+import { Game } from '@components/Game';
+
+const Page = () => {
+  return <Game />;
 };
 
-export default Home;
+export default Page;

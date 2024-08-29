@@ -4,10 +4,12 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": [
+    "types.d.ts",
     "**/*.js",
     "**/*.mjs",
     "**/*.ts",
