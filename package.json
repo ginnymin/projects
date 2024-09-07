@@ -3,14 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "workspaces": [
+    "apps/rest-countries-switcher",
     "apps/rock-paper-scissors"
   ],
   "scripts": {
     "build:scripts": "tsc --project scripts/tsconfig.scripts.json",
+    "generate:app": "yarn build:scripts && node scripts/generate-app/generate.js",
     "generate:component": "yarn build:scripts && node scripts/generate-component/generate.js",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint --quiet",
     "test": "yarn workspaces run test --silent",
+    "dev:countries": "yarn workspace rest-countries-switcher dev",
     "dev:rock": "yarn workspace rock-paper-scissors dev"
   },
   "dependencies": {
