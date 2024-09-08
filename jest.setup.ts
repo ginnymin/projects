@@ -4,3 +4,16 @@
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+
+global.ResizeObserver = class FakeResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
+global.fetch = jest.fn().mockImplementation(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve([]),
+  })
+);
