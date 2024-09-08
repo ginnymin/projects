@@ -9,6 +9,9 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const config = {
+  globals: {
+    fetch: global.fetch,
+  },
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/../../jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',

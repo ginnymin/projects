@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  a,
+  button {
+    &:focus,
+    &:focus-visible {
+      @apply outline-2 outline-gray-300;
+    }
+  }
+}
+
+@layer utilities {
+  .container-shadow {
+    @apply rounded-md shadow-md shadow-black/5 bg-white dark:bg-blue-dark text-blue-dark-text dark:text-white;
+  }
+
+  .container-shadow-focus {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-gray-300;
+    }
+  }
+}

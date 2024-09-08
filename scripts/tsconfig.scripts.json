@@ -15,5 +15,5 @@
     "incremental": true,
     "types": ["node"]
   },
-  "include": ["generate-component/generate.ts"]
+  "include": ["generate-app/generate.ts", "generate-component/generate.ts"]
 }
