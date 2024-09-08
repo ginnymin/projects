@@ -9,7 +9,16 @@ const font = Nunito_Sans({ subsets: ['latin'], weight: ['300', '600', '800'] });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/**
+         * system dark mode detection
+         */}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: process.env.MODE_DETECT }}
+        />
+      </head>
       <body
         className={clsx(
           'min-h-screen flex flex-col',
