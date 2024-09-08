@@ -34,7 +34,9 @@ export async function fetcher<P extends FetcherPaths>([path, param]: [
   const data = (await response.json()) as ApiCountryBase[] | ApiCountry;
 
   const transformedData = Array.isArray(data)
-    ? data.map(transformCountry)
+    ? data
+        .map(transformCountry)
+        .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
     : transformCountry(data);
 
   return transformedData;
