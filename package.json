@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "workspaces": [
+    "apps/favorite-dogs-matcher",
     "apps/rest-countries-switcher",
     "apps/rock-paper-scissors"
   ],
@@ -14,6 +15,7 @@
     "lint": "yarn workspaces run lint --quiet",
     "test": "yarn workspaces run test --silent",
     "dev:countries": "yarn workspace rest-countries-switcher dev",
+    "dev:dogs": "yarn workspace favorite-dogs-matcher dev",
     "dev:rock": "yarn workspace rock-paper-scissors dev"
   },
   "dependencies": {

@@ -40,3 +40,4 @@ yarn-error.log*
 # other
 notes
 scripts/generate-component/generate.js
+scripts/generate-app/generate.js

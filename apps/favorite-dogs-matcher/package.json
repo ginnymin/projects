@@ -1,0 +1,19 @@
+{
+  "name": "favorite-dogs-matcher",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc && eslint .",
+    "test": "jest"
+  },
+  "dependencies": {
+    "set-cookie-parser": "2.7.0",
+    "swr": "2.2.5"
+  },
+  "devDependencies": {
+    "@types/set-cookie-parser": "2.4.10"
+  }
+}
