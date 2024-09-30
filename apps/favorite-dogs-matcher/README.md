@@ -3,8 +3,7 @@
 ## Table of contents
 
 - [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+  - [Scripts](#scripts)
   - [Links](#links)
   - [Built with](#built-with)
 
@@ -12,10 +11,16 @@
 
 ### Scripts
 
+- `yarn dev` - Runs the application locally via the NextJS development server
+- `yarn test` - Runs all unit tests in the application
+- `yarn lint` - Runs `tsc` and `eslint` to validate types and lint rules
+- `yarn build` - Builds the application for production
+- `yarn start` - Runs the application locally against the production build (must run `build` first)
+
 ### Links
 
 - Solution URL: https://github.com/ginnymin/projects/tree/main/apps/favorite-dogs-matcher
-- Live Site URL:
+- Live Site URL: https://favorite-dogs-matcher.vercel.app/
 
 ### Built with
 

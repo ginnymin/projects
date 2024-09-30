@@ -45,6 +45,10 @@ export const getDogs = async ([path, query]: [
   return result;
 };
 
+/**
+ *
+ * Calls /dogs with array of IDs to get full data for dogs
+ */
 export const getDogsByIds = async ([path, ids]: [
   Extract<FetcherPaths, '/dogs'>,
   string[]

@@ -26,6 +26,11 @@ const defaultParams = new URLSearchParams();
 defaultParams.set('size', SIZE.toString());
 defaultParams.set('from', '0');
 
+/**
+ *
+ * TODO: Look into breaking down into sub components
+ */
+
 export const DogsGrid: FC<Props> = () => {
   const [selectedDogs, setSelectedDogs] = useState<DogType[]>([]);
   const [selectedBreeds, setSelectedBreeds] = useState<string[]>([]);
