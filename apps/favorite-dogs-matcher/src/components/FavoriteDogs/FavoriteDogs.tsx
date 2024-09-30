@@ -23,11 +23,13 @@ import { Grid } from '@components/Grid';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   selectedDogs: DogType[];
-  onRemove?: (dog: DogType) => void;
+  onRemove: (dog: DogType) => void;
+  onReset: () => void;
 };
 
 export const FavoriteDogs: FC<Props> = ({
   className,
+  onReset,
   onRemove,
   selectedDogs,
 }) => {
@@ -84,16 +86,29 @@ export const FavoriteDogs: FC<Props> = ({
             <p>
               You&apos;ve selected {selectedDogs.length} dogs so far. Click on a
               dog below to de-select it. Ready to get matched? Click the{' '}
-              <em>Find my match</em> button below!
+              <em className="font-semibold">Find my match</em> button below! You
+              can also click <em>Reset</em> to remove your selections and return
+              to the dashboard.
             </p>
-            <Button
-              size="large"
-              className="block my-6 w-full max-w-96 mx-auto"
-              disabled={isLoading}
-              onClick={handleMatch}
-            >
-              {isLoading ? 'Matching...' : 'Find my match!'}
-            </Button>
+            <div className="flex justify-center gap-4">
+              <Button
+                variant="outline"
+                size="large"
+                className="my-6 max-w-96"
+                disabled={isLoading}
+                onClick={onReset}
+              >
+                Reset
+              </Button>
+              <Button
+                size="large"
+                className="my-6 w-full max-w-96"
+                disabled={isLoading}
+                onClick={handleMatch}
+              >
+                {isLoading ? 'Matching...' : 'Find my match!'}
+              </Button>
+            </div>
             <Grid>
               {selectedDogs.map((dog) => (
                 <li key={dog.id}>

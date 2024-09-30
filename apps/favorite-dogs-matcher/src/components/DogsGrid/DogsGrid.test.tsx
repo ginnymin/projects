@@ -194,6 +194,29 @@ describe('Components: DogsGrid', () => {
     await userEvent.click(screen.getAllByText('Luna')[1]);
 
     expect(
+      screen.queryByRole('button', { name: /View your favorits/ })
+    ).toBeNull();
+    expect(
+      screen.queryByRole('button', { name: 'De-select as a favorite' })
+    ).toBeNull();
+  });
+
+  it('reset selection via the favorites dialog', async () => {
+    render(<DogsGrid />);
+
+    await userEvent.click(screen.getByText('Luna'));
+    await userEvent.click(screen.getByText('Sunny'));
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: 'View your favorites. Number of favorites: 2',
+      })
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Reset' }));
+
+    expect(
+      screen.queryByRole('button', { name: /View your favorits/ })
+    ).toBeNull();
+    expect(
       screen.queryByRole('button', { name: 'De-select as a favorite' })
     ).toBeNull();
   });

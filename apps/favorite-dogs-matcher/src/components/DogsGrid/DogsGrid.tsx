@@ -80,6 +80,10 @@ export const DogsGrid: FC<Props> = () => {
     );
   }, []);
 
+  const handleReset = useCallback(() => {
+    setSelectedDogs([]);
+  }, []);
+
   const handlePrevious = useCallback(() => {
     if (data?.prev !== undefined) {
       setPaginationParams(data.prev);
@@ -132,6 +136,7 @@ export const DogsGrid: FC<Props> = () => {
             className="ml-auto"
             selectedDogs={selectedDogs}
             onRemove={handleSelect}
+            onReset={handleReset}
           />
         )}
       </div>
