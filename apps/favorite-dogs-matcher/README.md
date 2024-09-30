@@ -3,11 +3,20 @@
 ## Table of contents
 
 - [Overview](#overview)
+  - [Getting started](#getting-started)
   - [Scripts](#scripts)
   - [Links](#links)
   - [Built with](#built-with)
 
 ## Overview
+
+### Getting started
+
+To run the application locally:
+
+- Run `yarn` to install dependencies
+- Run `yarn dev`
+- Open a browser and navigation to `http://localhost:3000` (the port number could be different if you have another application running locally. Check the console to verify the port number)
 
 ### Scripts
 
