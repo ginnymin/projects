@@ -163,7 +163,7 @@ export const DogsGrid: FC<Props> = () => {
         </Grid>
       )}
       {Array.isArray(data?.dogs) && data.dogs.length > 0 && (
-        <div className="flex justify-between -mx-2 px-2 py-4 sticky bottom-0 bg-stone-200">
+        <div className="flex justify-between -mx-2 px-2 py-4 mt-1.5 sticky bottom-0 bg-stone-200">
           <Button
             disabled={data?.prev === undefined || page === 1}
             onClick={handlePrevious}
