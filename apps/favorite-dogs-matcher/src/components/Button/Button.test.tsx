@@ -32,14 +32,14 @@ describe('Components: Button', () => {
     );
     expect(
       screen.getByRole('button', { name: 'This is a test' })
-    ).not.toHaveClass('p-4');
+    ).not.toHaveClass('px-6 py-4');
   });
 
   it('renders large size', () => {
     render(<Button size="large">This is a test</Button>);
 
     expect(screen.getByRole('button', { name: 'This is a test' })).toHaveClass(
-      'p-4'
+      'px-6 py-4'
     );
     expect(
       screen.getByRole('button', { name: 'This is a test' })

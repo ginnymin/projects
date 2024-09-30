@@ -26,7 +26,7 @@ export const Button: FC<Props> = ({
     'rounded element-focus text-center element',
     {
       'px-4 py-2 text-sm': size === 'medium',
-      'p-4': size === 'large',
+      'px-6 py-4': size === 'large',
       'bg-purple-900 text-white ': variant === 'solid',
       'bg-white font-semibold text-purple-900 border border-2 border-purple-900':
         variant === 'outline',

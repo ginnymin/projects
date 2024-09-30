@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { FavoriteDogs } from '.';
 
 const mockRemove = jest.fn();
+const mockReset = jest.fn();
 const mockGetMatch = jest.fn().mockReturnValue('09876');
 const mockPush = jest.fn();
 
@@ -38,7 +39,13 @@ const selectedDogs = [
 
 describe('Components: FavoriteDogs', () => {
   it('should render button', () => {
-    render(<FavoriteDogs selectedDogs={selectedDogs} />);
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onRemove={mockRemove}
+        onReset={mockReset}
+      />
+    );
 
     expect(
       screen.getByRole('button', {
@@ -49,7 +56,13 @@ describe('Components: FavoriteDogs', () => {
   });
 
   it('renders amd toggles dialog', async () => {
-    render(<FavoriteDogs selectedDogs={selectedDogs} />);
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onRemove={mockRemove}
+        onReset={mockReset}
+      />
+    );
 
     await userEvent.click(screen.getByRole('button'));
 
@@ -61,27 +74,39 @@ describe('Components: FavoriteDogs', () => {
   });
 
   it('renders dialog content', async () => {
-    render(<FavoriteDogs selectedDogs={selectedDogs} />);
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onRemove={mockRemove}
+        onReset={mockReset}
+      />
+    );
 
     await userEvent.click(screen.getByRole('button'));
 
     expect(
       screen.getByRole('heading', { name: 'Your favorites' })
     ).toBeVisible();
-    expect(screen.getByText(/You've selected 2 dogs so far. /)).toBeVisible();
+    expect(screen.getByText(/You've selected 2 dogs so far./)).toBeVisible();
     expect(
       screen.getByRole('button', { name: 'Find my match!' })
     ).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Reset' })).toBeVisible();
 
     expect(screen.getByRole('heading', { name: 'Luna' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Sunny' })).toBeVisible();
   });
 
   it('calls onRemove', async () => {
-    render(<FavoriteDogs selectedDogs={selectedDogs} onRemove={mockRemove} />);
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onReset={mockReset}
+        onRemove={mockRemove}
+      />
+    );
 
     await userEvent.click(screen.getByRole('button'));
-
     await userEvent.click(screen.getByRole('heading', { name: 'Luna' }));
 
     expect(mockRemove).toHaveBeenCalledWith({
@@ -94,11 +119,31 @@ describe('Components: FavoriteDogs', () => {
     });
   });
 
-  it('calls getMatch and routes to /match', async () => {
-    render(<FavoriteDogs selectedDogs={selectedDogs} onRemove={mockRemove} />);
+  it('calls onReset', async () => {
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onReset={mockReset}
+        onRemove={mockRemove}
+      />
+    );
 
     await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button', { name: 'Reset' }));
 
+    expect(mockReset).toHaveBeenCalled();
+  });
+
+  it('calls getMatch and routes to /match', async () => {
+    render(
+      <FavoriteDogs
+        selectedDogs={selectedDogs}
+        onReset={mockReset}
+        onRemove={mockRemove}
+      />
+    );
+
+    await userEvent.click(screen.getByRole('button'));
     await userEvent.click(
       screen.getByRole('button', { name: 'Find my match!' })
     );
