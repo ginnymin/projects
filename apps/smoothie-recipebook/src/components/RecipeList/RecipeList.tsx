@@ -7,6 +7,7 @@ import {
   ChangeEventHandler,
   useCallback,
   useEffect,
+  useMemo,
   useState,
   type FC,
   type HTMLAttributes,
@@ -24,6 +25,17 @@ export const RecipeList: FC<Props> = () => {
   const { getAll } = useStore();
   const [data, setData] = useState<Recipe[] | undefined>();
   const [filter, setFilter] = useState('');
+
+  const filteredData = useMemo(
+    () =>
+      filter.trim() !== ''
+        ? data?.filter(
+            (recipe) =>
+              recipe.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+          )
+        : data,
+    [data, filter]
+  );
 
   const handleFilter: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
@@ -44,14 +56,6 @@ export const RecipeList: FC<Props> = () => {
   }, [getAll, pathname]);
 
   const containerClass = 'bg-slate-100 rounded-lg p-4 min-h-48';
-
-  const filteredData =
-    filter.trim() !== ''
-      ? data?.filter(
-          (recipe) =>
-            recipe.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-        )
-      : data;
 
   return (
     <div>

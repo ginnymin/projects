@@ -85,7 +85,7 @@ export const add = <T>(
   storeName: StoreNames,
   data: T
 ): Promise<T | string | null> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, version);
 
     request.onsuccess = () => {
@@ -99,9 +99,9 @@ export const add = <T>(
       console.log('store add() onerror', data);
       const error = request.error?.message;
       if (error) {
-        resolve(error);
+        new Error(error);
       } else {
-        resolve('unknown error');
+        reject(new Error('unknown error'));
       }
     };
   });
@@ -141,7 +141,7 @@ export const update = <T>(storeName: StoreNames, key: number, payload: T) => {
 };
 
 export const remove = (storeName: StoreNames, key: number) => {
-  return new Promise<boolean>((resolve) => {
+  return new Promise<boolean>((resolve, reject) => {
     // again open the connection
     const request = indexedDB.open(dbName, version);
 
@@ -155,7 +155,9 @@ export const remove = (storeName: StoreNames, key: number) => {
       };
 
       res.onerror = () => {
-        resolve(false);
+        console.log('store remove() onerror');
+        const error = res.error?.message;
+        reject(new Error(error));
       };
     };
   });
