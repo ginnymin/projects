@@ -29,7 +29,10 @@ export default typescriptEslint.config(
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
-        { argsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
       ],
       'import/order': [
         'error',
