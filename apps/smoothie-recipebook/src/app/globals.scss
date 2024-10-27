@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  a,
+  button {
+    &:focus,
+    &:focus-visible {
+      @apply outline-2 outline-teal-700;
+    }
+  }
+}
+
+@layer utilities {
+  .element-focus {
+    &:enabled {
+      &:focus,
+      &:focus-visible,
+      &:active,
+      &[data-active] {
+        @apply outline outline-2 outline-teal-700;
+      }
+    }
+  }
+  .destructive-focus {
+    &:enabled {
+      &:focus,
+      &:focus-visible,
+      &:active,
+      &[data-active] {
+        @apply outline outline-2 outline-red-700;
+      }
+    }
+  }
+}

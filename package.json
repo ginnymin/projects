@@ -5,7 +5,8 @@
   "workspaces": [
     "apps/favorite-dogs-matcher",
     "apps/rest-countries-switcher",
-    "apps/rock-paper-scissors"
+    "apps/rock-paper-scissors",
+    "apps/smoothie-recipebook"
   ],
   "scripts": {
     "build:scripts": "tsc --project scripts/tsconfig.scripts.json",
@@ -16,7 +17,8 @@
     "test": "yarn workspaces run test --silent",
     "dev:countries": "yarn workspace rest-countries-switcher dev",
     "dev:dogs": "yarn workspace favorite-dogs-matcher dev",
-    "dev:rock": "yarn workspace rock-paper-scissors dev"
+    "dev:rock": "yarn workspace rock-paper-scissors dev",
+    "dev:smoothies": "yarn workspace smoothie-recipebook dev"
   },
   "dependencies": {
     "@headlessui/react": "2.1.10",
