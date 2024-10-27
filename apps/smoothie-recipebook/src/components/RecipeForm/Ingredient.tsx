@@ -87,11 +87,11 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
         label="Ingredient"
         id="ingredient-name"
         type="text"
-        className="flex-1"
+        className="flex-1 min-w-32"
         hideLabel={isEdit}
       />
       <Button
-        className={clsx({ 'mt-6': !isEdit })}
+        className={clsx({ 'self-end py-2.5 sm:mt-6 sm:self-stretch': !isEdit })}
         onClick={handleSubmit}
         disabled={isDisabled}
       >

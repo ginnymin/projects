@@ -79,12 +79,15 @@ export const RecipeForm: FC<Props> = ({
 
       <h3 className="mt-4 mb-2 font-semibold">Add/edit ingredients:</h3>
       <ul className="flex flex-col gap-2">
-        <li className="flex gap-2 border-b-2 border-b-neutral-200 mb-2 pb-4">
+        <li className="flex gap-2 flex-wrap sm:flex-nowrap border-b-2 border-b-neutral-200 mb-2 pb-4">
           <Ingredient onSubmit={onAddIngredient} />
         </li>
 
         {ingredients.map((ingredient, index) => (
-          <li key={`${ingredient.name}-${index}`} className="flex gap-2">
+          <li
+            key={`${ingredient.name}-${index}`}
+            className="flex gap-2 flex-wrap sm:flex-nowrap"
+          >
             <Ingredient
               ingredient={ingredient}
               onSubmit={onEditIngredient(index)}
