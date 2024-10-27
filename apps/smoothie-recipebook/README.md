@@ -43,7 +43,7 @@ According to Wikipedia:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - For styles
-- [HeadlessUI](https://headlessui.com/) - Headless, accessible React components
+- [IndexedDb](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - For local session storage
 
 ## Scripts
 
