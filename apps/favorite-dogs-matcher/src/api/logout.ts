@@ -11,5 +11,7 @@ import { fetcher } from './fetcher';
 export const logout = async () => {
   await fetcher(['/auth/logout', undefined, '']);
 
-  cookies().delete('fetch-access-token');
+  const cookiesResult = await cookies();
+
+  cookiesResult.delete('fetch-access-token');
 };

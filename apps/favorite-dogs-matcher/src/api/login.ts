@@ -12,7 +12,7 @@ type Result = {
 };
 
 type CookieOptions = NonNullable<
-  Parameters<ReturnType<typeof cookies>['set']>[2]
+  Parameters<Awaited<ReturnType<typeof cookies>>['set']>[2]
 >;
 
 /**
@@ -45,10 +45,12 @@ export const login = async (
       response.headers.getSetCookie()
     );
 
+    const cookiesResult = await cookies();
+
     parsedCookies.forEach((c) => {
       const { name, value, ...opts } = c;
 
-      cookies().set(name, value, {
+      cookiesResult.set(name, value, {
         ...opts,
         sameSite: (opts.sameSite as CookieOptions['sameSite']) ?? undefined,
       });
@@ -58,6 +60,6 @@ export const login = async (
     return { error: true };
   }
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard'); // eslint-disable-line @typescript-eslint/no-unsafe-call
   redirect('/dashboard', RedirectType.replace);
 };

@@ -21,11 +21,13 @@ export async function fetcher([path, queryParams, bodyParams]: [
     queryParams !== undefined ? `?${queryParams}` : ''
   }`;
 
+  const cookiesResult = await cookies();
+
   const response = await fetch(url, {
     credentials: 'include',
     method: bodyParams !== undefined ? 'POST' : 'GET',
     headers: {
-      Cookie: cookies().toString(),
+      Cookie: cookiesResult.toString(),
       'Content-Type': 'application/json',
     },
     body: bodyParams,
@@ -36,7 +38,7 @@ export async function fetcher([path, queryParams, bodyParams]: [
     console.log('fetcher error', url, response);
 
     if (response.status === 401) {
-      revalidatePath('/');
+      revalidatePath('/'); // eslint-disable-line @typescript-eslint/no-unsafe-call
       redirect('/', RedirectType.replace);
     }
 

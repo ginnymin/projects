@@ -5,7 +5,10 @@ import { DogDetail } from '@components/DogDetail';
 import { Header } from '@components/Header';
 import { SWRProvider } from '@components/SWRProvider';
 
-const Page = async ({ params: { id } }: { params: { id: string } }) => {
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const p = await params;
+  const id = p.id;
+
   const dogs = await getDogsByIds(['/dogs', [id]]);
   const dog = dogs[0];
 
