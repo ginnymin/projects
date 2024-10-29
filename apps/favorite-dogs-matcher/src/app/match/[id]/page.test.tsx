@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { render, screen } from '@testing-library/react';
 
 jest.mock('next/navigation', () => ({
@@ -22,7 +26,9 @@ jest.mock('@api/getDogs', () => ({
 import Page from './page';
 
 const resolveComponent = async (Component: typeof Page) => {
-  const ComponentResolved = await Component({ params: { id: '1' } });
+  const ComponentResolved = await Component({
+    params: Promise.resolve({ id: '1' }),
+  });
   return () => ComponentResolved;
 };
 
