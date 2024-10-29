@@ -17,3 +17,7 @@ global.fetch = jest.fn().mockImplementation(() =>
     json: () => Promise.resolve([]),
   })
 );
+
+jest.mock('next/cache', () => ({
+  revalidatePath: jest.fn(),
+}));

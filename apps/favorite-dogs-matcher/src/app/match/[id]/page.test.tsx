@@ -1,7 +1,3 @@
-/**
- * @jest-environment node
- */
-
 import { render, screen } from '@testing-library/react';
 
 jest.mock('next/navigation', () => ({
