@@ -4,7 +4,6 @@ import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslintConfig from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
-// @ts-expect-error eslint-plugin-jest does not have a declaration file
 import eslintPluginJest from 'eslint-plugin-jest';
 import typescriptEslint from 'typescript-eslint';
 
