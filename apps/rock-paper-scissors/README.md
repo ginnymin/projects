@@ -32,7 +32,7 @@ Users should be able to:
 ### Built in and with:
 
 - Typescript
-- Jest and React Testing Library
+- Vitest and React Testing Library
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - For styles

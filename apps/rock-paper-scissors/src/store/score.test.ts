@@ -1,6 +1,6 @@
 import { store } from './score';
 
-const mockCallback = jest.fn();
+const mockCallback = vi.fn();
 
 describe('Store: score', () => {
   it('initializes at 0', () => {

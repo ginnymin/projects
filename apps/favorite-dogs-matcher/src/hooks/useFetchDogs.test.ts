@@ -4,10 +4,10 @@ import { getDogs } from '@api/getDogs';
 
 import { useFetchDogs } from './useFetchDogs';
 
-const mockSwr = jest.fn().mockReturnValue({ data: {} });
+const mockSwr = vi.fn().mockReturnValue({ data: {} });
 
 /* eslint-disable */
-jest.mock('swr', () => ({
+vi.mock('swr', () => ({
   __esModule: true,
   default: (...args: any) => mockSwr(...args),
 }));

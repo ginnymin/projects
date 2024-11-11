@@ -2,15 +2,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import { CountryDetail } from '.';
 
-const mockBack = jest.fn();
+const mockBack = vi.fn();
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     back: mockBack,
   }),
 }));
 
-jest.mock('@api/hooks', () => ({
+vi.mock('@api/hooks', () => ({
   useFetchCountries: () => ({
     data: [
       { id: 'CAN', name: 'Canada' },

@@ -9,15 +9,15 @@ type Options = {
   pause?: boolean;
 };
 
-const mockUseRandomChoice = jest.fn();
-const mockUseResult = jest.fn();
+const mockUseRandomChoice = vi.fn();
+const mockUseResult = vi.fn();
 
-jest.mock('./useRandomChoice', () => ({
-  useRandomChoice: (p: Options) => mockUseRandomChoice(p) as jest.Mock,
+vi.mock('./useRandomChoice', () => ({
+  useRandomChoice: (p: Options) => mockUseRandomChoice(p) as typeof vi.fn,
 }));
 
-jest.mock('./useResult', () => ({
-  useResult: (p: Options) => mockUseResult(p) as jest.Mock,
+vi.mock('./useResult', () => ({
+  useResult: (p: Options) => mockUseResult(p) as typeof vi.fn,
 }));
 
 describe('Components: Game: useProgress', () => {

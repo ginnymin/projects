@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { RecipeForm } from '.';
 
-const mockOnSave = jest.fn();
-const mockOnRemove = jest.fn();
+const mockOnSave = vi.fn();
+const mockOnRemove = vi.fn();
 
 describe('Components: RecipeForm', () => {
   beforeEach(() => {

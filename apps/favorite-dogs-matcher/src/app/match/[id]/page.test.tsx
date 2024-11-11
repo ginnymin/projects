@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    replace: jest.fn(),
+    replace: vi.fn(),
   }),
 }));
 
-jest.mock('@api/getDogs', () => ({
-  getDogsByIds: jest.fn().mockReturnValue([
+vi.mock('@api/getDogs', () => ({
+  getDogsByIds: vi.fn().mockReturnValue([
     {
       age: 8,
       breed: 'Aussie',

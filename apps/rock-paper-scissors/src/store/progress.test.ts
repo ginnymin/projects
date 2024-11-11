@@ -2,7 +2,7 @@ import { HandType, ResultType } from '@components/constants';
 
 import { store } from './progress';
 
-const mockCallback = jest.fn();
+const mockCallback = vi.fn();
 
 describe('Store: progress', () => {
   it('returns undefined initial values', () => {

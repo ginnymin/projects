@@ -4,10 +4,10 @@ import { HandType, ResultType } from '@components/constants';
 
 import { Game } from '.';
 
-const mockUseProgress = jest.fn();
+const mockUseProgress = vi.fn();
 
-jest.mock('./useProgress', () => ({
-  useProgress: () => mockUseProgress() as jest.Mock,
+vi.mock('./useProgress', () => ({
+  useProgress: () => mockUseProgress() as typeof vi.fn,
 }));
 
 describe('Components: Game', () => {

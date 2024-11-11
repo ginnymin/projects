@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Dog } from '.';
 
-const mockSelect = jest.fn();
+const mockSelect = vi.fn();
 
 describe('Components: Dog', () => {
   it('renders', () => {

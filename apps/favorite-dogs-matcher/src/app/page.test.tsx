@@ -3,11 +3,15 @@ import { render, screen } from '@testing-library/react';
 import Page from './page';
 
 /* eslint-disable */
-jest.mock('react-dom', () => ({
-  ...jest.requireActual('react-dom'),
-  useFormState: jest.fn().mockReturnValue([{}, '/action']),
-  useFormStatus: jest.fn().mockReturnValue({ pending: false }),
-}));
+vi.mock('react-dom', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    // @ts-expect-error
+    ...actual,
+    useFormState: vi.fn().mockReturnValue([{}, '/action']),
+    useFormStatus: vi.fn().mockReturnValue({ pending: false }),
+  };
+});
 /* eslint-enable */
 
 describe('App router: Login', () => {

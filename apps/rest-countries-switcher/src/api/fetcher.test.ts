@@ -25,7 +25,7 @@ const mockDataDetails = {
   tld: ['.us'],
 };
 
-const mockFetch = jest.fn().mockImplementation((url?: string) =>
+const mockFetch = vi.fn().mockImplementation((url?: string) =>
   url?.includes('/name')
     ? Promise.resolve({
         ok: false,

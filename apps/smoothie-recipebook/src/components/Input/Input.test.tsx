@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Input } from '.';
 
-const mockOnChange = jest.fn();
+const mockOnChange = vi.fn();
 
 describe('Components: Input', () => {
   beforeEach(() => {

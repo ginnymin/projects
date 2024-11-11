@@ -2,9 +2,9 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 
 import { Country } from '.';
 
-const mockPush = jest.fn();
+const mockPush = vi.fn();
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     push: mockPush,
   }),

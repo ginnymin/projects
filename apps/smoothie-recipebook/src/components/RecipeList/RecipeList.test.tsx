@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { RecipeList } from '.';
 
-const mockGetAll = jest.fn().mockReturnValue(
+const mockGetAll = vi.fn().mockReturnValue(
   Promise.resolve([
     { id: 1, name: 'Recipe 1' },
     { id: 2, name: 'Recipe 2' },
@@ -11,24 +11,27 @@ const mockGetAll = jest.fn().mockReturnValue(
   ])
 );
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
 
-jest.mock('@store/useStore', () => ({
+vi.mock('@store/useStore', () => ({
   useStore: () => ({
     getAll: mockGetAll,
   }),
 }));
 
 describe('Components: RecipeList', () => {
-  it('should render loading state', () => {
+  it('should render loading state', async () => {
     render(<RecipeList />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Loading...')).toBeVisible();
+    });
 
     expect(
       screen.getByRole('heading', { name: 'My smoothies', level: 2 })
     ).toBeVisible();
-    expect(screen.getByText('Loading...')).toBeVisible();
   });
 
   it('should render recipes and filter', async () => {

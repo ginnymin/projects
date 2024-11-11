@@ -8,15 +8,19 @@ import { LoginForm } from '.';
  * NextJS uses the canary version of React and the newer APIs and hooks are not supported in jest.
  */
 
-const mockUseFormState = jest.fn().mockReturnValue([{}, '/action']);
-const mockUseFormStatus = jest.fn().mockReturnValue({ pending: false });
+const mockUseFormState = vi.fn().mockReturnValue([{}, '/action']);
+const mockUseFormStatus = vi.fn().mockReturnValue({ pending: false });
 
 /* eslint-disable */
-jest.mock('react-dom', () => ({
-  ...jest.requireActual('react-dom'),
-  useFormState: () => mockUseFormState(),
-  useFormStatus: () => mockUseFormStatus(),
-}));
+vi.mock('react-dom', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    // @ts-expect-error
+    ...actual,
+    useFormState: () => mockUseFormState(),
+    useFormStatus: () => mockUseFormStatus(),
+  };
+});
 /* eslint-enable */
 
 describe('Components: LoginForm', () => {

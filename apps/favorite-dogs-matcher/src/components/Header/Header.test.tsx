@@ -3,16 +3,16 @@ import userEvent from '@testing-library/user-event';
 
 import { Header } from '.';
 
-const mockReplace = jest.fn();
-const mockLogout = jest.fn();
+const mockReplace = vi.fn();
+const mockLogout = vi.fn();
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     replace: mockReplace,
   }),
 }));
 
-jest.mock('@api/logout', () => ({
+vi.mock('@api/logout', () => ({
   logout: () => mockLogout() as void,
 }));
 
