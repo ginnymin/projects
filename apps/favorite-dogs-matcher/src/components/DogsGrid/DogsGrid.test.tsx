@@ -38,23 +38,23 @@ const dogs = [
   },
 ];
 
-const mockUseFetchDogs = jest.fn().mockReturnValue({
+const mockUseFetchDogs = vi.fn().mockReturnValue({
   data: { dogs, total: 100, prev: 'prev', next: 'next' },
 });
 
-jest.mock('@hooks/useFetchDogs', () => ({
+vi.mock('@hooks/useFetchDogs', () => ({
   useFetchDogs: () => mockUseFetchDogs() as object,
 }));
 
-jest.mock('@hooks/useFetchBreeds', () => ({
+vi.mock('@hooks/useFetchBreeds', () => ({
   useFetchBreeds: () => ({
     data: ['Aussie', 'Border Collie', 'Blue Heeler', 'Corgi'],
   }),
 }));
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    push: jest.fn(),
+    push: vi.fn(),
   }),
 }));
 

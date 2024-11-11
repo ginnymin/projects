@@ -8,7 +8,7 @@ import { Board } from '.';
 
 let times = 0;
 
-const mockPlayerChoice = jest.fn();
+const mockPlayerChoice = vi.fn();
 
 const mockRef = (val: number | { clientWidth: number }) => {
   return {
@@ -16,7 +16,7 @@ const mockRef = (val: number | { clientWidth: number }) => {
   };
 };
 
-jest.spyOn(React, 'useRef').mockImplementation((val?: number | null) => {
+vi.spyOn(React, 'useRef').mockImplementation((val?: number | null) => {
   if (val === null) {
     times++;
   }
@@ -26,9 +26,9 @@ jest.spyOn(React, 'useRef').mockImplementation((val?: number | null) => {
     : mockRef({ clientWidth: times > 1 ? 82.25 : 164.5 });
 });
 
-jest.spyOn(store, 'setPlayerChoice').mockImplementation(mockPlayerChoice);
+vi.spyOn(store, 'setPlayerChoice').mockImplementation(mockPlayerChoice);
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
 describe('Components: Board', () => {
   beforeEach(() => {

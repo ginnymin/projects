@@ -4,7 +4,6 @@ import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslintConfig from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintPluginJest from 'eslint-plugin-jest';
 import typescriptEslint from 'typescript-eslint';
 
 const compat = new FlatCompat();
@@ -63,12 +62,8 @@ export default typescriptEslint.config(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   {
     files: ['**/*.test.*'],
-    ...eslintPluginJest.configs['flat/recommended'], // eslint-disable-line @typescript-eslint/no-unsafe-member-access
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     rules: {
-      ...eslintPluginJest.configs['flat/recommended'].rules, // eslint-disable-line @typescript-eslint/no-unsafe-member-access
       '@typescript-eslint/unbound-method': 'off',
-      'jest/unbound-method': 'error',
     },
   },
   {

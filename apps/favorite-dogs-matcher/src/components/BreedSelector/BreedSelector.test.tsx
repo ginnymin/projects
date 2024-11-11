@@ -3,13 +3,13 @@ import userEvent from '@testing-library/user-event';
 
 import { BreedSelector } from '.';
 
-jest.mock('@hooks/useFetchBreeds', () => ({
+vi.mock('@hooks/useFetchBreeds', () => ({
   useFetchBreeds: () => ({
     data: ['Australian Shepherd', 'Border Collie', 'Blue Heeler', 'Corgi'],
   }),
 }));
 
-const mockOnChange = jest.fn();
+const mockOnChange = vi.fn();
 
 describe('Components: BreedSelector', () => {
   it('should render combobox without options', () => {

@@ -14,7 +14,7 @@ global.ResizeObserver = class FakeResizeObserver {
   disconnect() {}
 };
 
-jest.mock('@api/hooks', () => ({
+vi.mock('@api/hooks', () => ({
   useFetchCountries: () => ({
     data: [
       { id: '1', region: 'Americas' },

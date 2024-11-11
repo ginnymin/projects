@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    replace: jest.fn(),
+    replace: vi.fn(),
   }),
 }));
 
-jest.mock('@api/getDogs', () => ({
-  getDogs: jest.fn().mockReturnValue({
+vi.mock('@api/getDogs', () => ({
+  getDogs: vi.fn().mockReturnValue({
     prev: undefined,
     next: undefined,
     total: 100,
@@ -24,8 +24,8 @@ jest.mock('@api/getDogs', () => ({
   }),
 }));
 
-jest.mock('@api/getBreeds', () => ({
-  getBreeds: jest
+vi.mock('@api/getBreeds', () => ({
+  getBreeds: vi
     .fn()
     .mockReturnValue(['Aussie', 'Border Collie', 'Blue Heeler', 'Corgi']),
 }));

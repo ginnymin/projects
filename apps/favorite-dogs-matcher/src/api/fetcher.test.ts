@@ -1,20 +1,20 @@
 import { fetcher } from './fetcher';
 
-const mockRevalidatePath = jest.fn();
-const mockRedirect = jest.fn();
+const mockRevalidatePath = vi.fn();
+const mockRedirect = vi.fn();
 
-jest.mock('next/cache', () => ({
+vi.mock('next/cache', () => ({
   revalidatePath: () => mockRevalidatePath() as void,
 }));
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   RedirectType: { replace: 'replace' },
   redirect: (...args: string[]) => mockRedirect(...args) as void,
 }));
 
-jest.mock('next/headers', () => ({ cookies: jest.fn().mockReturnValue('') }));
+vi.mock('next/headers', () => ({ cookies: vi.fn().mockReturnValue('') }));
 
-const mockFetch = jest
+const mockFetch = vi
   .fn()
   .mockImplementation(() => Promise.resolve({ ok: true }));
 

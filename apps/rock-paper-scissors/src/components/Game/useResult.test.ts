@@ -6,14 +6,14 @@ import { store as scoreStore } from '@store/score';
 
 import { useResult } from './useResult';
 
-const mockSetResult = jest.fn();
-const mockWin = jest.fn();
-const mockLoss = jest.fn();
+const mockSetResult = vi.fn();
+const mockWin = vi.fn();
+const mockLoss = vi.fn();
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
-jest.spyOn(scoreStore, 'win').mockImplementation(mockWin);
-jest.spyOn(scoreStore, 'loss').mockImplementation(mockLoss);
+vi.spyOn(scoreStore, 'win').mockImplementation(mockWin);
+vi.spyOn(scoreStore, 'loss').mockImplementation(mockLoss);
 
 describe('Components: Game: useResult', () => {
   beforeEach(() => {
@@ -24,15 +24,15 @@ describe('Components: Game: useResult', () => {
   });
 
   describe('results', () => {
-    const resultRender = (props: Parameters<typeof useResult>[0]) => {
+    const resultRender = async (props: Parameters<typeof useResult>[0]) => {
       const { result } = renderHook(() => useResult(props));
 
-      act(() => jest.runAllTimers());
+      await act(() => vi.runAllTimers());
       return result;
     };
 
-    it('tie', () => {
-      const result = resultRender({
+    it('tie', async () => {
+      const result = await resultRender({
         playerChoice: HandType.PAPER,
         houseChoice: HandType.PAPER,
       });
@@ -40,8 +40,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.TIE);
     });
 
-    it('scissors, paper', () => {
-      const result = resultRender({
+    it('scissors, paper', async () => {
+      const result = await resultRender({
         playerChoice: HandType.SCISSORS,
         houseChoice: HandType.PAPER,
       });
@@ -49,8 +49,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('scissors, rock', () => {
-      const result = resultRender({
+    it('scissors, rock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.SCISSORS,
         houseChoice: HandType.ROCK,
       });
@@ -58,8 +58,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.LOSE);
     });
 
-    it('scissors, spock', () => {
-      const result = resultRender({
+    it('scissors, spock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.SCISSORS,
         houseChoice: HandType.SPOCK,
       });
@@ -67,8 +67,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.LOSE);
     });
 
-    it('scissors, lizard', () => {
-      const result = resultRender({
+    it('scissors, lizard', async () => {
+      const result = await resultRender({
         playerChoice: HandType.SCISSORS,
         houseChoice: HandType.LIZARD,
       });
@@ -76,8 +76,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('lizard, rock', () => {
-      const result = resultRender({
+    it('lizard, rock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.LIZARD,
         houseChoice: HandType.ROCK,
       });
@@ -85,8 +85,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.LOSE);
     });
 
-    it('lizard, spock', () => {
-      const result = resultRender({
+    it('lizard, spock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.LIZARD,
         houseChoice: HandType.SPOCK,
       });
@@ -94,8 +94,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('lizard, paper', () => {
-      const result = resultRender({
+    it('lizard, paper', async () => {
+      const result = await resultRender({
         playerChoice: HandType.LIZARD,
         houseChoice: HandType.PAPER,
       });
@@ -103,8 +103,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('paper, rock', () => {
-      const result = resultRender({
+    it('paper, rock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.PAPER,
         houseChoice: HandType.ROCK,
       });
@@ -112,8 +112,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('paper, spock', () => {
-      const result = resultRender({
+    it('paper, spock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.PAPER,
         houseChoice: HandType.SPOCK,
       });
@@ -121,8 +121,8 @@ describe('Components: Game: useResult', () => {
       expect(result.current).toEqual(ResultType.WIN);
     });
 
-    it('spock', () => {
-      const result = resultRender({
+    it('spock', async () => {
+      const result = await resultRender({
         playerChoice: HandType.SPOCK,
         houseChoice: HandType.ROCK,
       });
@@ -156,7 +156,7 @@ describe('Components: Game: useResult', () => {
     expect(result.current).toBe(ResultType.LOSE);
   });
 
-  it('returns expected result after delay', () => {
+  it('returns expected result after delay', async () => {
     const { result } = renderHook(() =>
       useResult({
         delay: 5000,
@@ -167,17 +167,17 @@ describe('Components: Game: useResult', () => {
 
     expect(result.current).toBe(undefined);
 
-    act(() => jest.advanceTimersByTime(4000));
+    await act(() => vi.advanceTimersByTime(4000));
 
     expect(result.current).toBe(undefined);
 
-    act(() => jest.advanceTimersByTime(1000));
+    await act(() => vi.advanceTimersByTime(1000));
 
     expect(result.current).toBe(ResultType.WIN);
   });
 
-  it('calls setResult', () => {
-    const storeSpy = jest.spyOn(store, 'setResult');
+  it('calls setResult', async () => {
+    const storeSpy = vi.spyOn(store, 'setResult');
     storeSpy.mockImplementation(mockSetResult);
 
     renderHook(() =>
@@ -187,14 +187,14 @@ describe('Components: Game: useResult', () => {
       })
     );
 
-    act(() => jest.advanceTimersByTime(4000));
+    await act(() => vi.advanceTimersByTime(4000));
 
     expect(mockSetResult).toHaveBeenCalledWith(ResultType.WIN);
 
     storeSpy.mockRestore();
   });
 
-  it('calls score.win()', () => {
+  it('calls score.win()', async () => {
     renderHook(() =>
       useResult({
         playerChoice: HandType.SCISSORS,
@@ -202,13 +202,13 @@ describe('Components: Game: useResult', () => {
       })
     );
 
-    act(() => jest.advanceTimersByTime(4000));
+    await act(() => vi.advanceTimersByTime(4000));
 
     expect(mockWin).toHaveBeenCalled();
     expect(mockLoss).not.toHaveBeenCalled();
   });
 
-  it('calls score.loss()', () => {
+  it('calls score.loss()', async () => {
     renderHook(() =>
       useResult({
         playerChoice: HandType.PAPER,
@@ -216,14 +216,14 @@ describe('Components: Game: useResult', () => {
       })
     );
 
-    act(() => jest.advanceTimersByTime(4000));
+    await act(() => vi.advanceTimersByTime(4000));
 
     expect(mockLoss).toHaveBeenCalled();
     expect(mockWin).not.toHaveBeenCalled();
   });
 
-  it('does not call setResult or score.win() when paused', () => {
-    const storeSpy = jest.spyOn(store, 'setResult');
+  it('does not call setResult or score.win() when paused', async () => {
+    const storeSpy = vi.spyOn(store, 'setResult');
     storeSpy.mockImplementation(mockSetResult);
 
     renderHook(() =>
@@ -234,7 +234,7 @@ describe('Components: Game: useResult', () => {
       })
     );
 
-    act(() => jest.runAllTimers());
+    await act(() => vi.runAllTimers());
 
     expect(mockSetResult).not.toHaveBeenCalled();
     expect(mockWin).not.toHaveBeenCalled();
@@ -242,13 +242,13 @@ describe('Components: Game: useResult', () => {
     storeSpy.mockRestore();
   });
 
-  it('does not call callbacks when a choice is undefined', () => {
-    const storeSpy = jest.spyOn(store, 'setResult');
+  it('does not call callbacks when a choice is undefined', async () => {
+    const storeSpy = vi.spyOn(store, 'setResult');
     storeSpy.mockImplementation(mockSetResult);
 
     renderHook(() => useResult({ playerChoice: HandType.SCISSORS }));
 
-    act(() => jest.runAllTimers());
+    await act(() => vi.runAllTimers());
 
     expect(mockSetResult).not.toHaveBeenCalled();
     expect(mockWin).not.toHaveBeenCalled();

@@ -7,15 +7,15 @@ import {
 
 import { Countries } from '.';
 
-const mockUseFetchCountries = jest.fn();
+const mockUseFetchCountries = vi.fn();
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    push: jest.fn(),
+    push: vi.fn(),
   }),
 }));
 
-jest.mock('@api/hooks', () => ({
+vi.mock('@api/hooks', () => ({
   useFetchCountries: (...args: (string | undefined)[]) =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     mockUseFetchCountries(...args),

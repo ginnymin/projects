@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc && eslint .",
-    "test": "jest"
+    "test": "vitest run"
   },
   "dependencies": {
     "swr": "2.2.5"

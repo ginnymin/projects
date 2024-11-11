@@ -3,18 +3,18 @@ import userEvent from '@testing-library/user-event';
 
 import { FavoriteDogs } from '.';
 
-const mockRemove = jest.fn();
-const mockReset = jest.fn();
-const mockGetMatch = jest.fn().mockReturnValue('09876');
-const mockPush = jest.fn();
+const mockRemove = vi.fn();
+const mockReset = vi.fn();
+const mockGetMatch = vi.fn().mockReturnValue('09876');
+const mockPush = vi.fn();
 
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     push: mockPush,
   }),
 }));
 
-jest.mock('@api/getMatch', () => ({
+vi.mock('@api/getMatch', () => ({
   getMatch: () => mockGetMatch() as string,
 }));
 

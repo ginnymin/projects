@@ -1,18 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import { Modal } from '@components/Modal';
 
 import Page from './page';
 
-const mockDismiss = jest.fn();
+const mockDismiss = vi.fn();
 
 describe('App router: Rules', () => {
-  it('renders rules', () => {
+  it('renders rules', async () => {
     render(
       <Modal open onClose={mockDismiss}>
         <Page />
       </Modal>
     );
+
+    await waitFor(() => {
+      expect(screen.getByRole('dialog')).toBeVisible();
+    });
 
     expect(
       screen.getByRole('heading', { name: 'Rules', level: 2 })

@@ -1,8 +1,8 @@
 import { getDogs } from './getDogs';
 
-jest.mock('next/headers', () => ({ cookies: jest.fn().mockReturnValue('') }));
+vi.mock('next/headers', () => ({ cookies: vi.fn().mockReturnValue('') }));
 
-const mockFetch = jest.fn();
+const mockFetch = vi.fn();
 
 global.fetch = mockFetch;
 

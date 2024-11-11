@@ -5,17 +5,21 @@ import { CountryProvider } from '@components/CountryProvider';
 
 import { Search } from '.';
 
-const mockSetRegion = jest.fn();
-const mockSetSearch = jest.fn();
+const mockSetRegion = vi.fn();
+const mockSetSearch = vi.fn();
 
 /* eslint-disable */
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => ({
-    setRegion: mockSetRegion,
-    setSearch: mockSetSearch,
-  }),
-}));
+vi.mock('react', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    // @ts-expect-error
+    ...actual,
+    useContext: () => ({
+      setRegion: mockSetRegion,
+      setSearch: mockSetSearch,
+    }),
+  };
+});
 /* eslint-enable */
 
 const SearchComponent = () => (
