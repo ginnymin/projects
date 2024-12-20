@@ -16,7 +16,7 @@ const mockRef = (val: number | { clientWidth: number }) => {
   };
 };
 
-vi.spyOn(React, 'useRef').mockImplementation((val?: number | null) => {
+vi.spyOn(React, 'useRef').mockImplementation((val: unknown) => {
   if (val === null) {
     times++;
   }
