@@ -2,6 +2,9 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    tsconfigPath: './tsconfig.app.json',
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'frontend-take-home.fetch.com' },

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc && next lint",
+    "lint": "tsc -b && next lint",
     "test": "vitest run"
   }
 }

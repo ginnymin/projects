@@ -38,7 +38,7 @@ export async function fetcher([path, queryParams, bodyParams]: [
     console.log('fetcher error', url, response);
 
     if (response.status === 401) {
-      revalidatePath('/'); // eslint-disable-line @typescript-eslint/no-unsafe-call
+      revalidatePath('/');
       redirect('/', RedirectType.replace);
     }
 

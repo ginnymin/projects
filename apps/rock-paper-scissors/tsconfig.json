@@ -1,19 +1,7 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "plugins": [{ "name": "next" }],
-    "paths": {
-      "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/components/*"],
-      "@store/*": ["./src/store/*"]
-    }
-  },
-  "include": [
-    "types.d.ts",
-    "**/*.js",
-    "**/*.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }

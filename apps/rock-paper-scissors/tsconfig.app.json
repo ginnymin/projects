@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/components/*"],
+      "@store/*": ["./src/store/*"]
+    }
+  },
+  "include": ["src", "*.d.ts", ".next/types/**/*.ts"]
+}

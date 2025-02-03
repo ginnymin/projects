@@ -4,6 +4,7 @@ import { fixupConfigRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslintConfig from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
 const compat = new FlatCompat();
@@ -15,8 +16,11 @@ export default typescriptEslint.config(
   eslintConfigPrettier,
   {
     languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
       parserOptions: {
         project: './tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   },
@@ -59,7 +63,6 @@ export default typescriptEslint.config(
       ],
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   {
     files: ['**/*.test.*'],
     rules: {
