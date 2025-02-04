@@ -5,4 +5,3 @@ declare module '*.svg' {
 
 // CSS
 declare module '*.css' {}
-declare module '*.scss' {}

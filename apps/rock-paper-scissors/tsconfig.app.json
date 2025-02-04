@@ -8,5 +8,5 @@
       "@store/*": ["./src/store/*"]
     }
   },
-  "include": ["src", "*.d.ts", ".next/types/**/*.ts"]
+  "include": ["types.d.ts", "next-env.d.ts", "src", ".next/types/**/*.ts"]
 }
