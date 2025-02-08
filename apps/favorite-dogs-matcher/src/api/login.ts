@@ -60,6 +60,6 @@ export const login = async (
     return { error: true };
   }
 
-  revalidatePath('/dashboard'); // eslint-disable-line @typescript-eslint/no-unsafe-call
+  revalidatePath('/dashboard');
   redirect('/dashboard', RedirectType.replace);
 };

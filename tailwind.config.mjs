@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+
+const config = {
   theme: {
     extend: {
       backgroundImage: {
@@ -11,3 +12,5 @@ export default {
   },
   plugins: [],
 };
+
+export default config;

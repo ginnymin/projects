@@ -1,3 +1,15 @@
 import baseConfig from '../../eslint.config.mjs';
 
-export default baseConfig;
+const config = [
+  ...baseConfig,
+  {
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+];
+
+export default config;

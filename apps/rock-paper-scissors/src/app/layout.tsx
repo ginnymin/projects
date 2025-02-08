@@ -5,7 +5,7 @@ import { PropsWithChildren } from 'react';
 import { Footer } from '@components/Footer';
 import { Header } from '@components/Header';
 
-import './globals.scss';
+import './globals.css';
 
 const font = Barlow_Semi_Condensed({
   weight: ['600', '700'],
