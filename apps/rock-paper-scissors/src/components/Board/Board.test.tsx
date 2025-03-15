@@ -6,25 +6,7 @@ import { store } from '@store/progress';
 
 import { Board } from '.';
 
-let times = 0;
-
 const mockPlayerChoice = vi.fn();
-
-const mockRef = (val: number | { clientWidth: number }) => {
-  return {
-    current: val,
-  };
-};
-
-vi.spyOn(React, 'useRef').mockImplementation((val: unknown) => {
-  if (val === null) {
-    times++;
-  }
-
-  return typeof val === 'number'
-    ? mockRef(val)
-    : mockRef({ clientWidth: times > 1 ? 82.25 : 164.5 });
-});
 
 vi.spyOn(store, 'setPlayerChoice').mockImplementation(mockPlayerChoice);
 
@@ -33,7 +15,6 @@ vi.useFakeTimers();
 describe('Components: Board', () => {
   beforeEach(() => {
     mockPlayerChoice.mockReset();
-    times = 0;
   });
 
   it('should render sr-only header', () => {

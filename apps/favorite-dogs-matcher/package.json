@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "set-cookie-parser": "2.7.1",
-    "swr": "2.3.2"
+    "swr": "2.3.3"
   },
   "devDependencies": {
     "@types/set-cookie-parser": "2.4.10"
