@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Lexend } from 'next/font/google';
 
-import './globals.scss';
+import './globals.css';
 
 const font = Lexend({ subsets: ['latin'], weight: ['300', '600', '800'] });
 
