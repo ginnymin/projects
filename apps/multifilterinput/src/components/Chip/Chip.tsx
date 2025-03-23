@@ -17,7 +17,7 @@ export const Chip: FC<Props> = ({ children, onRemove, onSelect, ...props }) => {
       )}
     >
       {onSelect !== undefined ? (
-        <button className="rounded element-white-focus" onClick={onSelect}>
+        <button className="rounded-sm element-white-focus" onClick={onSelect}>
           {children}
         </button>
       ) : (
@@ -25,7 +25,7 @@ export const Chip: FC<Props> = ({ children, onRemove, onSelect, ...props }) => {
       )}
 
       {onRemove !== undefined && (
-        <button className="rounded element-white-focus" onClick={onRemove}>
+        <button className="rounded-sm element-white-focus" onClick={onRemove}>
           <span className="sr-only">Remove</span>
           <TbX className="size-4" />
         </button>

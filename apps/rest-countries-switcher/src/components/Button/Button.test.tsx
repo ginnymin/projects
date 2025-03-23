@@ -28,7 +28,7 @@ describe('Components: Button', () => {
     render(<Button>This is a test</Button>);
 
     expect(screen.getByRole('button', { name: 'This is a test' })).toHaveClass(
-      'rounded text-sm'
+      'rounded-sm text-sm'
     );
     expect(
       screen.getByRole('button', { name: 'This is a test' })
@@ -43,6 +43,6 @@ describe('Components: Button', () => {
     );
     expect(
       screen.getByRole('button', { name: 'This is a test' })
-    ).not.toHaveClass('rounded text-sm');
+    ).not.toHaveClass('rounded-sm text-sm');
   });
 });

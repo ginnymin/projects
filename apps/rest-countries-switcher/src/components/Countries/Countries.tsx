@@ -19,7 +19,7 @@ export const Countries: FC<Props> = () => {
 
   if (data === undefined) {
     return (
-      <div className="grid gap-14 grid-cols-[repeat(auto-fit,_minmax(260px,_1fr))]">
+      <div className="grid gap-14 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
         <h2 className="sr-only">Loading...</h2>
         <Skeleton className="h-48" />
         <Skeleton className="h-48" />
@@ -32,7 +32,7 @@ export const Countries: FC<Props> = () => {
   }
 
   return (
-    <ul className="grid gap-14 grid-cols-[repeat(auto-fill,_minmax(260px,_1fr))]">
+    <ul className="grid gap-14 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
       {data?.map((country) => (
         <li key={country.id}>
           <Country

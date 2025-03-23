@@ -28,7 +28,7 @@ export const Button: FC<Props> = ({
         size === 'large',
     },
     {
-      'rounded text-sm px-5 py-1.5 shadow-[0px_0px_4px_0px_rgba(0,0,0,0.2)] ':
+      'rounded-sm text-sm px-5 py-1.5 shadow-[0px_0px_4px_0px_rgba(0,0,0,0.2)] ':
         size === 'medium',
     },
     className

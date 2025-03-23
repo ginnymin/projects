@@ -167,7 +167,7 @@ export const ValueInput: FC<Props> = ({
           placeholder="Enter value..."
           type={type === "string" ? "text" : type}
           className={clsx(
-            "disabled:bg-gray-100 outline-none font-mono text-sm",
+            "disabled:bg-gray-100 outline-hidden font-mono text-sm",
             className
           )}
           onChange={handleInputChange}

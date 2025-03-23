@@ -56,18 +56,18 @@ export const BreedSelector: FC<Props> = ({
         aria-label="Filter by breed"
         onChange={handleChange}
         placeholder="Filter by breed..."
-        className="rounded w-44 px-4 py-2 element-focus bg-white disabled:bg-gray-100"
+        className="rounded-sm w-44 px-4 py-2 element-focus bg-white disabled:bg-gray-100"
       />
 
       <ComboboxOptions
         anchor={{ to: 'bottom start', gap: 8, offset: -2 }}
-        className="rounded bg-white empty:invisible z-10"
+        className="rounded-sm bg-white empty:invisible z-10"
       >
         {filteredBreeds?.map((breed) => (
           <ComboboxOption
             key={breed}
             value={breed}
-            className="flex gap-1.5 items-center data-[focus]:bg-purple-100 py-2 pl-2 pr-4"
+            className="flex gap-1.5 items-center data-focus:bg-purple-100 py-2 pl-2 pr-4"
           >
             <HiCheck
               className={clsx({ invisible: !selectedBreeds.includes(breed) })}

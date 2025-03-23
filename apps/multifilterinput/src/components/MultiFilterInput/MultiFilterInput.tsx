@@ -113,7 +113,7 @@ export const MultiFilterInput: FC<Props> = ({
     <div
       {...props}
       className={clsx(
-        "flex flex-wrap items-baseline gap-2 border border-gray-300 rounded px-3 py-2 element-focus-within bg-white",
+        "flex flex-wrap items-baseline gap-2 border border-gray-300 rounded-sm px-3 py-2 element-focus-within bg-white",
         className
       )}
     >

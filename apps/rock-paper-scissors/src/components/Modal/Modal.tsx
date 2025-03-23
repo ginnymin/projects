@@ -17,7 +17,7 @@ export const Modal = ({ children, ...props }: DialogProps) => {
         <Transition appear show>
           <DialogPanel
             transition
-            className="min-w-80 mx-auto bg-white p-8 rounded-lg w-full h-full md:w-fit md:h-fit transition duration-500 ease-out data-[closed]:opacity-0"
+            className="min-w-80 mx-auto bg-white p-8 rounded-lg w-full h-full md:w-fit md:h-fit transition duration-500 ease-out data-closed:opacity-0"
           >
             {children}
           </DialogPanel>

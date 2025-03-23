@@ -94,7 +94,7 @@ export const CountryDetail: FC<Props> = ({
               </strong>
               <ul
                 className={clsx(
-                  'lg:flex-grow',
+                  'lg:grow',
                   'gap-2.5 grid grid-cols-[repeat(auto-fit,minmax(100px,max-content))]'
                 )}
               >

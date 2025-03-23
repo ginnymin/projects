@@ -198,14 +198,14 @@ export const Combobox: FC<Props> = ({
             onChange={handleInput}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className={clsx("disabled:bg-gray-100 outline-none", className)}
+            className={clsx("disabled:bg-gray-100 outline-hidden", className)}
             value={query}
           />
         </div>
 
         <ComboboxOptions
           anchor={{ to: "bottom start", gap: 8, offset: -2 }}
-          className="rounded bg-white border border-gray-200 empty:invisible z-10"
+          className="rounded-sm bg-white border border-gray-200 empty:invisible z-10"
           // when using autoFocus, the options do not appear even though the input is focused.
           // setting static to true, but only for the initial render, addresses this.
           static={isStatic}
@@ -214,7 +214,7 @@ export const Combobox: FC<Props> = ({
             <ComboboxOption
               key={option.id}
               value={option}
-              className="flex gap-1.5 items-center data-[selected]:bg-blue-100 data-[focus]:bg-blue-200 data-[focus]:data-[selected]:bg-blue-200 py-2 px-4"
+              className="flex gap-1.5 items-center data-selected:bg-blue-100 data-focus:bg-blue-200 data-focus:data-selected:bg-blue-200 py-2 px-4"
             >
               {option.value}
             </ComboboxOption>

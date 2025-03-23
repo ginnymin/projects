@@ -10,7 +10,7 @@ describe('Components: BoardHand', () => {
 
     expect(screen.getByRole('button', { name: 'lizard' })).toBeVisible();
     expect(screen.getByRole('button', { name: 'lizard' })).toHaveClass(
-      '!absolute scale-[0.48] -m-16'
+      'absolute! scale-[0.48] -m-16'
     );
   });
 

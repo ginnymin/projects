@@ -23,7 +23,7 @@ export const Button: FC<Props> = ({
   ...props
 }) => {
   const classes = clsx(
-    'rounded element-focus text-center element',
+    'rounded-sm element-focus text-center element',
     {
       'px-4 py-2 text-sm': size === 'medium',
       'px-6 py-4': size === 'large',

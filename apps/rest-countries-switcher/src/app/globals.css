@@ -1,6 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+@theme {
+  --color-gray-light: hsl(0, 0%, 98%);
+  --color-gray-dark: hsl(0, 0%, 52%);
+
+  --color-blue-dark: hsl(209, 23%, 22%);
+  --color-blue-dark-background: hsl(207, 26%, 17%);
+  --color-blue-dark-text: hsl(200, 15%, 8%);
+
+  --breakpoint-xs: 480px;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility container-shadow {
+  @apply rounded-md shadow-md shadow-black/5 bg-white dark:bg-blue-dark text-blue-dark-text dark:text-white;
+}
+
+@utility container-shadow-focus {
+  &:focus,
+  &:focus-visible,
+  &:active,
+  &[data-active] {
+    @apply outline outline-2 outline-gray-300;
+  }
+}
 
 @layer base {
   * {
@@ -12,21 +54,6 @@
     &:focus,
     &:focus-visible {
       @apply outline-2 outline-gray-300;
-    }
-  }
-}
-
-@layer utilities {
-  .container-shadow {
-    @apply rounded-md shadow-md shadow-black/5 bg-white dark:bg-blue-dark text-blue-dark-text dark:text-white;
-  }
-
-  .container-shadow-focus {
-    &:focus,
-    &:focus-visible,
-    &:active,
-    &[data-active] {
-      @apply outline outline-2 outline-gray-300;
     }
   }
 }

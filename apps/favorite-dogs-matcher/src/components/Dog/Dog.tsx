@@ -60,7 +60,7 @@ const DogComponent: FC<Props> = ({
       <div className="p-2.5">
         <div className="flex justify-between items-center">
           <h3 className="inline-block text-base font-bold">{name}</h3>
-          <button className="focus:outline-none">
+          <button className="focus:outline-hidden">
             {selected ? (
               <HiHeart className="size-5 fill-purple-600" />
             ) : (

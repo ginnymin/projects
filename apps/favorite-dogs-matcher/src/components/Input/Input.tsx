@@ -52,7 +52,7 @@ export const Input: FC<Props> = ({
           {...props}
           id={id}
           className={clsx(
-            'rounded element-focus bg-white p-4 w-full disabled:bg-gray-100',
+            'rounded-sm element-focus bg-white p-4 w-full disabled:bg-gray-100',
             {
               'pl-12 sm:pl-14': leading !== undefined,
             }
