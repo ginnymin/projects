@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import {
   type HTMLAttributes,
   type FC,
+  useActionState,
   useState,
   useCallback,
   ChangeEventHandler,
 } from 'react';
-import { useFormState } from 'react-dom';
 
 import { login } from '@api/login';
 import { Input } from '@components/Input';
@@ -22,7 +22,7 @@ export const LoginForm: FC<Props> = ({ className }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const [{ error }, formAction] = useFormState(login, {});
+  const [{ error }, formAction] = useActionState(login, {});
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event) => {
