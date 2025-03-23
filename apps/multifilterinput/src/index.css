@@ -1,6 +1,50 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility element-focus {
+  &:enabled {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-blue-700;
+    }
+  }
+}
+
+@utility element-white-focus {
+  &:enabled {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-white;
+    }
+  }
+}
+
+@utility element-focus-within {
+  &:focus-within {
+    @apply outline outline-2 outline-blue-700;
+  }
+}
 
 @layer base {
   * {
@@ -12,34 +56,6 @@
     &:focus,
     &:focus-visible {
       @apply outline-2 outline-blue-700;
-    }
-  }
-}
-
-@layer utilities {
-  .element-focus {
-    &:enabled {
-      &:focus,
-      &:focus-visible,
-      &:active,
-      &[data-active] {
-        @apply outline outline-2 outline-blue-700;
-      }
-    }
-  }
-  .element-white-focus {
-    &:enabled {
-      &:focus,
-      &:focus-visible,
-      &:active,
-      &[data-active] {
-        @apply outline outline-2 outline-white;
-      }
-    }
-  }
-  .element-focus-within {
-    &:focus-within {
-      @apply outline outline-2 outline-blue-700;
     }
   }
 }

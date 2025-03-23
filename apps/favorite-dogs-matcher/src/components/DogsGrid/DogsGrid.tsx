@@ -100,7 +100,7 @@ export const DogsGrid: FC<Props> = () => {
 
   return (
     <>
-      <div className="flex md:items-start gap-4 -mx-2 px-2 -mt-4 py-4 mb-1.5 sticky top-0 bg-stone-200 z-[1]">
+      <div className="flex md:items-start gap-4 -mx-2 px-2 -mt-4 py-4 mb-1.5 sticky top-0 bg-stone-200 z-1">
         <Button
           className="flex gap-2 items-center flex-nowrap text-nowrap"
           variant="outline"

@@ -1,10 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary-dark: hsl(229, 25%, 31%);
-  --color-primary-score: hsl(229, 64%, 46%);
-  --color-primary-outline: hsl(217, 16%, 45%);
-
   --breakpoint-xs: 480px;
 }
 
@@ -26,11 +22,41 @@
   }
 }
 
-body {
-  background-image: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
-  background-position: top center;
+@utility p-main {
+  @apply px-10 py-8 md:px-16 md:py-10;
 }
 
-* {
-  @apply box-border;
+@utility px-main {
+  @apply px-10 md:px-16;
+}
+
+@utility element-focus {
+  &:enabled {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-purple-700;
+    }
+  }
+}
+
+@utility element-focus-within {
+  &:focus-within {
+    @apply outline outline-2 outline-purple-700;
+  }
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  a,
+  button {
+    &:focus,
+    &:focus-visible {
+      @apply outline-2 outline-purple-700;
+    }
+  }
 }

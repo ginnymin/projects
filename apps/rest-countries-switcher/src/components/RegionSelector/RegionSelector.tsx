@@ -53,7 +53,7 @@ export const RegionSelector: FC<Props> = ({ className }) => {
       >
         <span>{region ?? 'Filter by Region'}</span>
         <HiChevronDown
-          className="size-5 fill-blue-dark dark:fill-white group-data-[open]:rotate-180 transition"
+          className="size-5 fill-blue-dark dark:fill-white group-data-open:rotate-180 transition"
           aria-hidden="true"
         />
       </ListboxButton>
@@ -61,8 +61,8 @@ export const RegionSelector: FC<Props> = ({ className }) => {
         anchor="bottom"
         transition
         className={clsx(
-          'container-shadow px-1 py-3 w-[var(--button-width)] [--anchor-gap:6px] focus:outline-none',
-          'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
+          'container-shadow px-1 py-3 w-[var(--button-width)] [--anchor-gap:6px] focus:outline-hidden',
+          'transition duration-100 ease-in data-leave:data-closed:opacity-0'
         )}
       >
         {regions?.map((region) => (
@@ -71,8 +71,8 @@ export const RegionSelector: FC<Props> = ({ className }) => {
             value={region}
             className={clsx(
               'cursor-pointer rounded-md py-1 px-5 text-sm select-none',
-              'data-[focus]:bg-gray-200 data-[selected]:bg-gray-100',
-              'dark:data-[focus]:bg-white/10 dark:data-[selected]:bg-white/5'
+              'data-focus:bg-gray-200 data-selected:bg-gray-100',
+              'dark:data-focus:bg-white/10 dark:data-selected:bg-white/5'
             )}
           >
             {region}
@@ -82,8 +82,8 @@ export const RegionSelector: FC<Props> = ({ className }) => {
           value="all"
           className={clsx(
             'cursor-pointer rounded-md py-1 px-5 text-sm select-none',
-            'data-[focus]:bg-gray-200 data-[selected]:bg-gray-100',
-            'dark:data-[focus]:bg-white/15 dark:data-[selected]:bg-white/10'
+            'data-focus:bg-gray-200 data-selected:bg-gray-100',
+            'dark:data-focus:bg-white/15 dark:data-selected:bg-white/10'
           )}
         >
           All regions

@@ -11,7 +11,7 @@ export const Grid: FC<Props> = ({ as = 'ul', children, className }) => {
   return (
     <Element
       className={clsx(
-        'grid gap-5 grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))]',
+        'grid gap-5 grid-cols-[repeat(auto-fill,minmax(240px,1fr))]',
         className
       )}
       role="grid"

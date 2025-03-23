@@ -37,7 +37,7 @@ export const BoardHand: FC<Props> = ({
   return (
     <Hand
       {...props}
-      className={clsx('!absolute', className)}
+      className={clsx('absolute!', className)}
       size="default"
       style={style}
     />

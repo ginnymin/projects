@@ -1,10 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary-dark: hsl(229, 25%, 31%);
-  --color-primary-score: hsl(229, 64%, 46%);
-  --color-primary-outline: hsl(217, 16%, 45%);
-
   --breakpoint-xs: 480px;
 }
 
@@ -26,11 +22,38 @@
   }
 }
 
-body {
-  background-image: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
-  background-position: top center;
+@utility element-focus {
+  &:enabled {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-teal-700;
+    }
+  }
 }
 
-* {
-  @apply box-border;
+@utility destructive-focus {
+  &:enabled {
+    &:focus,
+    &:focus-visible,
+    &:active,
+    &[data-active] {
+      @apply outline outline-2 outline-red-700;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  a,
+  button {
+    &:focus,
+    &:focus-visible {
+      @apply outline-2 outline-teal-700;
+    }
+  }
 }

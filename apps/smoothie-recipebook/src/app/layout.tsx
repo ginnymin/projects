@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import './globals.scss';
+import './globals.css';
 
 const font = Inter({ subsets: ['latin'] });
 
