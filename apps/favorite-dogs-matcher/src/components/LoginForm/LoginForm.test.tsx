@@ -12,12 +12,22 @@ const mockUseFormState = vi.fn().mockReturnValue([{}, '/action']);
 const mockUseFormStatus = vi.fn().mockReturnValue({ pending: false });
 
 /* eslint-disable */
+vi.mock('react', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    // @ts-expect-error
+    ...actual,
+    useActionState: () => mockUseFormState(),
+  };
+});
+/* eslint-enable */
+
+/* eslint-disable */
 vi.mock('react-dom', async (importOriginal) => {
   const actual = await importOriginal();
   return {
     // @ts-expect-error
     ...actual,
-    useFormState: () => mockUseFormState(),
     useFormStatus: () => mockUseFormStatus(),
   };
 });
