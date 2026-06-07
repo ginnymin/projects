@@ -1,16 +1,14 @@
 // @ts-check
 
-import { fixupConfigRules } from '@eslint/compat';
-import { FlatCompat } from '@eslint/eslintrc';
 import eslintConfig from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals'
 import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
-const compat = new FlatCompat();
-
-export default typescriptEslint.config(
-  ...fixupConfigRules(compat.extends('next/core-web-vitals')),
+export default defineConfig(
+  ...nextVitals,
   eslintConfig.configs.recommended,
   ...typescriptEslint.configs.recommendedTypeChecked,
   eslintConfigPrettier,
@@ -23,6 +21,11 @@ export default typescriptEslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      react: {
+        version: "19.2"
+      }
+    }
   },
   {
     ignores: ['.next', 'build'],

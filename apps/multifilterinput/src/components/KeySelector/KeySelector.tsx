@@ -1,13 +1,14 @@
 import { useMemo, type FC } from "react";
 
-import { Combobox, type ComboboxProps } from "@components/Combobox";
+import { Combobox, Option, type ComboboxProps } from "@components/Combobox";
 import { type Key } from "@lib/types";
 
 type Props = Pick<
   ComboboxProps,
-  "autoFocus" | "disabled" | "onChange" | "className"
+  "autoFocus" | "disabled" |  "className"
 > & {
   keys: Key[];
+  onChange: (option: Option) => void;
   selectedId?: string;
 };
 

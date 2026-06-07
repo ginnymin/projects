@@ -6,12 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc -b && next lint",
+    "lint": "tsc -b && eslint",
     "test": "vitest run"
   },
   "dependencies": {
-    "set-cookie-parser": "2.7.1",
-    "swr": "2.3.6"
+    "set-cookie-parser": "3.1.0",
+    "swr": "2.4.1"
   },
   "devDependencies": {
     "@types/set-cookie-parser": "2.4.10"
