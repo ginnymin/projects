@@ -4,9 +4,6 @@ import {
   useCallback,
   useMemo,
   useState,
-  type FC,
-  useRef,
-  useEffect,
 } from "react";
 
 import { KeySelector, type KeySelectorProps } from "@components/KeySelector";
@@ -25,7 +22,7 @@ type Props = Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> & {
   onSelect: (filter: FilterType) => void;
 };
 
-export const Filter: FC<Props> = ({
+export const Filter = ({
   autoFocus,
   className,
   defaultFilter,
@@ -33,25 +30,25 @@ export const Filter: FC<Props> = ({
   operators = defaultOperators,
   onSelect,
   ...props
-}) => {
+}: Props) => {
   const [key, setKey] = useState<Partial<FilterType>["key"]>(
     defaultFilter?.key
   );
   const [operator, setOperator] = useState<Partial<FilterType>["operator"]>(
-    defaultFilter?.operator
+    // if we're editing a filter that has set or !set as the oeprator
+    // we need the operator selector to be editable when the component mounts
+    defaultFilter?.operator === 'set' || defaultFilter?.operator === '!set' ? undefined : defaultFilter?.operator
   );
 
-  // use refs to store previously selected values for backspace scenarios
-  const selectedKey = useRef<Partial<FilterType>["key"]>(defaultFilter?.key);
-  const selectedOperator = useRef<Partial<FilterType>["operator"]>(
-    defaultFilter?.operator
-  );
+  // store previously selected values for backspace scenarios
+  const [selectedKey, setSelectedKey] = useState<Partial<FilterType>["key"]>(defaultFilter?.key);
+  const [selectedOperator, setSelectedOperator] = useState<Partial<FilterType>["operator"]>(defaultFilter?.operator);
 
   const handleKeyChange: KeySelectorProps["onChange"] = useCallback(
     (option) => {
       if (option) {
         setKey(option.id);
-        selectedKey.current = option.id;
+        setSelectedKey(option.id);
       }
     },
     []
@@ -65,14 +62,14 @@ export const Filter: FC<Props> = ({
             onSelect({ key, operator: option.id });
             setKey(undefined);
             setOperator(undefined);
-            selectedKey.current = undefined;
-            selectedOperator.current = undefined;
+            setSelectedKey(undefined);
+            setSelectedOperator(undefined);
           }
           return;
         }
 
         setOperator(option.id as FilterType["operator"]);
-        selectedOperator.current = option.id as FilterType["operator"];
+        setSelectedOperator(option.id as FilterType["operator"])
       }
     },
     [key, onSelect]
@@ -82,7 +79,7 @@ export const Filter: FC<Props> = ({
     useCallback(() => {
       setKey(undefined);
       setOperator(undefined);
-      selectedOperator.current = undefined;
+      setSelectedOperator(undefined);
     }, []);
 
   const handleValueSelect: ValueInputProps["onSelect"] = useCallback(
@@ -91,8 +88,8 @@ export const Filter: FC<Props> = ({
         onSelect({ key, operator, value: v });
         setKey(undefined);
         setOperator(undefined);
-        selectedKey.current = undefined;
-        selectedOperator.current = undefined;
+        setSelectedKey(undefined);
+        setSelectedOperator(undefined);
       }
     },
     [key, operator, onSelect]
@@ -109,17 +106,6 @@ export const Filter: FC<Props> = ({
     [operator, operators]
   );
 
-  // for when we're editing a filter that has set or !set as the oeprator
-  // we need the operator selector to be editable on load instead of the value filter
-  useEffect(() => {
-    if (
-      defaultFilter?.operator === "set" ||
-      defaultFilter?.operator === "!set"
-    ) {
-      setOperator(undefined);
-    }
-  }, [defaultFilter?.operator]);
-
   return (
     <div {...props} className={clsx("flex gap-2 items-baseline", className)}>
       {currentKey !== undefined ? (
@@ -128,8 +114,8 @@ export const Filter: FC<Props> = ({
         <KeySelector
           keys={keys}
           onChange={handleKeyChange}
-          selectedId={selectedKey.current}
-          autoFocus={selectedKey.current !== undefined || autoFocus === true}
+          selectedId={selectedKey}
+          autoFocus={selectedKey !== undefined || autoFocus === true}
         />
       )}
 
@@ -142,7 +128,7 @@ export const Filter: FC<Props> = ({
           <OperatorSelector
             type={currentKey.type}
             operators={operators}
-            selectedId={selectedOperator.current}
+            selectedId={selectedOperator}
             onBackspace={handleOperatorBackspace}
             onChange={handleOperatorChange}
           />

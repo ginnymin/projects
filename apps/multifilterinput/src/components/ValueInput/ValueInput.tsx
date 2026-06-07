@@ -132,14 +132,14 @@ export const ValueInput: FC<Props> = ({
 
   return (
     <div className="flex items-center gap-2">
-      {isSelect ? (
+      {isSelect ? type === "multiselect" ? (
         <Combobox
           {...props}
           autoFocus
           className="w-[10ch]"
           label="Filter value"
           placeholder="Enter value..."
-          multiple={type === "multiselect"}
+          multiple
           options={
             values?.map((value) => ({
               id: value.toString(),
@@ -156,6 +156,29 @@ export const ValueInput: FC<Props> = ({
                   id: v.toString(),
                   value: v.toString(),
                 }))
+              : [{ id: value.toString(), value: value.toString() }]
+          }
+        />
+      ) : (
+        <Combobox
+          {...props}
+          autoFocus
+          className="w-[10ch]"
+          label="Filter value"
+          placeholder="Enter value..."
+          options={
+            values?.map((value) => ({
+              id: value.toString(),
+              value,
+            })) ?? []
+          }
+          onChange={handleSelectChange}
+          onRemoveOption={handleRemoveOption}
+          onBackspace={onBackspace}
+          onKeyDown={handleComboboxKeyDown}
+          selectedOptions={
+            Array.isArray(value)
+              ? { id: value[0].toString(), value: value[0].toString() }
               : { id: value.toString(), value: value.toString() }
           }
         />

@@ -110,7 +110,7 @@ export const DogsGrid: FC<Props> = () => {
           {sort === 'asc' ? <FaSortAmountUpAlt /> : <FaSortAmountDown />}
           <span className="sr-only">
             Sort {sort === 'asc' ? 'ascending' : 'descending'}
-          </span>
+          </span>{' '}
           <span className="max-md:sr-only">by breed</span>
         </Button>
         <div className="flex items-end flex-wrap gap-x-2 gap-y-1">

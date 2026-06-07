@@ -15,7 +15,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type FC,
 } from "react";
 
 import { Chip } from "@components/Chip";
@@ -32,31 +31,51 @@ type ComboboxProps<T = string> = Pick<
   className?: string;
   label: string;
   options: Option<T>[];
-  onChange: (option: Option | null) => void;
+  // onChange: (option: Option | Option[]) => void;
   onBackspace?: () => void;
   onRemoveOption?: (option: Option) => void;
-  selectedOptions?: Option<T> | Option<T>[];
+  // selectedOptions?: Option<T> | Option<T>[];
 };
 
 type SingleProps<T = string> = Omit<
   HeadlessComboboxProps<Option, false>,
-  "by" | "virtual" | "onChange"
+  "by" | "virtual" | "onChange" | "multiple"
 > &
-  ComboboxProps<T>;
+  ComboboxProps<T> & {
+    multiple?: false;
+    onChange: (option: Option) => void;
+    selectedOptions?: Option<T>;
+  };
 
 type MultiProps<T = string> = Omit<
   HeadlessComboboxProps<Option[], true>,
-  "by" | "virtual" | "onChange"
+  "by" | "virtual" | "onChange" | "multiple"
 > &
-  ComboboxProps<T>;
+  ComboboxProps<T> & {
+    multiple: true;
+    onChange: (option: Option[]) => void;
+    selectedOptions?: Option<T>[];
+  };
 
 type Props<T = string> = SingleProps<T> | MultiProps<T>;
 
-export const Combobox: FC<Props> = ({
+function isNonNullArray<T>(value: T[] | null[]): value is T[] {
+  return value.every(v => v !== null);
+}
+
+function isSingleOnChange(_onChange: Props["onChange"], multiple: boolean, value: Option | Option[]): _onChange is SingleProps["onChange"] {
+  return !multiple && !Array.isArray(value);
+}
+
+function isMultipleOnChange(_onChange: Props["onChange"], multiple: boolean, value: Option | Option[]): _onChange is MultiProps["onChange"] {
+  return multiple && Array.isArray(value);
+}
+
+export const Combobox = ({
   autoFocus,
   className,
   label,
-  multiple,
+  multiple = false,
   placeholder,
   options,
   selectedOptions,
@@ -64,15 +83,27 @@ export const Combobox: FC<Props> = ({
   onBackspace,
   onRemoveOption,
   ...props
-}) => {
+}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(!Array.isArray(selectedOptions) ? selectedOptions?.value.toString() ?? "" : "");
   const [isStatic, setStatic] = useState(autoFocus ?? false);
 
   const handleChange = useCallback(
-    (value: Option | null) => {
+    (value: Option | Option[] | null | null[]) => {
       if (multiple) setQuery("");
-      onChange(value);
+
+      if (!value || (Array.isArray(value) && !isNonNullArray(value))) {
+        return;
+      }
+
+      if (isSingleOnChange(onChange, multiple, value) && !Array.isArray(value)) {
+        onChange(value);
+        return;
+      }
+
+      if (isMultipleOnChange(onChange, multiple, value) && Array.isArray(value)) {
+        onChange(value);
+      }
     },
     [onChange, multiple]
   );
@@ -120,7 +151,8 @@ export const Combobox: FC<Props> = ({
         event.key === "Enter" &&
         isStatic &&
         selectedOptions !== undefined &&
-        !Array.isArray(selectedOptions)
+        !Array.isArray(selectedOptions) &&
+        isSingleOnChange(onChange, multiple, selectedOptions)
       ) {
         onChange(selectedOptions);
       }
@@ -147,12 +179,6 @@ export const Combobox: FC<Props> = ({
           }),
     [query, options]
   );
-
-  useEffect(() => {
-    if (!Array.isArray(selectedOptions)) {
-      setQuery(selectedOptions?.value.toString() ?? "");
-    }
-  }, [selectedOptions]);
 
   useEffect(() => {
     const handleClickEvent = (e: MouseEvent) => {
