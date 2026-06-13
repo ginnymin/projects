@@ -25,7 +25,7 @@ export const CountryDetail: FC<Props> = ({
   topLevelDomain,
 }) => {
   const router = useRouter();
-  const { data: countries } = useFetchCountries('/all', undefined);
+  const { data: countries } = useFetchCountries('', undefined);
 
   const handleBack = useCallback(() => {
     router.back();
@@ -58,8 +58,7 @@ export const CountryDetail: FC<Props> = ({
           <h2 className="text-xl font-bold mt-6 mb-4 lg:mb-6">{name}</h2>
           <ul className="lg:columns-2">
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Native Name</strong>:{' '}
-              {nativeName}
+              <strong className="font-semibold">Native Name</strong>: {nativeName}
             </li>
             <li className="leading-[1.75]">
               <strong className="font-semibold">Population</strong>:{' '}
@@ -75,23 +74,18 @@ export const CountryDetail: FC<Props> = ({
               <strong className="font-semibold">Capital</strong>: {capital}
             </li>
             <li className="leading-[1.75] mt-6 lg:mt-0">
-              <strong className="font-semibold">Top Level Domain</strong>:{' '}
-              {topLevelDomain}
+              <strong className="font-semibold">Top Level Domain</strong>: {topLevelDomain}
             </li>
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Currencies</strong>:{' '}
-              {currencies?.join(', ')}
+              <strong className="font-semibold">Currencies</strong>: {currencies?.join(', ')}
             </li>
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Languages</strong>:{' '}
-              {languages?.join(', ')}
+              <strong className="font-semibold">Languages</strong>: {languages?.join(', ')}
             </li>
           </ul>
           {borderCountries !== undefined && borderCountries.length > 0 && (
             <div className="lg:flex lg:items-baseline mt-6 lg:mt-8">
-              <strong className="block font-semibold mb-4 lg:mr-3">
-                Border Countries:
-              </strong>
+              <strong className="block font-semibold mb-4 lg:mr-3">Border Countries:</strong>
               <ul
                 className={clsx(
                   'lg:grow',

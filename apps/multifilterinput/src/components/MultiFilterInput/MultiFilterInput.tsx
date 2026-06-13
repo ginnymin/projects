@@ -1,11 +1,11 @@
-import clsx from "clsx";
-import { HTMLAttributes, useCallback, useState, type FC } from "react";
+import clsx from 'clsx';
+import { HTMLAttributes, useCallback, useState, type FC } from 'react';
 
-import { Filter, type FilterProps } from "@components/Filter";
-import type { OperatorDefinition, Filter as FilterType, Key } from "@lib/types";
-import { Chip } from "@components/Chip";
+import { Chip } from '@components/Chip';
+import { Filter, type FilterProps } from '@components/Filter';
+import type { OperatorDefinition, Filter as FilterType, Key } from '@lib/types';
 
-interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   keys: Key[];
   operators?: OperatorDefinition[];
   onChange: (filters: FilterType[]) => void;
@@ -18,9 +18,9 @@ type FilterWithId = FilterType & {
 const addIdToFilter = (filter: FilterType): FilterWithId => {
   const timestamp = new Date().getTime();
   const value =
-    "value" in filter
+    'value' in filter
       ? Array.isArray(filter.value)
-        ? filter.value.join(", ")
+        ? filter.value.join(', ')
         : filter.value.toString()
       : undefined;
   return value !== undefined
@@ -47,14 +47,12 @@ export const MultiFilterInput: FC<Props> = ({
   ...props
 }) => {
   const [filters, setFilters] = useState<FilterWithId[]>([]);
-  const [editFilterId, setEditFilterId] = useState<
-    FilterWithId["id"] | undefined
-  >();
+  const [editFilterId, setEditFilterId] = useState<FilterWithId['id'] | undefined>();
 
   const handleChange = useCallback(
     (filters: FilterWithId[]) => {
       const sanitizedFilters = filters.map((filter) =>
-        "value" in filter
+        'value' in filter
           ? {
               key: filter.key,
               operator: filter.operator,
@@ -72,7 +70,7 @@ export const MultiFilterInput: FC<Props> = ({
     [onChange]
   );
 
-  const addFilter: FilterProps["onSelect"] = useCallback(
+  const addFilter: FilterProps['onSelect'] = useCallback(
     (filter) => {
       const newFilters = [...filters, addIdToFilter(filter)];
       handleChange(newFilters);
@@ -81,14 +79,14 @@ export const MultiFilterInput: FC<Props> = ({
   );
 
   const setEditFilter = useCallback(
-    (id: FilterWithId["id"]) => () => {
+    (id: FilterWithId['id']) => () => {
       setEditFilterId(id);
     },
     []
   );
 
   const editFilter = useCallback(
-    (id: FilterWithId["id"]) => (filter: FilterType) => {
+    (id: FilterWithId['id']) => (filter: FilterType) => {
       const newFilters = filters.map((f) => {
         if (f.id === id) {
           return addIdToFilter(filter);
@@ -102,7 +100,7 @@ export const MultiFilterInput: FC<Props> = ({
   );
 
   const removeFilter = useCallback(
-    (id: FilterWithId["id"]) => () => {
+    (id: FilterWithId['id']) => () => {
       const newFilters = filters.filter((f) => f.id !== id);
       handleChange(newFilters);
     },
@@ -113,7 +111,7 @@ export const MultiFilterInput: FC<Props> = ({
     <div
       {...props}
       className={clsx(
-        "flex flex-wrap items-baseline gap-2 border border-gray-300 rounded-sm px-3 py-2 element-focus-within bg-white",
+        'flex flex-wrap items-baseline gap-2 border border-gray-300 rounded-sm px-3 py-2 element-focus-within bg-white',
         className
       )}
     >
@@ -138,10 +136,10 @@ export const MultiFilterInput: FC<Props> = ({
             onSelect={setEditFilter(filter.id)}
             onRemove={removeFilter(filter.id)}
           >
-            {key?.name ?? filter.key} {filter.operator}{" "}
-            {"value" in filter
+            {key?.name ?? filter.key} {filter.operator}{' '}
+            {'value' in filter
               ? Array.isArray(filter.value)
-                ? filter.value.join(", ")
+                ? filter.value.join(', ')
                 : filter.value.toString()
               : null}
           </Chip>

@@ -13,7 +13,7 @@ export const Countries: FC<Props> = () => {
   const { region, search } = useContext(CountryContext);
 
   const { data } = useFetchCountries(
-    search !== undefined ? '/name' : region !== undefined ? '/region' : '/all',
+    search !== undefined ? '/names.common' : region !== undefined ? '/region' : '',
     search !== undefined ? search : region !== undefined ? region : undefined
   );
 

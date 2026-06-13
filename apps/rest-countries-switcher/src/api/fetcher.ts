@@ -1,29 +1,19 @@
 import { transformCountry } from './transformCountry';
-import type { ApiCountryBase, ApiCountry, Country } from './types';
+import type { ApiCountryBase, ApiCountry } from './types';
 
-export type FetcherPaths = '/alpha' | '/all' | '/name' | '/region';
+export type FetcherPaths = '' | '/codes.alpha_3' | '/names.common' | '/region';
 
-export async function fetcher(
-  options: [Extract<FetcherPaths, '/alpha'>, string?]
-): Promise<Country>;
-export async function fetcher(
-  options: [Exclude<FetcherPaths, '/alpha'>, string?]
-): Promise<Country[]>;
-
-export async function fetcher<P extends FetcherPaths>([path, param]: [
-  P,
-  string?
-]) {
+export async function fetcher<P extends FetcherPaths>([path, param]: [P, string?]) {
   const fields =
-    path === '/alpha'
+    path === '/codes.alpha_3'
       ? 'cca3,name,flags,capital,population,region,subregion,tld,currencies,languages,borders'
       : 'cca3,name,flags,capital,population,region';
 
-  const url = `https://restcountries.com/v3.1${path}${
-    param ? `/${param}` : ''
-  }?fields=${fields}`;
+  const url = `https://api.restcountries.com/countries/v5${path}${param && path !== '/names.common' ? `/${param}` : ''}?fields=${fields}&limit=100${path === '/names.common' && param ? `&q=${param}` : ''}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_REST_COUNTRIES_API_KEY}` },
+  });
 
   // Handle errors
   if (!response.ok) {
@@ -31,13 +21,11 @@ export async function fetcher<P extends FetcherPaths>([path, param]: [
     throw new Error(`Failed to fetch ${url}`);
   }
 
-  const data = (await response.json()) as ApiCountryBase[] | ApiCountry;
+  const data = (await response.json()) as { data: { objects: ApiCountryBase[] | ApiCountry[] } };
 
-  const transformedData = Array.isArray(data)
-    ? data
-        .map(transformCountry)
-        .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
-    : transformCountry(data);
+  const transformedData = data.data.objects
+    .map(transformCountry)
+    .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
 
   return transformedData;
 }

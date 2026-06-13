@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react';
 
 import Page from './page';
 
+vi.mock('@api/fetcher', () => ({
+  fetcher: vi.fn().mockResolvedValue([]),
+}));
+
 const resolveComponent = async (Component: typeof Page) => {
   const ComponentResolved = await Component();
   return () => ComponentResolved;
@@ -13,9 +17,7 @@ describe('App router: Home', () => {
 
     render(<Component />);
 
-    expect(
-      screen.getByRole('textbox', { name: 'Search for a country' })
-    ).toBeVisible();
+    expect(screen.getByRole('textbox', { name: 'Search for a country' })).toBeVisible();
 
     expect(screen.getByRole('button')).toBeVisible();
   });

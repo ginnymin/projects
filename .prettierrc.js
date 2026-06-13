@@ -7,4 +7,5 @@ module.exports = {
   useTabs: false,
   jsxSingleQuote: false,
   bracketSameLine: false,
-}
+  printWidth: 100,
+};
