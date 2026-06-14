@@ -7,6 +7,9 @@ import { Country } from '@api/types';
 type Props = HTMLAttributes<HTMLImageElement> & Country['flag'] & {};
 
 export const Flag: FC<Props> = ({ alt, src, className, ...props }) => {
+  if (!src || src.trim() === '') {
+    return <span className={clsx('block aspect-[1.65] object-cover w-full', className)} />;
+  }
   return (
     <Image
       {...props}

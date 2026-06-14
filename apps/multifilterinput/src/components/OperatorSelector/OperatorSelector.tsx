@@ -1,16 +1,13 @@
-import { useMemo, type FC } from "react";
+import { useMemo, type FC } from 'react';
 
-import { Combobox, Option, type ComboboxProps } from "@components/Combobox";
-import type { Key, OperatorDefinition } from "@lib/types";
-import { operators as defaultOperators } from "@lib/constants";
+import { Combobox, Option, type ComboboxProps } from '@components/Combobox';
+import { operators as defaultOperators } from '@lib/constants';
+import type { Key, OperatorDefinition } from '@lib/types';
 
-type Props = Pick<
-  ComboboxProps,
-  "autoFocus" | "onBackspace" | "className"
-> & {
+type Props = Pick<ComboboxProps, 'autoFocus' | 'onBackspace' | 'className'> & {
   onChange: (option: Option) => void;
   operators?: OperatorDefinition[];
-  type: Key["type"];
+  type: Key['type'];
   selectedId?: string;
 };
 

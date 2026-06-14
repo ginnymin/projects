@@ -9,5 +9,5 @@
       "@hooks/*": ["./src/hooks/*"]
     }
   },
-  "include": ["src", "*.d.ts", ".next/types/**/*.ts"]
+  "include": ["src", "env.d.ts", "types.d.ts", ".next/types/**/*.ts", "next-env.d.ts"]
 }

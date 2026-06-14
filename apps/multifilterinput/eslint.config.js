@@ -1,65 +1,26 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
+// @ts-check
+
+import { fixupConfigRules } from '@eslint/compat';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
 
-// import baseConfig from '../../eslint.config.mjs';
+import baseConfig from '../../eslint.config.mjs';
 
-// const config = tseslint.config({
-//   files: ['**/*.{ts,tsx}'],
-//   languageOptions: {
-//     ecmaVersion: 2020,
-//     globals: globals.browser,
-//     parserOptions: {
-//       project: ['./tsconfig.node.json', './tsconfig.app.json'],
-//       // tsconfigRootDir: import.meta.dirname,
-//     },
-//   },
-//   plugins: {
-//     // 'react-hooks': reactHooks,
-//     'react-refresh': reactRefresh,
-//   },
-//   rules: {
-//     ...reactHooks.configs.recommended.rules,
-//     'react-refresh/only-export-components': [
-//       'warn',
-//       { allowConstantExport: true },
-//     ],
-//   },
-// });
-
-// const configs = [...baseConfig, ...config];
-
-// export default configs;
-
-export default tseslint.config(
-  { ignores: ['dist'] },
+const config = [
+  ...fixupConfigRules(baseConfig),
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
-    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
     plugins: {
-      'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
-  }
-);
+  },
+];
+
+export default config;

@@ -1,15 +1,15 @@
 export type ApiCountryBase = {
-  capital?: string[];
-  cca3: string;
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
+  capitals?: { name: string }[];
+  codes: { alpha_3: string };
+  flag: {
+    url_png: string;
+    url_svg: string;
+    emoji: string;
   };
-  name: {
+  names: {
     common: string;
     official: string;
-    nativeName?: { [key: string]: { official: string; common: string } };
+    native?: { [key: string]: { official: string; common: string } };
   };
   population: number;
   region: string;
@@ -18,9 +18,9 @@ export type ApiCountryBase = {
 type ApiCountryDetails = {
   borders: string[];
   currencies?: { [key: string]: { name: string; symbol: string } };
-  languages?: { [key: string]: string };
+  languages?: { name: string }[];
   subregion: string;
-  tld: string[];
+  tlds: string[];
 };
 
 export type ApiCountry = ApiCountryBase & ApiCountryDetails;

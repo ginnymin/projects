@@ -1,3 +1,5 @@
+// @ts-check
+
 import baseConfig from '../../eslint.config.mjs';
 
 const config = [

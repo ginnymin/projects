@@ -13,12 +13,12 @@ export const metadata = {
 };
 
 const Page = async () => {
-  const countries = await fetcher(['/all']);
+  const countries = await fetcher(['']);
 
   return (
     <SWRProvider
       value={{
-        fallback: { [unstable_serialize(['/all', undefined])]: countries },
+        fallback: { [unstable_serialize(['', undefined])]: countries },
       }}
     >
       <CountryProvider>

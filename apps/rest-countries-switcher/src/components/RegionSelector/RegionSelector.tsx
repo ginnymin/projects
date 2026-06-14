@@ -1,19 +1,8 @@
 'use client';
 
-import {
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from '@headlessui/react';
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import clsx from 'clsx';
-import {
-  useCallback,
-  useContext,
-  useMemo,
-  type FC,
-  type HTMLAttributes,
-} from 'react';
+import { useCallback, useContext, useMemo, type FC, type HTMLAttributes } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 
 import { useFetchCountries } from '@api/hooks';
@@ -24,7 +13,7 @@ type Props = HTMLAttributes<HTMLElement> & {};
 export const RegionSelector: FC<Props> = ({ className }) => {
   const { region, setRegion, setSearch } = useContext(CountryContext);
 
-  const { data } = useFetchCountries('/all');
+  const { data } = useFetchCountries('');
 
   const regions = useMemo(() => {
     return data?.reduce((array: string[], country) => {

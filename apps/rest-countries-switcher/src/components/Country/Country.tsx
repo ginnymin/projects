@@ -1,34 +1,15 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {
-  MouseEventHandler,
-  useCallback,
-  useRef,
-  type FC,
-  type HTMLAttributes,
-} from 'react';
+import { MouseEventHandler, useCallback, useRef, type FC, type HTMLAttributes } from 'react';
 
 import { Country as CountryType } from '@api/types';
 import { Flag } from '@components/Flag';
 
 type Props = HTMLAttributes<HTMLElement> &
-  Required<
-    Pick<
-      CountryType,
-      'name' | 'id' | 'population' | 'region' | 'capital' | 'flag'
-    >
-  > & {};
+  Required<Pick<CountryType, 'name' | 'id' | 'population' | 'region' | 'capital' | 'flag'>> & {};
 
-export const Country: FC<Props> = ({
-  capital,
-  className,
-  flag,
-  id,
-  name,
-  population,
-  region,
-}) => {
+export const Country: FC<Props> = ({ capital, className, flag, id, name, population, region }) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const router = useRouter();
 

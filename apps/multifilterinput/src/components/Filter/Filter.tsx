@@ -1,21 +1,13 @@
-import clsx from "clsx";
-import {
-  type HTMLAttributes,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import clsx from 'clsx';
+import { type HTMLAttributes, useCallback, useMemo, useState } from 'react';
 
-import { KeySelector, type KeySelectorProps } from "@components/KeySelector";
-import type { OperatorDefinition, Filter as FilterType, Key } from "@lib/types";
-import {
-  OperatorSelector,
-  OperatorSelectorProps,
-} from "@components/OperatorSelector";
-import { ValueInput, ValueInputProps } from "@components/ValueInput";
-import { operators as defaultOperators } from "@lib/constants";
+import { KeySelector, type KeySelectorProps } from '@components/KeySelector';
+import { OperatorSelector, OperatorSelectorProps } from '@components/OperatorSelector';
+import { ValueInput, ValueInputProps } from '@components/ValueInput';
+import { operators as defaultOperators } from '@lib/constants';
+import type { OperatorDefinition, Filter as FilterType, Key } from '@lib/types';
 
-type Props = Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> & {
+type Props = Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> & {
   defaultFilter?: FilterType;
   keys: Key[];
   operators?: OperatorDefinition[];
@@ -31,33 +23,32 @@ export const Filter = ({
   onSelect,
   ...props
 }: Props) => {
-  const [key, setKey] = useState<Partial<FilterType>["key"]>(
-    defaultFilter?.key
-  );
-  const [operator, setOperator] = useState<Partial<FilterType>["operator"]>(
+  const [key, setKey] = useState<Partial<FilterType>['key']>(defaultFilter?.key);
+  const [operator, setOperator] = useState<Partial<FilterType>['operator']>(
     // if we're editing a filter that has set or !set as the oeprator
     // we need the operator selector to be editable when the component mounts
-    defaultFilter?.operator === 'set' || defaultFilter?.operator === '!set' ? undefined : defaultFilter?.operator
+    defaultFilter?.operator === 'set' || defaultFilter?.operator === '!set'
+      ? undefined
+      : defaultFilter?.operator
   );
 
   // store previously selected values for backspace scenarios
-  const [selectedKey, setSelectedKey] = useState<Partial<FilterType>["key"]>(defaultFilter?.key);
-  const [selectedOperator, setSelectedOperator] = useState<Partial<FilterType>["operator"]>(defaultFilter?.operator);
-
-  const handleKeyChange: KeySelectorProps["onChange"] = useCallback(
-    (option) => {
-      if (option) {
-        setKey(option.id);
-        setSelectedKey(option.id);
-      }
-    },
-    []
+  const [selectedKey, setSelectedKey] = useState<Partial<FilterType>['key']>(defaultFilter?.key);
+  const [selectedOperator, setSelectedOperator] = useState<Partial<FilterType>['operator']>(
+    defaultFilter?.operator
   );
 
-  const handleOperatorChange: OperatorSelectorProps["onChange"] = useCallback(
+  const handleKeyChange: KeySelectorProps['onChange'] = useCallback((option) => {
+    if (option) {
+      setKey(option.id);
+      setSelectedKey(option.id);
+    }
+  }, []);
+
+  const handleOperatorChange: OperatorSelectorProps['onChange'] = useCallback(
     (option) => {
       if (option) {
-        if (option.id === "set" || option.id === "!set") {
+        if (option.id === 'set' || option.id === '!set') {
           if (key !== undefined) {
             onSelect({ key, operator: option.id });
             setKey(undefined);
@@ -68,21 +59,20 @@ export const Filter = ({
           return;
         }
 
-        setOperator(option.id as FilterType["operator"]);
-        setSelectedOperator(option.id as FilterType["operator"])
+        setOperator(option.id as FilterType['operator']);
+        setSelectedOperator(option.id as FilterType['operator']);
       }
     },
     [key, onSelect]
   );
 
-  const handleOperatorBackspace: OperatorSelectorProps["onBackspace"] =
-    useCallback(() => {
-      setKey(undefined);
-      setOperator(undefined);
-      setSelectedOperator(undefined);
-    }, []);
+  const handleOperatorBackspace: OperatorSelectorProps['onBackspace'] = useCallback(() => {
+    setKey(undefined);
+    setOperator(undefined);
+    setSelectedOperator(undefined);
+  }, []);
 
-  const handleValueSelect: ValueInputProps["onSelect"] = useCallback(
+  const handleValueSelect: ValueInputProps['onSelect'] = useCallback(
     (v) => {
       if (key !== undefined && operator !== undefined) {
         onSelect({ key, operator, value: v });
@@ -95,10 +85,9 @@ export const Filter = ({
     [key, operator, onSelect]
   );
 
-  const handleValueBackspace: ValueInputProps["onBackspace"] =
-    useCallback(() => {
-      setOperator(undefined);
-    }, []);
+  const handleValueBackspace: ValueInputProps['onBackspace'] = useCallback(() => {
+    setOperator(undefined);
+  }, []);
 
   const currentKey = useMemo(() => keys.find((k) => k.id === key), [key, keys]);
   const currentOperator = useMemo(
@@ -107,7 +96,7 @@ export const Filter = ({
   );
 
   return (
-    <div {...props} className={clsx("flex gap-2 items-baseline", className)}>
+    <div {...props} className={clsx('flex gap-2 items-baseline', className)}>
       {currentKey !== undefined ? (
         <span className="font-bold text-blue-600">{currentKey.name}</span>
       ) : (
@@ -121,9 +110,7 @@ export const Filter = ({
 
       {currentKey !== undefined ? (
         currentOperator !== undefined ? (
-          <span className="font-bold text-blue-600">
-            {currentOperator.value}
-          </span>
+          <span className="font-bold text-blue-600">{currentOperator.value}</span>
         ) : (
           <OperatorSelector
             type={currentKey.type}
@@ -137,13 +124,13 @@ export const Filter = ({
 
       {currentKey !== undefined &&
         operator !== undefined &&
-        operator !== "set" &&
-        operator !== "!set" &&
-        (currentKey.type === "multiselect" || currentKey.type === "select" ? (
+        operator !== 'set' &&
+        operator !== '!set' &&
+        (currentKey.type === 'multiselect' || currentKey.type === 'select' ? (
           <ValueInput
             type={currentKey.type}
             initialValue={
-              defaultFilter !== undefined && "value" in defaultFilter
+              defaultFilter !== undefined && 'value' in defaultFilter
                 ? defaultFilter.value
                 : undefined
             }
@@ -156,7 +143,7 @@ export const Filter = ({
             type={currentKey.type}
             initialValue={
               defaultFilter !== undefined &&
-              "value" in defaultFilter &&
+              'value' in defaultFilter &&
               !Array.isArray(defaultFilter.value)
                 ? defaultFilter.value
                 : undefined
