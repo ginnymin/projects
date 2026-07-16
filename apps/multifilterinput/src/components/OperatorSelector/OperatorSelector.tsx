@@ -1,13 +1,12 @@
-import { useMemo, type FC } from 'react';
+import { Combobox, type ComboboxProps, type Option } from "@components/Combobox";
+import { operators as defaultOperators } from "@lib/constants";
+import type { Key, OperatorDefinition } from "@lib/types";
+import { type FC, useMemo } from "react";
 
-import { Combobox, Option, type ComboboxProps } from '@components/Combobox';
-import { operators as defaultOperators } from '@lib/constants';
-import type { Key, OperatorDefinition } from '@lib/types';
-
-type Props = Pick<ComboboxProps, 'autoFocus' | 'onBackspace' | 'className'> & {
+type Props = Pick<ComboboxProps, "autoFocus" | "onBackspace" | "className"> & {
   onChange: (option: Option) => void;
   operators?: OperatorDefinition[];
-  type: Key['type'];
+  type: Key["type"];
   selectedId?: string;
 };
 
@@ -24,17 +23,17 @@ export const OperatorSelector: FC<Props> = ({
         ...o,
         value: `${o.value} (${o.id})`,
       })),
-    [operators]
+    [operators],
   );
 
   const filteredOptions = useMemo(
     () => operatorOptions.filter((option) => option.types.includes(type)),
-    [operatorOptions, type]
+    [operatorOptions, type],
   );
 
   const selectedOption = useMemo(
     () => operators.find((option) => option.id === selectedId),
-    [operators, selectedId]
+    [operators, selectedId],
   );
 
   return (

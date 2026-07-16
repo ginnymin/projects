@@ -1,13 +1,11 @@
-import Image from 'next/image';
+import { CloseButton, ModalTitle } from "@components/Modal";
+import Image from "next/image";
 
-import { CloseButton, ModalTitle } from '@components/Modal';
-
-import RulesSVG from './image-rules-bonus.svg';
+import RulesSVG from "./image-rules-bonus.svg";
 
 export const metadata = {
-  title: 'Rules for Rock Paper Scissors Lizard Spock',
-  description:
-    'How the game works, who beats who. A fun little project from ginnymin.com',
+  title: "Rules for Rock Paper Scissors Lizard Spock",
+  description: "How the game works, who beats who. A fun little project from ginnymin.com",
 };
 
 const Rules = () => {

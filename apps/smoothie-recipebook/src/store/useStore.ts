@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
 import {
-  init,
-  get as getData,
   add as addData,
-  update as updateData,
+  get as getData,
+  init,
   remove as removeData,
   StoreNames,
-} from './store';
-import { Recipe } from './types';
+  update as updateData,
+} from "./store";
+import type { Recipe } from "./types";
 
 let allRecipes: Recipe[];
 
@@ -48,14 +48,11 @@ export const useStore = () => {
     }
   }, []);
 
-  const add = useCallback(async (data: Omit<Recipe, 'id'>) => {
+  const add = useCallback(async (data: Omit<Recipe, "id">) => {
     setError(false);
     setLoading(true);
     try {
-      const result = await addData<Omit<Recipe, 'id'>>(
-        StoreNames.Recipes,
-        data
-      );
+      const result = await addData<Omit<Recipe, "id">>(StoreNames.Recipes, data);
       setLoading(false);
       return result;
     } catch (_e) {
@@ -95,7 +92,7 @@ export const useStore = () => {
 
   useEffect(() => {
     // initialize the store
-    init<Recipe>(StoreNames.Recipes, 'id')
+    init<Recipe>(StoreNames.Recipes, "id")
       .then((result) => {
         setInitialized(result);
       })

@@ -1,25 +1,13 @@
-import {
-  CloseButton,
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from '@headlessui/react';
-import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
-import {
-  type ButtonHTMLAttributes,
-  useCallback,
-  useState,
-  type FC,
-} from 'react';
-import { HiHeart, HiOutlineX } from 'react-icons/hi';
-
-import { Dog as DogType } from '@api/getDogs';
-import { getMatch } from '@api/getMatch';
-import { Button } from '@components/Button';
-import { Dog } from '@components/Dog';
-import { Grid } from '@components/Grid';
+import type { Dog as DogType } from "@api/getDogs";
+import { getMatch } from "@api/getMatch";
+import { Button } from "@components/Button";
+import { Dog } from "@components/Dog";
+import { Grid } from "@components/Grid";
+import { CloseButton, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { type ButtonHTMLAttributes, type FC, useCallback, useState } from "react";
+import { HiHeart, HiOutlineX } from "react-icons/hi";
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   selectedDogs: DogType[];
@@ -27,12 +15,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   onReset: () => void;
 };
 
-export const FavoriteDogs: FC<Props> = ({
-  className,
-  onReset,
-  onRemove,
-  selectedDogs,
-}) => {
+export const FavoriteDogs: FC<Props> = ({ className, onReset, onRemove, selectedDogs }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
@@ -48,8 +31,8 @@ export const FavoriteDogs: FC<Props> = ({
     const match = async () => {
       const id = await getMatch(selectedDogs.map((d) => d.id));
 
-      if (typeof id === 'string') {
-        router.push('/match/' + id);
+      if (typeof id === "string") {
+        router.push("/match/" + id);
       } else {
         setLoading(false);
       }
@@ -61,14 +44,13 @@ export const FavoriteDogs: FC<Props> = ({
   return (
     <>
       <button
-        className={clsx('relative hover:scale-[1.1]', className)}
+        type="button"
+        className={clsx("relative hover:scale-[1.1]", className)}
         onClick={toggleDialog}
       >
         <HiHeart className="size-10 fill-purple-600 drop-shadow-md" />
         <span className="absolute bg-stone-700 text-white rounded-lg px-1.5 text-xs font-semibold left-[65%] -top-0">
-          <span className="sr-only">
-            View your favorites. Number of favorites:
-          </span>{' '}
+          <span className="sr-only">View your favorites. Number of favorites:</span>{" "}
           {selectedDogs.length}
         </span>
       </button>
@@ -80,15 +62,12 @@ export const FavoriteDogs: FC<Props> = ({
               <HiOutlineX className="size-7" />
               <span className="sr-only">Close dialog</span>
             </CloseButton>
-            <DialogTitle className="font-semibold text-xl">
-              Your favorites
-            </DialogTitle>
+            <DialogTitle className="font-semibold text-xl">Your favorites</DialogTitle>
             <p>
-              You&apos;ve selected {selectedDogs.length} dogs so far. Click on a
-              dog below to de-select it. Ready to get matched? Click the{' '}
-              <em className="font-semibold">Find my match</em> button below! You
-              can also click <em>Reset</em> to remove your selections and return
-              to the dashboard.
+              You&apos;ve selected {selectedDogs.length} dogs so far. Click on a dog below to
+              de-select it. Ready to get matched? Click the{" "}
+              <em className="font-semibold">Find my match</em> button below! You can also click{" "}
+              <em>Reset</em> to remove your selections and return to the dashboard.
             </p>
             <div className="flex justify-center gap-4">
               <Button
@@ -106,7 +85,7 @@ export const FavoriteDogs: FC<Props> = ({
                 disabled={isLoading}
                 onClick={handleMatch}
               >
-                {isLoading ? 'Matching...' : 'Find my match!'}
+                {isLoading ? "Matching..." : "Find my match!"}
               </Button>
             </div>
             <Grid>

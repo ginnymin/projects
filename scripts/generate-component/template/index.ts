@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { ComponentName } from './ComponentName';
+import type { ComponentName } from "./ComponentName";
 
-export { ComponentName } from './ComponentName';
+export { ComponentName } from "./ComponentName";
 export type ComponentNameProps = ComponentProps<typeof ComponentName>;

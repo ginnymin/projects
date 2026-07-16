@@ -1,15 +1,14 @@
-import { useSyncExternalStore } from 'react';
+import { store } from "@store/progress";
+import { useSyncExternalStore } from "react";
 
-import { store } from '@store/progress';
-
-import { useRandomChoice } from './useRandomChoice';
-import { useResult } from './useResult';
+import { useRandomChoice } from "./useRandomChoice";
+import { useResult } from "./useResult";
 
 export const useProgress = () => {
   const choice = useSyncExternalStore(
     store.subscribe,
-    store.getProgress('playerChoice'),
-    store.getServerProgress
+    store.getProgress("playerChoice"),
+    store.getServerProgress,
   );
 
   const houseChoice = useRandomChoice({

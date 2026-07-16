@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
-
-import { Modal } from '@components/Modal';
+import { Modal } from "@components/Modal";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 const ModalLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();

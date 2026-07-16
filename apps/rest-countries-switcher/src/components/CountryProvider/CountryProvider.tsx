@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
-  useState,
+  type Dispatch,
   type FC,
   type HTMLAttributes,
-} from 'react';
+  type SetStateAction,
+  useState,
+} from "react";
 
 type Context = {
   region: string | undefined;
@@ -25,16 +25,15 @@ const defaultContext: Context = {
 
 export const CountryContext = createContext<Context>(defaultContext);
 
-type Props = HTMLAttributes<HTMLElement> &
-  Partial<Pick<Context, 'region' | 'search'>>;
+type Props = HTMLAttributes<HTMLElement> & Partial<Pick<Context, "region" | "search">>;
 
 export const CountryProvider: FC<Props> = ({
   children,
   region: regionProp,
   search: searchProp,
 }) => {
-  const [region, setRegion] = useState<Context['region']>(regionProp);
-  const [search, setSearch] = useState<Context['search']>(searchProp);
+  const [region, setRegion] = useState<Context["region"]>(regionProp);
+  const [search, setSearch] = useState<Context["search"]>(searchProp);
 
   const value = {
     region,
@@ -43,7 +42,5 @@ export const CountryProvider: FC<Props> = ({
     setSearch,
   };
 
-  return (
-    <CountryContext.Provider value={value}>{children}</CountryContext.Provider>
-  );
+  return <CountryContext.Provider value={value}>{children}</CountryContext.Provider>;
 };

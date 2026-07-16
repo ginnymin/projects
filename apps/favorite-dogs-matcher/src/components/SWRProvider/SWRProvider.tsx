@@ -1,11 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentProps } from 'react';
-import { SWRConfig } from 'swr';
+import type { ComponentProps } from "react";
+import { SWRConfig } from "swr";
 
-export const SWRProvider = ({
-  children,
-  ...props
-}: ComponentProps<typeof SWRConfig>) => (
+export const SWRProvider = ({ children, ...props }: ComponentProps<typeof SWRConfig>) => (
   <SWRConfig {...props}>{children}</SWRConfig>
 );

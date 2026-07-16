@@ -1,4 +1,4 @@
-import { ApiCountryBase, ApiCountry, Country } from './types';
+import type { ApiCountry, ApiCountryBase, Country } from "./types";
 
 export const transformCountry = (country: ApiCountryBase | ApiCountry) => {
   const base: Country = {
@@ -17,7 +17,7 @@ export const transformCountry = (country: ApiCountryBase | ApiCountry) => {
     region: country.region,
   };
 
-  if ('tlds' in country) {
+  if ("tlds" in country) {
     const details: Country = {
       ...base,
       borders: country.borders,

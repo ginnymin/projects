@@ -1,6 +1,6 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
-import { MultiFilterInput } from "./MultiFilterInput";
+import type { MultiFilterInput } from "./MultiFilterInput";
 
 export type { Filter, Key, OperatorDefinition } from "@lib/types";
 export { MultiFilterInput } from "./MultiFilterInput";

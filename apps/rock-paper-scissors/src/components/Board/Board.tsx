@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import Image from 'next/image';
-import type { FC, HTMLAttributes } from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { HandType } from "@components/constants";
+import { BoardHand as Hand } from "@components/Hand";
+import { store } from "@store/progress";
+import clsx from "clsx";
+import Image from "next/image";
+import type { FC, HTMLAttributes } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { HandType } from '@components/constants';
-import { BoardHand as Hand } from '@components/Hand';
-import { store } from '@store/progress';
-
-import Background from './bg-pentagon.svg';
-import { useOnResize } from './useOnResize';
+import Background from "./bg-pentagon.svg";
+import { useOnResize } from "./useOnResize";
 
 type Props = HTMLAttributes<HTMLElement>;
 
@@ -28,7 +27,7 @@ export const Board: FC<Props> = (props) => {
     (type: HandType) => () => {
       store.setPlayerChoice(type);
     },
-    []
+    [],
   );
 
   const handleResize = useCallback(() => {
@@ -50,24 +49,17 @@ export const Board: FC<Props> = (props) => {
     <div
       {...props}
       className={clsx(
-        'relative flex items-center justify-center p-14 xs:p-16 transition max-w-[360px] xs:max-w-[400px] md:max-w-none',
-        { 'opacity-0': !ready }
+        "relative flex items-center justify-center p-14 xs:p-16 transition max-w-[360px] xs:max-w-[400px] md:max-w-none",
+        { "opacity-0": !ready },
       )}
     >
       <Image ref={ref} src={Background} alt="" />
-      <div className="absolute transition" role="region" style={style}>
+      <section className="absolute transition" style={style}>
         <h2 className="sr-only">Choose a hand:</h2>
         {Object.values(HandType).map((type, index) => {
-          return (
-            <Hand
-              key={type}
-              index={index}
-              type={type}
-              onClick={handleClick(type)}
-            />
-          );
+          return <Hand key={type} index={index} type={type} onClick={handleClick(type)} />;
         })}
-      </div>
+      </section>
     </div>
   );
 };

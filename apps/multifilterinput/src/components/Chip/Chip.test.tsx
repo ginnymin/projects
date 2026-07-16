@@ -35,9 +35,7 @@ describe("Components: Chip", () => {
     render(<Chip onSelect={mockOnSelect}>Test label</Chip>);
 
     expect(screen.getByRole("button", { name: "Test label" })).toBeVisible();
-    expect(screen.getByText("Test label").parentElement).toHaveClass(
-      "bg-blue-600"
-    );
+    expect(screen.getByText("Test label").parentElement).toHaveClass("bg-blue-600");
 
     await userEvent.click(screen.getByRole("button", { name: "Test label" }));
 
@@ -48,7 +46,7 @@ describe("Components: Chip", () => {
     render(
       <Chip onSelect={mockOnSelect} onRemove={mockOnRemove}>
         Test label
-      </Chip>
+      </Chip>,
     );
 
     expect(screen.getByRole("button", { name: "Test label" })).toBeVisible();

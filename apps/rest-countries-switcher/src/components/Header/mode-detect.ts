@@ -3,12 +3,10 @@
  * See: next.config and layout.tsx
  */
 
-(function () {
-  const isSystemDarkMode = window.matchMedia(
-    '(prefers-color-scheme: dark)'
-  ).matches;
+(() => {
+  const isSystemDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   if (isSystemDarkMode) {
-    document.documentElement.setAttribute('data-mode', 'dark');
+    document.documentElement.setAttribute("data-mode", "dark");
   }
 })();

@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { SWRProvider } from './SWRProvider';
+import type { SWRProvider } from "./SWRProvider";
 
-export { SWRProvider } from './SWRProvider';
+export { SWRProvider } from "./SWRProvider";
 export type SWRProviderProps = ComponentProps<typeof SWRProvider>;

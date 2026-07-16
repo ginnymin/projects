@@ -1,6 +1,5 @@
-import useSWR from 'swr';
-
-import { getDogs } from '@api/getDogs';
+import { getDogs } from "@api/getDogs";
+import useSWR from "swr";
 
 interface FilterOptions {
   breeds?: string[];
@@ -10,16 +9,11 @@ interface FilterOptions {
   sort?: string;
 }
 
-export const useFetchDogs = (
-  options?: FilterOptions,
-  paginationOptions?: string
-) => {
-  const queryParams = new URLSearchParams(paginationOptions ?? '');
+export const useFetchDogs = (options?: FilterOptions, paginationOptions?: string) => {
+  const queryParams = new URLSearchParams(paginationOptions ?? "");
 
   if (options !== undefined) {
-    (
-      Object.entries(options) as [string, string[] | string | undefined][]
-    ).forEach(([key, val]) => {
+    (Object.entries(options) as [string, string[] | string | undefined][]).forEach(([key, val]) => {
       if (Array.isArray(val)) {
         val.forEach((v) => {
           queryParams.append(key, v);
@@ -30,7 +24,7 @@ export const useFetchDogs = (
     });
   }
 
-  const data = useSWR(['/dogs/search', queryParams.toString()], getDogs, {});
+  const data = useSWR(["/dogs/search", queryParams.toString()], getDogs, {});
 
   return data;
 };

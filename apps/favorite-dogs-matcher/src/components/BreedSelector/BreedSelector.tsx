@@ -4,29 +4,24 @@ import {
   ComboboxOption,
   ComboboxOptions,
   type ComboboxProps,
-} from '@headlessui/react';
-import clsx from 'clsx';
-import { ChangeEvent, useCallback, useMemo, useState, type FC } from 'react';
-import { HiCheck } from 'react-icons/hi';
-
-import { useFetchBreeds } from '@hooks/useFetchBreeds';
+} from "@headlessui/react";
+import { useFetchBreeds } from "@hooks/useFetchBreeds";
+import clsx from "clsx";
+import { type ChangeEvent, type FC, useCallback, useMemo, useState } from "react";
+import { HiCheck } from "react-icons/hi";
 
 interface Props extends ComboboxProps<string, true> {
   selectedBreeds: string[];
   onChange: (breeds: string[]) => void;
 }
 
-export const BreedSelector: FC<Props> = ({
-  selectedBreeds,
-  onChange,
-  ...props
-}) => {
+export const BreedSelector: FC<Props> = ({ selectedBreeds, onChange, ...props }) => {
   const { data: breeds } = useFetchBreeds();
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleClose = useCallback(() => {
-    setQuery('');
+    setQuery("");
   }, []);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -35,12 +30,12 @@ export const BreedSelector: FC<Props> = ({
 
   const filteredBreeds = useMemo(
     () =>
-      query === ''
+      query === ""
         ? breeds
         : breeds?.filter((breed) => {
             return breed.toLowerCase().includes(query.toLowerCase());
           }),
-    [query, breeds]
+    [query, breeds],
   );
 
   return (
@@ -60,7 +55,7 @@ export const BreedSelector: FC<Props> = ({
       />
 
       <ComboboxOptions
-        anchor={{ to: 'bottom start', gap: 8, offset: -2 }}
+        anchor={{ to: "bottom start", gap: 8, offset: -2 }}
         className="rounded-sm bg-white empty:invisible z-10"
       >
         {filteredBreeds?.map((breed) => (
@@ -69,10 +64,7 @@ export const BreedSelector: FC<Props> = ({
             value={breed}
             className="flex gap-1.5 items-center data-focus:bg-purple-100 py-2 pl-2 pr-4"
           >
-            <HiCheck
-              className={clsx({ invisible: !selectedBreeds.includes(breed) })}
-            />{' '}
-            {breed}
+            <HiCheck className={clsx({ invisible: !selectedBreeds.includes(breed) })} /> {breed}
           </ComboboxOption>
         ))}
       </ComboboxOptions>

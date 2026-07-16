@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Grid } from './Grid';
+import type { Grid } from "./Grid";
 
-export { Grid } from './Grid';
+export { Grid } from "./Grid";
 export type GridProps = ComponentProps<typeof Grid>;

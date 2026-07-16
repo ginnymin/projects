@@ -1,7 +1,6 @@
+import type { OperatorDefinition } from "@lib/types";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
-import { OperatorDefinition } from "@lib/types";
 
 import { OperatorSelector } from ".";
 
@@ -24,9 +23,7 @@ describe("Components: OperatorSelector", () => {
 
     await screen.findByRole("combobox", { name: "Filter operator" });
 
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toBeVisible();
     expect(screen.getByPlaceholderText("Select an operator...")).toBeVisible();
     expect(screen.getByRole("listbox")).toBeVisible();
     expect(screen.getAllByRole("option")).toHaveLength(6);
@@ -51,13 +48,7 @@ describe("Components: OperatorSelector", () => {
   });
 
   it("renders custom operators", async () => {
-    render(
-      <OperatorSelector
-        operators={operators}
-        type="date"
-        onChange={mockOnChange}
-      />
-    );
+    render(<OperatorSelector operators={operators} type="date" onChange={mockOnChange} />);
 
     await screen.findAllByRole("option");
 

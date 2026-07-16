@@ -1,6 +1,6 @@
-'use client'; // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { HiExclamation } from 'react-icons/hi';
+import { HiExclamation } from "react-icons/hi";
 
 const Page = () => {
   return (

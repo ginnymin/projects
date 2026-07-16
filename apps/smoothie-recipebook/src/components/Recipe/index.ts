@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Recipe } from './Recipe';
+import type { Recipe } from "./Recipe";
 
-export { Recipe as Recipe } from './Recipe';
+export { Recipe } from "./Recipe";
 export type RecipeProps = ComponentProps<typeof Recipe>;

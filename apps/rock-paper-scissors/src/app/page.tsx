@@ -1,9 +1,9 @@
-import { Game } from '@components/Game';
+import { Game } from "@components/Game";
 
 export const metadata = {
-  title: 'Rock Paper Scissors Lizard Spock',
+  title: "Rock Paper Scissors Lizard Spock",
   description:
-    'Play the game and see how high you can score! A fun little project from ginnymin.com',
+    "Play the game and see how high you can score! A fun little project from ginnymin.com",
 };
 
 const Page = () => {

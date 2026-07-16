@@ -1,26 +1,19 @@
-import { CloseButton, ModalTitle } from '@components/Modal';
-import { Recipe } from '@components/Recipe';
+import { CloseButton, ModalTitle } from "@components/Modal";
+import { Recipe } from "@components/Recipe";
 
 export const metadata = {
-  title: 'Recipe detail',
-  description:
-    'How the game works, who beats who. A fun little project from ginnymin.com',
+  title: "Recipe detail",
+  description: "How the game works, who beats who. A fun little project from ginnymin.com",
 };
 
-const Page = async ({
-  params,
-}: {
-  params: Promise<{ id: string[] | undefined }>;
-}) => {
+const Page = async ({ params }: { params: Promise<{ id: string[] | undefined }> }) => {
   const p = await params;
   const id = p.id;
 
   return (
     <div className="sm:w-[75vw] sm:max-w-3xl">
       <div className="flex justify-between mb-2">
-        <ModalTitle>
-          {id === undefined ? 'New recipe' : 'View/edit recipe'}
-        </ModalTitle>
+        <ModalTitle>{id === undefined ? "New recipe" : "View/edit recipe"}</ModalTitle>
         <CloseButton className="md:order-2" iconAlt="Close and go back" />
       </div>
       <Recipe id={Array.isArray(id) ? id[0] : id} />

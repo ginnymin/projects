@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { DogDetail } from './DogDetail';
+import type { DogDetail } from "./DogDetail";
 
-export { DogDetail } from './DogDetail';
+export { DogDetail } from "./DogDetail";
 export type DogDetailProps = ComponentProps<typeof DogDetail>;

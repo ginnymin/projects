@@ -1,30 +1,23 @@
-'use client';
+"use client";
 
-import {
-  MouseEventHandler,
-  useCallback,
-  useState,
-  type FC,
-  type HTMLAttributes,
-} from 'react';
-import { FaSortAmountUpAlt, FaSortAmountDown } from 'react-icons/fa';
-import { HiOutlineX } from 'react-icons/hi';
-
-import { Dog as DogType } from '@api/getDogs';
-import { BreedSelector } from '@components/BreedSelector';
-import { Button } from '@components/Button';
-import { Dog } from '@components/Dog';
-import { FavoriteDogs } from '@components/FavoriteDogs';
-import { Grid } from '@components/Grid';
-import { Skeleton } from '@components/Skeleton';
-import { useFetchDogs } from '@hooks/useFetchDogs';
+import type { Dog as DogType } from "@api/getDogs";
+import { BreedSelector } from "@components/BreedSelector";
+import { Button } from "@components/Button";
+import { Dog } from "@components/Dog";
+import { FavoriteDogs } from "@components/FavoriteDogs";
+import { Grid } from "@components/Grid";
+import { Skeleton } from "@components/Skeleton";
+import { useFetchDogs } from "@hooks/useFetchDogs";
+import { type FC, type HTMLAttributes, type MouseEventHandler, useCallback, useState } from "react";
+import { FaSortAmountDown, FaSortAmountUpAlt } from "react-icons/fa";
+import { HiOutlineX } from "react-icons/hi";
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
 const SIZE = 25;
 const defaultParams = new URLSearchParams();
-defaultParams.set('size', SIZE.toString());
-defaultParams.set('from', '0');
+defaultParams.set("size", SIZE.toString());
+defaultParams.set("from", "0");
 
 /**
  *
@@ -34,37 +27,31 @@ defaultParams.set('from', '0');
 export const DogsGrid: FC<Props> = () => {
   const [selectedDogs, setSelectedDogs] = useState<DogType[]>([]);
   const [selectedBreeds, setSelectedBreeds] = useState<string[]>([]);
-  const [sort, setSort] = useState<'asc' | 'desc'>('asc');
-  const [paginationParams, setPaginationParams] = useState<string>(
-    defaultParams.toString()
-  );
+  const [sort, setSort] = useState<"asc" | "desc">("asc");
+  const [paginationParams, setPaginationParams] = useState<string>(defaultParams.toString());
   const [page, setPage] = useState<number>(1);
 
   const { data } = useFetchDogs(
-    { breeds: selectedBreeds, sort: 'breed:' + sort },
-    paginationParams
+    { breeds: selectedBreeds, sort: "breed:" + sort },
+    paginationParams,
   );
 
   const isLoading = data === undefined;
 
-  const totalPages =
-    typeof data?.total === 'number' ? Math.ceil(data.total / SIZE) : undefined;
+  const totalPages = typeof data?.total === "number" ? Math.ceil(data.total / SIZE) : undefined;
 
   const toggleSort = useCallback(() => {
-    setSort((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+    setSort((prev) => (prev === "asc" ? "desc" : "asc"));
   }, []);
 
-  const handleRemoveBreed: MouseEventHandler<HTMLButtonElement> = useCallback(
-    (event) => {
-      if (event.target instanceof HTMLButtonElement) {
-        const id = event.target.dataset.breed;
-        setSelectedBreeds((prev) => prev.filter((i) => i !== id));
-        setPaginationParams(defaultParams.toString());
-        setPage(1);
-      }
-    },
-    []
-  );
+  const handleRemoveBreed: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
+    if (event.target instanceof HTMLButtonElement) {
+      const id = event.target.dataset.breed;
+      setSelectedBreeds((prev) => prev.filter((i) => i !== id));
+      setPaginationParams(defaultParams.toString());
+      setPage(1);
+    }
+  }, []);
 
   const handleSelectBreed = useCallback((breeds: string[]) => {
     setSelectedBreeds(breeds);
@@ -74,9 +61,7 @@ export const DogsGrid: FC<Props> = () => {
 
   const handleSelect = useCallback((dog: DogType) => {
     setSelectedDogs((prev) =>
-      prev.some((d) => d.id === dog.id)
-        ? prev.filter((d) => d.id !== dog.id)
-        : [...prev, dog]
+      prev.some((d) => d.id === dog.id) ? prev.filter((d) => d.id !== dog.id) : [...prev, dog],
     );
   }, []);
 
@@ -107,10 +92,8 @@ export const DogsGrid: FC<Props> = () => {
           onClick={toggleSort}
           disabled={isLoading}
         >
-          {sort === 'asc' ? <FaSortAmountUpAlt /> : <FaSortAmountDown />}
-          <span className="sr-only">
-            Sort {sort === 'asc' ? 'ascending' : 'descending'}
-          </span>{' '}
+          {sort === "asc" ? <FaSortAmountUpAlt /> : <FaSortAmountDown />}
+          <span className="sr-only">Sort {sort === "asc" ? "ascending" : "descending"}</span>{" "}
           <span className="max-md:sr-only">by breed</span>
         </Button>
         <div className="flex items-end flex-wrap gap-x-2 gap-y-1">
@@ -122,6 +105,7 @@ export const DogsGrid: FC<Props> = () => {
           {selectedBreeds.length > 0 &&
             selectedBreeds.map((breed) => (
               <button
+                type="button"
                 key={breed}
                 data-breed={breed}
                 className="hidden md:flex gap-1.5 items-center bg-white text-xs px-2 py-1 rounded-md"
@@ -151,12 +135,13 @@ export const DogsGrid: FC<Props> = () => {
         </Grid>
       ) : data.dogs.length === 0 ? (
         <div className="flex-1">
-          Looks like there aren&apos;t any matches for your search. Try changing
-          or removing some filters to get more matches!
+          Looks like there aren&apos;t any matches for your search. Try changing or removing some
+          filters to get more matches!
         </div>
       ) : (
         <Grid>
           {data.dogs.map((dog) => (
+            // biome-ignore lint/a11y/useFocusableInteractive lint/a11y/useSemanticElements lint/a11y/noNoninteractiveElementToInteractiveRole: will migrate later
             <li key={dog.id} role="gridcell">
               <Dog
                 {...dog}
@@ -169,10 +154,7 @@ export const DogsGrid: FC<Props> = () => {
       )}
       {Array.isArray(data?.dogs) && data.dogs.length > 0 && (
         <div className="flex justify-between -mx-2 px-2 py-4 mt-1.5 sticky bottom-0 bg-stone-200">
-          <Button
-            disabled={data?.prev === undefined || page === 1}
-            onClick={handlePrevious}
-          >
+          <Button disabled={data?.prev === undefined || page === 1} onClick={handlePrevious}>
             Previous
           </Button>
           {totalPages !== undefined && (

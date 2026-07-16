@@ -1,18 +1,12 @@
-import {
-  ChangeEventHandler,
-  useState,
-  type FC,
-  type HTMLAttributes,
-} from 'react';
+import { Button } from "@components/Button";
+import { Input } from "@components/Input";
+import type { Ingredient as IngredientType, Recipe } from "@store/types";
+import { type ChangeEventHandler, type FC, type HTMLAttributes, useState } from "react";
 
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
-import { Ingredient as IngredientType, Recipe } from '@store/types';
-
-import { Ingredient } from './Ingredient';
+import { Ingredient } from "./Ingredient";
 
 type Props = HTMLAttributes<HTMLElement> & {
-  onSave: (data: Omit<Recipe, 'id'>) => void;
+  onSave: (data: Omit<Recipe, "id">) => void;
   onRemove?: () => void;
   ingredients?: IngredientType[];
   name?: string;
@@ -26,11 +20,9 @@ export const RecipeForm: FC<Props> = ({
   onSave,
   onRemove,
 }) => {
-  const [name, setName] = useState<Recipe['name']>(nameProp ?? '');
+  const [name, setName] = useState<Recipe["name"]>(nameProp ?? "");
 
-  const [ingredients, setIngredients] = useState<Recipe['ingredients']>(
-    ingredientsProp ?? []
-  );
+  const [ingredients, setIngredients] = useState<Recipe["ingredients"]>(ingredientsProp ?? []);
 
   const isDisabled = ingredients.length === 0 || name.trim().length < 3;
 
@@ -50,7 +42,7 @@ export const RecipeForm: FC<Props> = ({
         }
 
         return ingredient;
-      })
+      }),
     );
   };
 
@@ -68,11 +60,7 @@ export const RecipeForm: FC<Props> = ({
         type="text"
         value={name}
         onChange={onNameChange}
-        label={
-          hasNameError
-            ? 'Name (this one already exists, try a different one)'
-            : 'Name'
-        }
+        label={hasNameError ? "Name (this one already exists, try a different one)" : "Name"}
         id="recipe-name"
         error={hasNameError}
       />
@@ -84,10 +72,7 @@ export const RecipeForm: FC<Props> = ({
         </li>
 
         {ingredients.map((ingredient, index) => (
-          <li
-            key={`${ingredient.name}-${index}`}
-            className="flex gap-2 flex-wrap sm:flex-nowrap"
-          >
+          <li key={`${ingredient.name}-${index}`} className="flex gap-2 flex-wrap sm:flex-nowrap">
             <Ingredient
               ingredient={ingredient}
               onSubmit={onEditIngredient(index)}
@@ -98,27 +83,15 @@ export const RecipeForm: FC<Props> = ({
       </ul>
 
       {ingredients.length === 0 && (
-        <p className="text-sm">
-          No ingredients added yet! Add your first ingredient above.
-        </p>
+        <p className="text-sm">No ingredients added yet! Add your first ingredient above.</p>
       )}
 
       <div className="flex gap-2">
-        <Button
-          className="mt-6"
-          disabled={isDisabled}
-          size="large"
-          onClick={handleSave}
-        >
+        <Button className="mt-6" disabled={isDisabled} size="large" onClick={handleSave}>
           Save recipe!
         </Button>
         {onRemove !== undefined && (
-          <Button
-            className="mt-6"
-            size="large"
-            onClick={onRemove}
-            variant="destructive"
-          >
+          <Button className="mt-6" size="large" onClick={onRemove} variant="destructive">
             Delete
           </Button>
         )}

@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Footer } from './Footer';
+import type { Footer } from "./Footer";
 
-export { Footer } from './Footer';
+export { Footer } from "./Footer";
 export type FooterProps = ComponentProps<typeof Footer>;

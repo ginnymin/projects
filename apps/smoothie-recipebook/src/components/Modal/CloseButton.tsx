@@ -1,8 +1,5 @@
-import {
-  CloseButton as CloseButtonComponent,
-  CloseButtonProps,
-} from '@headlessui/react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { CloseButton as CloseButtonComponent, type CloseButtonProps } from "@headlessui/react";
+import { AiOutlineClose } from "react-icons/ai";
 
 type Props = CloseButtonProps & {
   iconAlt?: string;

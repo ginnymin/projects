@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Game } from './Game';
+import type { Game } from "./Game";
 
-export { Game } from './Game';
+export { Game } from "./Game";
 export type GameProps = ComponentProps<typeof Game>;

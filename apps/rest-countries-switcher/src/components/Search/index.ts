@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Search } from './Search';
+import type { Search } from "./Search";
 
-export { Search } from './Search';
+export { Search } from "./Search";
 export type SearchProps = ComponentProps<typeof Search>;

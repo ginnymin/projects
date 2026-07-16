@@ -26,30 +26,20 @@ describe("Components: ValueInput", () => {
         type="select"
         onSelect={mockOnSelect}
         values={["Value 1", "Value 2", "Value 3"]}
-      />
+      />,
     );
 
     await screen.findByRole("combobox", { name: "Filter value" });
 
-    expect(
-      screen.getByRole("combobox", { name: "Filter value" })
-    ).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter value" })).toBeVisible();
     expect(screen.getByPlaceholderText("Enter value...")).toBeVisible();
     expect(screen.getAllByRole("option")).toHaveLength(3);
   });
 
   it("renders with initial value", () => {
-    render(
-      <ValueInput
-        type="string"
-        onSelect={mockOnSelect}
-        initialValue="Initial value"
-      />
-    );
+    render(<ValueInput type="string" onSelect={mockOnSelect} initialValue="Initial value" />);
 
-    expect(screen.getByRole("textbox", { name: "Filter value" })).toHaveValue(
-      "Initial value"
-    );
+    expect(screen.getByRole("textbox", { name: "Filter value" })).toHaveValue("Initial value");
     expect(screen.getByRole("button", { name: "Save filter" })).toBeEnabled();
   });
 
@@ -60,7 +50,7 @@ describe("Components: ValueInput", () => {
         onSelect={mockOnSelect}
         initialValue={["Value 2"]}
         values={["Value 1", "Value 2", "Value 3"]}
-      />
+      />,
     );
 
     await screen.findByRole("listbox");
@@ -77,25 +67,20 @@ describe("Components: ValueInput", () => {
         onSelect={mockOnSelect}
         initialValue="Initial value"
         values={["Value 1", "Value 2", "Value 3"]}
-      />
+      />,
     );
 
     await screen.findByRole("listbox");
     await userEvent.keyboard("{Escape}");
 
-    expect(screen.getByRole("combobox", { name: "Filter value" })).toHaveValue(
-      ""
-    );
+    expect(screen.getByRole("combobox", { name: "Filter value" })).toHaveValue("");
     expect(screen.getByRole("button", { name: "Save filter" })).toBeDisabled();
   });
 
   it("calls onSelect", async () => {
     render(<ValueInput type="string" onSelect={mockOnSelect} />);
 
-    await userEvent.type(
-      screen.getByRole("textbox", { name: "Filter value" }),
-      "Value 1"
-    );
+    await userEvent.type(screen.getByRole("textbox", { name: "Filter value" }), "Value 1");
     await userEvent.click(screen.getByRole("button", { name: "Save filter" }));
 
     expect(mockOnSelect).toHaveBeenCalledTimes(1);
@@ -105,10 +90,7 @@ describe("Components: ValueInput", () => {
   it("calls onSelect after pressing enter", async () => {
     render(<ValueInput type="string" onSelect={mockOnSelect} />);
 
-    await userEvent.type(
-      screen.getByRole("textbox", { name: "Filter value" }),
-      "Value 1"
-    );
+    await userEvent.type(screen.getByRole("textbox", { name: "Filter value" }), "Value 1");
     await userEvent.keyboard("{Enter}");
 
     expect(mockOnSelect).toHaveBeenCalledWith("Value 1");
@@ -120,13 +102,10 @@ describe("Components: ValueInput", () => {
         type="select"
         onSelect={mockOnSelect}
         values={["Value 1", "Value 2", "Value 3"]}
-      />
+      />,
     );
 
-    await userEvent.type(
-      screen.getByRole("combobox", { name: "Filter value" }),
-      "Value 1"
-    );
+    await userEvent.type(screen.getByRole("combobox", { name: "Filter value" }), "Value 1");
     await userEvent.keyboard("{Enter}");
 
     expect(mockOnSelect).not.toHaveBeenCalled();
@@ -137,18 +116,9 @@ describe("Components: ValueInput", () => {
   });
 
   it("calls onBackspace", async () => {
-    render(
-      <ValueInput
-        type="string"
-        onSelect={mockOnSelect}
-        onBackspace={mockOnBackspace}
-      />
-    );
+    render(<ValueInput type="string" onSelect={mockOnSelect} onBackspace={mockOnBackspace} />);
 
-    await userEvent.type(
-      screen.getByRole("textbox", { name: "Filter value" }),
-      "T"
-    );
+    await userEvent.type(screen.getByRole("textbox", { name: "Filter value" }), "T");
     await userEvent.keyboard("{Backspace}");
 
     expect(mockOnBackspace).not.toHaveBeenCalled();
@@ -164,18 +134,12 @@ describe("Components: ValueInput", () => {
         type="multiselect"
         onSelect={mockOnSelect}
         values={["Value 1", "Value 2", "Value 3"]}
-      />
+      />,
     );
 
-    await userEvent.type(
-      screen.getByRole("combobox", { name: "Filter value" }),
-      "Value 2"
-    );
+    await userEvent.type(screen.getByRole("combobox", { name: "Filter value" }), "Value 2");
     await userEvent.keyboard("{Enter}");
-    await userEvent.type(
-      screen.getByRole("combobox", { name: "Filter value" }),
-      "Value 3"
-    );
+    await userEvent.type(screen.getByRole("combobox", { name: "Filter value" }), "Value 3");
     await userEvent.keyboard("{Enter}");
     await userEvent.keyboard("{Escape}");
 

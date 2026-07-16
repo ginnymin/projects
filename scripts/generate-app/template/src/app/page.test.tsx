@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
 
-import Page from './page';
+import Page from "./page";
 
-describe('App router: Home', () => {
-  it('renders', () => {
+describe("App router: Home", () => {
+  it("renders", () => {
     render(<Page />);
 
-    expect(screen.getByText('Hello World')).toBeVisible();
+    expect(screen.getByText("Hello World")).toBeVisible();
   });
 });

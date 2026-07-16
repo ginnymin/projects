@@ -1,14 +1,14 @@
-import { getPositions } from './getPositions';
+import { getPositions } from "./getPositions";
 
-describe('Components: Hand: getPositions', () => {
-  it('calculates expected position', () => {
+describe("Components: Hand: getPositions", () => {
+  it("calculates expected position", () => {
     const { x, y } = getPositions({ radius: 1, index: 0, sides: 4 });
 
     expect(x).toBe(1);
     expect(y).toBe(0);
   });
 
-  it('calculates with offset', () => {
+  it("calculates with offset", () => {
     const { x, y } = getPositions({
       radius: 1,
       index: 0,
@@ -20,7 +20,7 @@ describe('Components: Hand: getPositions', () => {
     expect(y).toBe(1);
   });
 
-  it('calculates with offsetAngle', () => {
+  it("calculates with offsetAngle", () => {
     const { x, y } = getPositions({
       radius: 1,
       index: 0,

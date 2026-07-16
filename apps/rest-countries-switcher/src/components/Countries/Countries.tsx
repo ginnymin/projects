@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import { useContext, type FC, type HTMLAttributes } from 'react';
-
-import { useFetchCountries } from '@api/hooks';
-import { Country } from '@components/Country';
-import { CountryContext } from '@components/CountryProvider';
-import { Skeleton } from '@components/Skeleton';
+import { useFetchCountries } from "@api/hooks";
+import { Country } from "@components/Country";
+import { CountryContext } from "@components/CountryProvider";
+import { Skeleton } from "@components/Skeleton";
+import { type FC, type HTMLAttributes, useContext } from "react";
 
 type Props = HTMLAttributes<HTMLElement> & {};
 
@@ -13,8 +12,8 @@ export const Countries: FC<Props> = () => {
   const { region, search } = useContext(CountryContext);
 
   const { data } = useFetchCountries(
-    search !== undefined ? '/names.common' : region !== undefined ? '/region' : '',
-    search !== undefined ? search : region !== undefined ? region : undefined
+    search !== undefined ? "/names.common" : region !== undefined ? "/region" : "",
+    search !== undefined ? search : region !== undefined ? region : undefined,
   );
 
   if (data === undefined) {

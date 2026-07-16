@@ -1,18 +1,15 @@
 import {
   Dialog,
-  DialogPanel,
   DialogBackdrop,
-  DialogProps,
+  DialogPanel,
+  type DialogProps,
   Transition,
-} from '@headlessui/react';
+} from "@headlessui/react";
 
 export const Modal = ({ children, ...props }: DialogProps) => {
   return (
     <Dialog {...props} className="relative">
-      <DialogBackdrop
-        className="fixed inset-0 bg-black/50"
-        aria-hidden="true"
-      />
+      <DialogBackdrop className="fixed inset-0 bg-black/50" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center">
         <Transition appear show>
           <DialogPanel

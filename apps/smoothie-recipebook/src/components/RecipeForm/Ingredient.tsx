@@ -1,9 +1,8 @@
-import clsx from 'clsx';
-import { ChangeEventHandler, FC, useState } from 'react';
-
-import { Button } from '@components/Button';
-import { Input } from '@components/Input';
-import { Ingredient as IngredientType } from '@store/types';
+import { Button } from "@components/Button";
+import { Input } from "@components/Input";
+import type { Ingredient as IngredientType } from "@store/types";
+import clsx from "clsx";
+import { type ChangeEventHandler, type FC, useState } from "react";
 
 type Props = {
   ingredient?: IngredientType;
@@ -13,13 +12,13 @@ type Props = {
 
 const defaultIngredient = {
   quantity: 0,
-  unit: 'tsp',
-  name: '',
+  unit: "tsp",
+  name: "",
 };
 
 export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
   const [newIngredient, setNewIngredient] = useState<IngredientType>(
-    ingredient ?? defaultIngredient
+    ingredient ?? defaultIngredient,
   );
 
   const isEdit = ingredient !== undefined;
@@ -31,11 +30,10 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
     : newIngredient.name.trim().length < 3 || newIngredient.quantity <= 0;
 
   const onIngredientChange: (
-    key: string
-  ) => ChangeEventHandler<HTMLInputElement | HTMLSelectElement> =
-    (key) => (e) => {
-      setNewIngredient((prev) => ({ ...prev, [key]: e.target.value }));
-    };
+    key: string,
+  ) => ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (key) => (e) => {
+    setNewIngredient((prev) => ({ ...prev, [key]: e.target.value }));
+  };
 
   const handleSubmit = () => {
     if (isDisabled) {
@@ -52,7 +50,7 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
     <>
       <Input
         value={newIngredient.quantity}
-        onChange={onIngredientChange('quantity')}
+        onChange={onIngredientChange("quantity")}
         label="Quantity"
         id="ingredient-quantity"
         type="number"
@@ -70,9 +68,9 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
         <select
           className="h-full rounded-md element-focus bg-neutral-100 px-3 py-2 w-full "
           value={newIngredient.unit}
-          onChange={onIngredientChange('unit')}
+          onChange={onIngredientChange("unit")}
           id="ingredient-unit"
-          aria-label={isEdit ? 'Unit' : undefined}
+          aria-label={isEdit ? "Unit" : undefined}
         >
           <option>tsp</option>
           <option>tbsp</option>
@@ -83,7 +81,7 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
       </div>
       <Input
         value={newIngredient.name}
-        onChange={onIngredientChange('name')}
+        onChange={onIngredientChange("name")}
         label="Ingredient"
         id="ingredient-name"
         type="text"
@@ -91,11 +89,11 @@ export const Ingredient: FC<Props> = ({ ingredient, onSubmit, onRemove }) => {
         hideLabel={isEdit}
       />
       <Button
-        className={clsx({ 'self-end py-2.5 sm:mt-6 sm:self-stretch': !isEdit })}
+        className={clsx({ "self-end py-2.5 sm:mt-6 sm:self-stretch": !isEdit })}
         onClick={handleSubmit}
         disabled={isDisabled}
       >
-        {isEdit ? 'Edit' : 'Add'}
+        {isEdit ? "Edit" : "Add"}
       </Button>
       {isEdit && <Button onClick={onRemove}>Remove</Button>}
     </>

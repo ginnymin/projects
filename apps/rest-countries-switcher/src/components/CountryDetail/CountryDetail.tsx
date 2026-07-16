@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
-import { useCallback, useMemo, type FC, type HTMLAttributes } from 'react';
-
-import { useFetchCountries } from '@api/hooks';
-import { Country } from '@api/types';
-import { Button } from '@components/Button';
-import { Flag } from '@components/Flag';
+import { useFetchCountries } from "@api/hooks";
+import type { Country } from "@api/types";
+import { Button } from "@components/Button";
+import { Flag } from "@components/Flag";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { type FC, type HTMLAttributes, useCallback, useMemo } from "react";
 
 type Props = HTMLAttributes<HTMLElement> & Country & {};
 
@@ -25,7 +24,7 @@ export const CountryDetail: FC<Props> = ({
   topLevelDomain,
 }) => {
   const router = useRouter();
-  const { data: countries } = useFetchCountries('', undefined);
+  const { data: countries } = useFetchCountries("", undefined);
 
   const handleBack = useCallback(() => {
     router.back();
@@ -42,7 +41,7 @@ export const CountryDetail: FC<Props> = ({
             };
           })
         : undefined,
-    [borders, countries]
+    [borders, countries],
   );
 
   return (
@@ -61,7 +60,7 @@ export const CountryDetail: FC<Props> = ({
               <strong className="font-semibold">Native Name</strong>: {nativeName}
             </li>
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Population</strong>:{' '}
+              <strong className="font-semibold">Population</strong>:{" "}
               {new Intl.NumberFormat().format(population)}
             </li>
             <li className="leading-[1.75]">
@@ -77,10 +76,10 @@ export const CountryDetail: FC<Props> = ({
               <strong className="font-semibold">Top Level Domain</strong>: {topLevelDomain}
             </li>
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Currencies</strong>: {currencies?.join(', ')}
+              <strong className="font-semibold">Currencies</strong>: {currencies?.join(", ")}
             </li>
             <li className="leading-[1.75]">
-              <strong className="font-semibold">Languages</strong>: {languages?.join(', ')}
+              <strong className="font-semibold">Languages</strong>: {languages?.join(", ")}
             </li>
           </ul>
           {borderCountries !== undefined && borderCountries.length > 0 && (
@@ -88,8 +87,8 @@ export const CountryDetail: FC<Props> = ({
               <strong className="block font-semibold mb-4 lg:mr-3">Border Countries:</strong>
               <ul
                 className={clsx(
-                  'lg:grow',
-                  'gap-2.5 grid grid-cols-[repeat(auto-fit,minmax(100px,max-content))]'
+                  "lg:grow",
+                  "gap-2.5 grid grid-cols-[repeat(auto-fit,minmax(100px,max-content))]",
                 )}
               >
                 {borderCountries.map(({ id, name }) => (

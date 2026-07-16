@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Result } from './Result';
+import type { Result } from "./Result";
 
-export { Result } from './Result';
+export { Result } from "./Result";
 export type ChoicesProps = ComponentProps<typeof Result>;

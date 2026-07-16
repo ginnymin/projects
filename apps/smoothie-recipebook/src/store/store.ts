@@ -1,17 +1,14 @@
 // global db variables
 let db: IDBDatabase;
 let version = 1;
-const dbName = 'db';
+const dbName = "db";
 
 // store names
 export enum StoreNames {
-  Recipes = 'recipes',
+  Recipes = "recipes",
 }
 
-const getObjectStore = (
-  storeName: StoreNames,
-  mode: 'readonly' | 'readwrite'
-) => {
+const getObjectStore = (storeName: StoreNames, mode: "readonly" | "readwrite") => {
   const tx = db.transaction(storeName, mode);
   const store = tx.objectStore(storeName);
   return { tx, store };
@@ -27,7 +24,7 @@ export const init = <T>(storeName: StoreNames, keyPath: keyof T) => {
 
       // create store if store doesn't exist
       if (!db.objectStoreNames.contains(storeName)) {
-        console.log('creating users store: ', storeName);
+        console.log("creating users store: ", storeName);
         db.createObjectStore(storeName, {
           keyPath: keyPath as string,
           autoIncrement: true,
@@ -42,7 +39,7 @@ export const init = <T>(storeName: StoreNames, keyPath: keyof T) => {
     };
 
     request.onerror = () => {
-      console.log('store init() onerror', version);
+      console.log("store init() onerror", version);
       resolve(false);
     };
   });
@@ -58,7 +55,7 @@ export function get<T>(storeName: StoreNames, key?: number) {
     request.onsuccess = () => {
       db = request.result;
 
-      const { tx, store } = getObjectStore(storeName, 'readonly');
+      const { tx, store } = getObjectStore(storeName, "readonly");
 
       const res = key === undefined ? store.getAll() : store.get(key);
 
@@ -67,12 +64,12 @@ export function get<T>(storeName: StoreNames, key?: number) {
       };
 
       res.onerror = () => {
-        console.log('store get() onerror');
+        console.log("store get() onerror");
         const error = res.error?.message;
         if (error) {
           reject(new Error(error));
         } else {
-          reject(new Error('unknown error'));
+          reject(new Error("unknown error"));
         }
       };
 
@@ -81,27 +78,24 @@ export function get<T>(storeName: StoreNames, key?: number) {
   });
 }
 
-export const add = <T>(
-  storeName: StoreNames,
-  data: T
-): Promise<T | string | null> => {
+export const add = <T>(storeName: StoreNames, data: T): Promise<T | string | null> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, version);
 
     request.onsuccess = () => {
       db = request.result;
-      const { store } = getObjectStore(storeName, 'readwrite');
+      const { store } = getObjectStore(storeName, "readwrite");
       store.add(data);
       resolve(data);
     };
 
     request.onerror = () => {
-      console.log('store add() onerror', data);
+      console.log("store add() onerror", data);
       const error = request.error?.message;
       if (error) {
         new Error(error);
       } else {
-        reject(new Error('unknown error'));
+        reject(new Error("unknown error"));
       }
     };
   });
@@ -114,7 +108,7 @@ export const update = <T>(storeName: StoreNames, key: number, payload: T) => {
     request.onsuccess = () => {
       db = request.result;
 
-      const { tx, store } = getObjectStore(storeName, 'readwrite');
+      const { tx, store } = getObjectStore(storeName, "readwrite");
 
       const res = store.get(key);
 
@@ -126,12 +120,12 @@ export const update = <T>(storeName: StoreNames, key: number, payload: T) => {
       };
 
       res.onerror = () => {
-        console.log('store update() onerror');
+        console.log("store update() onerror");
         const error = res.error?.message;
         if (error) {
           reject(new Error(error));
         } else {
-          reject(new Error('unknown error'));
+          reject(new Error("unknown error"));
         }
       };
 
@@ -147,7 +141,7 @@ export const remove = (storeName: StoreNames, key: number) => {
 
     request.onsuccess = () => {
       db = request.result;
-      const { store } = getObjectStore(storeName, 'readwrite');
+      const { store } = getObjectStore(storeName, "readwrite");
       const res = store.delete(key);
 
       res.onsuccess = () => {
@@ -155,7 +149,7 @@ export const remove = (storeName: StoreNames, key: number) => {
       };
 
       res.onerror = () => {
-        console.log('store remove() onerror');
+        console.log("store remove() onerror");
         const error = res.error?.message;
         reject(new Error(error));
       };

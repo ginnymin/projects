@@ -1,50 +1,43 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
+import { login } from "@api/login";
+import { Input } from "@components/Input";
+import clsx from "clsx";
 import {
-  type HTMLAttributes,
+  type ChangeEventHandler,
   type FC,
+  type HTMLAttributes,
   useActionState,
-  useState,
   useCallback,
-  ChangeEventHandler,
-} from 'react';
+  useState,
+} from "react";
 
-import { login } from '@api/login';
-import { Input } from '@components/Input';
-
-import { ErrorMessage } from './ErrorMessage';
-import { SignInButton } from './SignInButton';
+import { ErrorMessage } from "./ErrorMessage";
+import { SignInButton } from "./SignInButton";
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
 export const LoginForm: FC<Props> = ({ className }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const [{ error }, formAction] = useActionState(login, {});
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
-      const { name: inputName, value } = event.target;
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
+    const { name: inputName, value } = event.target;
 
-      if (inputName === 'name') {
-        setName(value);
-        return;
-      }
+    if (inputName === "name") {
+      setName(value);
+      return;
+    }
 
-      if (inputName === 'email') {
-        setEmail(value);
-      }
-    },
-    []
-  );
+    if (inputName === "email") {
+      setEmail(value);
+    }
+  }, []);
 
   return (
-    <form
-      className={clsx('flex flex-col gap-3', className)}
-      action={formAction}
-    >
+    <form className={clsx("flex flex-col gap-3", className)} action={formAction}>
       <Input
         id="fr-name"
         label="Name"

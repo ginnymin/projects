@@ -1,7 +1,6 @@
+import type { Key } from "@lib/types";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
-import { Key } from "@lib/types";
 
 import { Filter } from ".";
 
@@ -86,15 +85,13 @@ describe("Components: Filter", () => {
         keys={keys}
         onSelect={mockOnSelect}
         defaultFilter={{ key: "1", operator: "=", value: "Test" }}
-      />
+      />,
     );
 
     expect(screen.getByText("String type")).toBeVisible();
     expect(screen.getByText("equals")).toBeVisible();
     expect(screen.getByRole("textbox", { name: "Filter value" })).toBeVisible();
-    expect(screen.getByRole("textbox", { name: "Filter value" })).toHaveValue(
-      "Test"
-    );
+    expect(screen.getByRole("textbox", { name: "Filter value" })).toHaveValue("Test");
     expect(screen.getByRole("button", { name: "Save filter" })).toBeEnabled();
   });
 
@@ -104,19 +101,15 @@ describe("Components: Filter", () => {
         keys={keys}
         onSelect={mockOnSelect}
         defaultFilter={{ key: "4", operator: "=", value: "Value 2" }}
-      />
+      />,
     );
 
     await screen.findByRole("combobox", { name: "Filter value" });
 
     expect(screen.getByText("Select type")).toBeVisible();
     expect(screen.getByText("equals")).toBeVisible();
-    expect(
-      screen.getByRole("combobox", { name: "Filter value" })
-    ).toBeVisible();
-    expect(screen.getByRole("combobox", { name: "Filter value" })).toHaveValue(
-      "Value 2"
-    );
+    expect(screen.getByRole("combobox", { name: "Filter value" })).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter value" })).toHaveValue("Value 2");
 
     await userEvent.keyboard("{Escape}");
 
@@ -125,23 +118,15 @@ describe("Components: Filter", () => {
 
   it("renders with operator editable when default filter has set or !set", async () => {
     render(
-      <Filter
-        keys={keys}
-        onSelect={mockOnSelect}
-        defaultFilter={{ key: "1", operator: "set" }}
-      />
+      <Filter keys={keys} onSelect={mockOnSelect} defaultFilter={{ key: "1", operator: "set" }} />,
     );
 
     await screen.findByRole("combobox", { name: "Filter operator" });
 
     expect(screen.getByText("String type")).toBeVisible();
     expect(screen.queryByText("set")).toBeNull();
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toBeVisible();
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toHaveValue("is set");
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toHaveValue("is set");
   });
 
   it("calls onSelect when user clicks save", async () => {
@@ -150,10 +135,7 @@ describe("Components: Filter", () => {
     await userEvent.click(screen.getByRole("combobox"));
     await userEvent.click(screen.getByRole("option", { name: "String type" }));
     await userEvent.click(screen.getByRole("option", { name: "equals (=)" }));
-    await userEvent.type(
-      screen.getByRole("textbox", { name: "Filter value" }),
-      "Test"
-    );
+    await userEvent.type(screen.getByRole("textbox", { name: "Filter value" }), "Test");
     await userEvent.click(screen.getByRole("button", { name: "Save filter" }));
 
     expect(mockOnSelect).toHaveBeenCalledTimes(1);
@@ -183,9 +165,7 @@ describe("Components: Filter", () => {
 
     await userEvent.click(screen.getByRole("combobox"));
     await userEvent.click(screen.getByRole("option", { name: "String type" }));
-    await userEvent.click(
-      screen.getByRole("option", { name: "is not set (!set)" })
-    );
+    await userEvent.click(screen.getByRole("option", { name: "is not set (!set)" }));
 
     expect(mockOnSelect).toHaveBeenCalledTimes(1);
     expect(mockOnSelect).toHaveBeenCalledWith({
@@ -201,9 +181,7 @@ describe("Components: Filter", () => {
     await userEvent.click(screen.getByRole("option", { name: "Number type" }));
     await userEvent.click(screen.getByRole("option", { name: "equals (=)" }));
 
-    expect(
-      screen.getByRole("spinbutton", { name: "Filter value" })
-    ).toBeVisible();
+    expect(screen.getByRole("spinbutton", { name: "Filter value" })).toBeVisible();
     expect(screen.getByPlaceholderText("Enter value...")).toBeVisible();
   });
 
@@ -222,9 +200,7 @@ describe("Components: Filter", () => {
     render(<Filter keys={keys} onSelect={mockOnSelect} />);
 
     await userEvent.click(screen.getByRole("combobox"));
-    await userEvent.click(
-      screen.getByRole("option", { name: "Multiselect type" })
-    );
+    await userEvent.click(screen.getByRole("option", { name: "Multiselect type" }));
     await userEvent.click(screen.getByRole("option", { name: "equals (=)" }));
     await userEvent.click(screen.getByRole("combobox"));
     await userEvent.click(screen.getByRole("option", { name: "Multi 3" }));
@@ -246,19 +222,15 @@ describe("Components: Filter", () => {
     await userEvent.click(screen.getByRole("option", { name: "String type" }));
 
     expect(screen.queryByRole("combobox", { name: "Filter key" })).toBeNull();
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toBeVisible();
 
     await userEvent.keyboard("{Backspace}");
 
-    expect(
-      screen.queryByRole("combobox", { name: "Filter operator" })
-    ).toBeNull();
+    expect(screen.queryByRole("combobox", { name: "Filter operator" })).toBeNull();
     expect(screen.getByRole("combobox", { name: "Filter key" })).toBeVisible();
-    expect(
-      screen.getByRole("combobox", { name: "Filter key" }).getAttribute("value")
-    ).toBe("String type");
+    expect(screen.getByRole("combobox", { name: "Filter key" }).getAttribute("value")).toBe(
+      "String type",
+    );
   });
 
   it("handles backspace from value input", async () => {
@@ -268,19 +240,13 @@ describe("Components: Filter", () => {
     await userEvent.click(screen.getByRole("option", { name: "String type" }));
     await userEvent.click(screen.getByRole("option", { name: "equals (=)" }));
 
-    expect(
-      screen.queryByRole("combobox", { name: "Filter operator" })
-    ).toBeNull();
+    expect(screen.queryByRole("combobox", { name: "Filter operator" })).toBeNull();
     expect(screen.getByRole("textbox")).toBeVisible();
 
     await userEvent.keyboard("{Backspace}");
 
     expect(screen.queryByRole("textbox")).toBeNull();
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toBeVisible();
-    expect(
-      screen.getByRole("combobox", { name: "Filter operator" })
-    ).toHaveValue("equals");
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter operator" })).toHaveValue("equals");
   });
 });

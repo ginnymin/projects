@@ -1,10 +1,10 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { BoardHand } from './BoardHand';
-import { ResultHand } from './ResultHand';
+import type { BoardHand } from "./BoardHand";
+import type { ResultHand } from "./ResultHand";
 
-export { BoardHand } from './BoardHand';
+export { BoardHand } from "./BoardHand";
 export type BoardHandProps = ComponentProps<typeof BoardHand>;
 
-export { ResultHand } from './ResultHand';
+export { ResultHand } from "./ResultHand";
 export type ResultHandProps = ComponentProps<typeof ResultHand>;
