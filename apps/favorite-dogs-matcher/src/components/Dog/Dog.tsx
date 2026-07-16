@@ -1,15 +1,7 @@
 import type { Dog as DogType } from "@api/getDogs";
 import clsx from "clsx";
 import Image from "next/image";
-import {
-  type FC,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
-  memo,
-  useCallback,
-  useRef,
-} from "react";
+import { type FC, type HTMLAttributes, type MouseEvent, memo, useCallback, useRef } from "react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 interface Props extends Omit<HTMLAttributes<HTMLDivElement>, "id" | "onSelect">, DogType {
@@ -31,7 +23,7 @@ const DogComponent: FC<Props> = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleSelect = useCallback(
-    (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLDivElement>) => {
       if (onSelect !== undefined) {
         // button already handles this, we don't need to duplicate the event
         if (event.target === buttonRef.current) {
@@ -45,18 +37,13 @@ const DogComponent: FC<Props> = ({
   );
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: will refactor later
+    // biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: clickable card has a link inside it
     <div
       className={clsx(
         "relative rounded-md shadow-md shadow-black/5 bg-white overflow-hidden cursor-pointer hover:scale-[1.02] focus-within:scale-[1.02] focus-within:outline-2 focus-within:outline-purple-700",
         className,
       )}
       onClick={handleSelect}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          handleSelect(e);
-        }
-      }}
     >
       <div className="relative h-[200px]">
         <Image src={img} alt="" fill className="object-cover" />

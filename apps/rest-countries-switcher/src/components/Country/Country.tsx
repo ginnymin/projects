@@ -3,14 +3,7 @@ import { Flag } from "@components/Flag";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  type FC,
-  type HTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
-  useCallback,
-  useRef,
-} from "react";
+import { type FC, type HTMLAttributes, type MouseEvent, useCallback, useRef } from "react";
 
 type Props = HTMLAttributes<HTMLElement> &
   Required<Pick<CountryType, "name" | "id" | "population" | "region" | "capital" | "flag">> & {};
@@ -20,7 +13,7 @@ export const Country: FC<Props> = ({ capital, className, flag, id, name, populat
   const router = useRouter();
 
   const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLDivElement>) => {
       // link already handles this, we don't need to duplicate the event
       if (event.target === linkRef.current) {
         return;
@@ -37,18 +30,13 @@ export const Country: FC<Props> = ({ capital, className, flag, id, name, populat
   );
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: will refactor later
+    // biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: clickable card has a link inside it
     <div
       className={clsx(
         "container-shadow relative overflow-hidden cursor-pointer hover:scale-[1.01] focus-within:scale-[1.01]",
         className,
       )}
       onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          handleClick(e);
-        }
-      }}
     >
       <Flag {...flag} />
       <div className="p-5">
