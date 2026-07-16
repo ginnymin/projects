@@ -20,31 +20,15 @@ describe("Components: Combobox", () => {
   });
 
   it("renders", () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} />);
 
-    expect(
-      screen.getByRole("combobox", { name: "Filter label" })
-    ).toBeVisible();
-    expect(
-      screen.getByRole("combobox", { name: "Filter label" })
-    ).not.toHaveFocus();
+    expect(screen.getByRole("combobox", { name: "Filter label" })).toBeVisible();
+    expect(screen.getByRole("combobox", { name: "Filter label" })).not.toHaveFocus();
     expect(screen.queryByRole("listbox")).toBeNull();
   });
 
   it("renders options", async () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} />);
 
     await userEvent.click(screen.getByRole("combobox"));
 
@@ -53,14 +37,7 @@ describe("Components: Combobox", () => {
   });
 
   it("renders options initially with autofocus", async () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-        autoFocus
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} autoFocus />);
 
     await screen.findByRole("listbox");
 
@@ -72,13 +49,8 @@ describe("Components: Combobox", () => {
     render(
       <div>
         <h2 data-testid="outside">Hello</h2>
-        <Combobox
-          label="Filter label"
-          options={options}
-          onChange={mockOnChange}
-          autoFocus
-        />
-      </div>
+        <Combobox label="Filter label" options={options} onChange={mockOnChange} autoFocus />
+      </div>,
     );
 
     await screen.findByRole("listbox");
@@ -91,13 +63,8 @@ describe("Components: Combobox", () => {
     render(
       <div>
         <h2 data-testid="outside">Hello</h2>
-        <Combobox
-          label="Filter label"
-          options={options}
-          onChange={mockOnChange}
-          autoFocus
-        />
-      </div>
+        <Combobox label="Filter label" options={options} onChange={mockOnChange} autoFocus />
+      </div>,
     );
 
     await screen.findByRole("listbox");
@@ -107,13 +74,7 @@ describe("Components: Combobox", () => {
   });
 
   it("calls onChange", async () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} />);
 
     await userEvent.type(screen.getByRole("combobox"), "1");
     await userEvent.keyboard("{Enter}");
@@ -128,7 +89,7 @@ describe("Components: Combobox", () => {
         options={options}
         onChange={mockOnChange}
         onBackspace={mockOnBackspace}
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole("combobox"));
@@ -145,13 +106,7 @@ describe("Components: Combobox", () => {
   });
 
   it("clears query after selection", async () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} />);
 
     await userEvent.type(screen.getByRole("combobox"), "Option 1");
     await userEvent.keyboard("{Enter}");
@@ -160,14 +115,7 @@ describe("Components: Combobox", () => {
   });
 
   it("clears query after selection for multiple", async () => {
-    render(
-      <Combobox
-        label="Filter label"
-        options={options}
-        onChange={mockOnChange}
-        multiple
-      />
-    );
+    render(<Combobox label="Filter label" options={options} onChange={mockOnChange} multiple />);
 
     await userEvent.type(screen.getByRole("combobox"), "Option 1");
     await userEvent.keyboard("{Enter}");
@@ -182,7 +130,7 @@ describe("Components: Combobox", () => {
         options={options}
         onChange={mockOnChange}
         selectedOptions={{ id: "1", value: "Option 1" }}
-      />
+      />,
     );
 
     expect(screen.getByRole("combobox")).toHaveValue("Option 1");
@@ -199,7 +147,7 @@ describe("Components: Combobox", () => {
           { id: "1", value: "Option 1" },
           { id: "3", value: "Option 3" },
         ]}
-      />
+      />,
     );
 
     expect(screen.getByText("Option 1")).toBeVisible();
@@ -216,7 +164,7 @@ describe("Components: Combobox", () => {
         onRemoveOption={mockOnRemoveOption}
         selectedOptions={[{ id: "1", value: "Option 1" }]}
         multiple
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Remove" }));
@@ -236,7 +184,7 @@ describe("Components: Combobox", () => {
         onRemoveOption={mockOnRemoveOption}
         selectedOptions={[{ id: "1", value: "Option 1" }]}
         multiple
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole("combobox"));

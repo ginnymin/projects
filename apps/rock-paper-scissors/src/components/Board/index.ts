@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Board } from './Board';
+import type { Board } from "./Board";
 
-export { Board } from './Board';
+export { Board } from "./Board";
 export type BoardProps = ComponentProps<typeof Board>;

@@ -1,4 +1,4 @@
-import { OperatorDefinition } from "./types";
+import type { OperatorDefinition } from "./types";
 
 export const operators: OperatorDefinition[] = [
   {

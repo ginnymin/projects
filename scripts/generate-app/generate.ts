@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "node:fs";
+import path from "node:path";
 
-import prompts, { PromptType } from 'prompts';
+import prompts, { type PromptType } from "prompts";
 
 const init = async () => {
   const questions = [
     {
-      type: 'text' as PromptType,
-      name: 'appName',
-      message: 'What would you like to call your app? (kebab-case)',
+      type: "text" as PromptType,
+      name: "appName",
+      message: "What would you like to call your app? (kebab-case)",
     },
   ];
 
@@ -21,7 +21,7 @@ const init = async () => {
     fs.mkdirSync(appDir, { recursive: true });
   }
 
-  const templateDir = path.resolve(__dirname, './template');
+  const templateDir = path.resolve(__dirname, "./template");
   const templates = fs.readdirSync(templateDir, {
     recursive: true,
     withFileTypes: true,
@@ -29,7 +29,7 @@ const init = async () => {
 
   templates.forEach((file) => {
     const fullPath = `${file.parentPath}/${file.name}`;
-    const relativePath = fullPath.replace(templateDir, '');
+    const relativePath = fullPath.replace(templateDir, "");
     const newPath = appDir + relativePath;
 
     if (file.isDirectory()) {
@@ -39,11 +39,7 @@ const init = async () => {
     } else {
       fs.writeFileSync(
         newPath,
-        fs
-          .readFileSync(
-            path.resolve(templateDir, relativePath.replace('/', ''))
-          )
-          .toString()
+        fs.readFileSync(path.resolve(templateDir, relativePath.replace("/", ""))).toString(),
       );
     }
   });

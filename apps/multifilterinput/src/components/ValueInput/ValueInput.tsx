@@ -1,15 +1,8 @@
-import clsx from "clsx";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useState,
-  type FC,
-} from "react";
-import { TbSquareRoundedCheckFilled } from "react-icons/tb";
-
 import { Combobox, type Option } from "@components/Combobox";
-import { MultiKey, SingleKey } from "@lib/types";
+import type { MultiKey, SingleKey } from "@lib/types";
+import clsx from "clsx";
+import { type ChangeEvent, type FC, type KeyboardEvent, useCallback, useState } from "react";
+import { TbSquareRoundedCheckFilled } from "react-icons/tb";
 
 interface InputProps {
   className?: string;
@@ -44,12 +37,10 @@ export const ValueInput: FC<Props> = ({
       ? Array.isArray(initialValue)
         ? initialValue
         : []
-      : initialValue ?? ""
+      : (initialValue ?? ""),
   );
 
-  const isDisabled =
-    (Array.isArray(value) && value.length === 0) ||
-    value.toString().trim() === "";
+  const isDisabled = (Array.isArray(value) && value.length === 0) || value.toString().trim() === "";
 
   const handleSelectChange = useCallback((option: Option | Option[] | null) => {
     if (option !== null) {
@@ -72,7 +63,7 @@ export const ValueInput: FC<Props> = ({
         });
       }
     },
-    [type]
+    [type],
   );
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -84,11 +75,7 @@ export const ValueInput: FC<Props> = ({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
-      if (
-        event.key === "Backspace" &&
-        onBackspace !== undefined &&
-        value === ""
-      ) {
+      if (event.key === "Backspace" && onBackspace !== undefined && value === "") {
         onBackspace();
         return;
       }
@@ -97,7 +84,7 @@ export const ValueInput: FC<Props> = ({
         onSelect(value);
       }
     },
-    [onBackspace, onSelect, value, isDisabled]
+    [onBackspace, onSelect, value, isDisabled],
   );
 
   const handleComboboxKeyDown = useCallback(
@@ -110,7 +97,7 @@ export const ValueInput: FC<Props> = ({
         onSelect(value);
       }
     },
-    [onSelect, value, isDisabled]
+    [onSelect, value, isDisabled],
   );
 
   const handleSelect = () => {
@@ -127,88 +114,84 @@ export const ValueInput: FC<Props> = ({
         ? value.toString().length + 2
         : value.toString().length
       : type === "number"
-      ? 16
-      : 14;
+        ? 16
+        : 14;
 
   return (
     <div className="flex items-center gap-2">
-      {isSelect ? type === "multiselect" ? (
-        <Combobox
-          {...props}
-          autoFocus
-          className="w-[10ch]"
-          label="Filter value"
-          placeholder="Enter value..."
-          multiple
-          options={
-            values?.map((value) => ({
-              id: value.toString(),
-              value,
-            })) ?? []
-          }
-          onChange={handleSelectChange}
-          onRemoveOption={handleRemoveOption}
-          onBackspace={onBackspace}
-          onKeyDown={handleComboboxKeyDown}
-          selectedOptions={
-            Array.isArray(value)
-              ? value.map((v) => ({
-                  id: v.toString(),
-                  value: v.toString(),
-                }))
-              : [{ id: value.toString(), value: value.toString() }]
-          }
-        />
-      ) : (
-        <Combobox
-          {...props}
-          autoFocus
-          className="w-[10ch]"
-          label="Filter value"
-          placeholder="Enter value..."
-          options={
-            values?.map((value) => ({
-              id: value.toString(),
-              value,
-            })) ?? []
-          }
-          onChange={handleSelectChange}
-          onRemoveOption={handleRemoveOption}
-          onBackspace={onBackspace}
-          onKeyDown={handleComboboxKeyDown}
-          selectedOptions={
-            Array.isArray(value)
-              ? { id: value[0].toString(), value: value[0].toString() }
-              : { id: value.toString(), value: value.toString() }
-          }
-        />
+      {isSelect ? (
+        type === "multiselect" ? (
+          <Combobox
+            {...props}
+            autoFocus
+            className="w-[10ch]"
+            label="Filter value"
+            placeholder="Enter value..."
+            multiple
+            options={
+              values?.map((value) => ({
+                id: value.toString(),
+                value,
+              })) ?? []
+            }
+            onChange={handleSelectChange}
+            onRemoveOption={handleRemoveOption}
+            onBackspace={onBackspace}
+            onKeyDown={handleComboboxKeyDown}
+            selectedOptions={
+              Array.isArray(value)
+                ? value.map((v) => ({
+                    id: v.toString(),
+                    value: v.toString(),
+                  }))
+                : [{ id: value.toString(), value: value.toString() }]
+            }
+          />
+        ) : (
+          <Combobox
+            {...props}
+            autoFocus
+            className="w-[10ch]"
+            label="Filter value"
+            placeholder="Enter value..."
+            options={
+              values?.map((value) => ({
+                id: value.toString(),
+                value,
+              })) ?? []
+            }
+            onChange={handleSelectChange}
+            onRemoveOption={handleRemoveOption}
+            onBackspace={onBackspace}
+            onKeyDown={handleComboboxKeyDown}
+            selectedOptions={
+              Array.isArray(value)
+                ? { id: value[0].toString(), value: value[0].toString() }
+                : { id: value.toString(), value: value.toString() }
+            }
+          />
+        )
       ) : (
         <input
           {...props}
+          // biome-ignore lint/a11y/noAutofocus: this is fine here
           autoFocus
           aria-label="Filter value"
           placeholder="Enter value..."
           type={type === "string" ? "text" : type}
-          className={clsx(
-            "disabled:bg-gray-100 outline-hidden font-mono text-sm",
-            className
-          )}
+          className={clsx("disabled:bg-gray-100 outline-hidden font-mono text-sm", className)}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           style={{ width: `${inputWidth}ch` }}
-          value={
-            typeof value === "string" || typeof value === "number"
-              ? value
-              : undefined
-          }
+          value={typeof value === "string" || typeof value === "number" ? value : undefined}
         />
       )}
-      <button onClick={handleSelect} disabled={isDisabled}>
+      <button type="button" onClick={handleSelect} disabled={isDisabled}>
         <span className="sr-only">Save filter</span>
         <TbSquareRoundedCheckFilled
           className={clsx(
             "size-6",
-            isDisabled ? "text-gray-300" : "text-blue-700 hover:text-blue-500"
+            isDisabled ? "text-gray-300" : "text-blue-700 hover:text-blue-500",
           )}
         />
       </button>

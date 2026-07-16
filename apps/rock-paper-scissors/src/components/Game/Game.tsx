@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import { type FC, type HTMLAttributes } from 'react';
+import { Board } from "@components/Board";
+import { Result } from "@components/Result";
+import type { FC, HTMLAttributes } from "react";
 
-import { Board } from '@components/Board';
-import { Result } from '@components/Result';
-
-import { useProgress } from './useProgress';
+import { useProgress } from "./useProgress";
 
 type Props = HTMLAttributes<HTMLElement>;
 

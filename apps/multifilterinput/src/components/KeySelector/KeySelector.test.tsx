@@ -1,7 +1,6 @@
+import type { Key } from "@lib/types";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
-import { Key } from "@lib/types";
 
 import { KeySelector } from ".";
 

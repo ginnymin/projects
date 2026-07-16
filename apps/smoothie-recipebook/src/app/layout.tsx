@@ -1,30 +1,18 @@
-import clsx from 'clsx';
-import { Inter } from 'next/font/google';
-import { ReactNode } from 'react';
+import clsx from "clsx";
+import { Inter } from "next/font/google";
+import type { ReactNode } from "react";
 
-import './globals.css';
+import "./globals.css";
 
-const font = Inter({ subsets: ['latin'] });
+const font = Inter({ subsets: ["latin"] });
 
-const RootLayout = ({
-  children,
-  modal,
-}: {
-  children: ReactNode;
-  modal: ReactNode;
-}) => {
+const RootLayout = ({ children, modal }: { children: ReactNode; modal: ReactNode }) => {
   return (
     <html lang="en">
       <body
-        className={clsx(
-          'min-h-screen flex flex-col',
-          'text-gray-700 bg-white',
-          font.className
-        )}
+        className={clsx("min-h-screen flex flex-col", "text-gray-700 bg-white", font.className)}
       >
-        <main className="flex-1 flex flex-col justify-center items-center">
-          {children}
-        </main>
+        <main className="flex-1 flex flex-col justify-center items-center">{children}</main>
 
         {modal}
       </body>

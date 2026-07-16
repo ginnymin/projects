@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'ginnymin',
-  description: 'A fun little project from ginnymin.com',
+  title: "ginnymin",
+  description: "A fun little project from ginnymin.com",
 };
 
 const Page = () => {

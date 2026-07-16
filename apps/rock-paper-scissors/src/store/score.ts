@@ -1,12 +1,12 @@
-import { isServer } from '@components/constants';
+import { isServer } from "@components/constants";
 
-import { LocalStorage } from './LocalStorage';
+import { LocalStorage } from "./LocalStorage";
 
 const storage = isServer ? window.localStorage : undefined;
 const localStorage = new LocalStorage<{ score: number }>(storage);
 
 const subscribers = new Set<() => void>();
-let score = localStorage?.get('score') ?? 0;
+let score = localStorage?.get("score") ?? 0;
 
 export const store = {
   getScore: () => score,
@@ -36,5 +36,5 @@ const emit = () => {
     callback();
   });
 
-  localStorage?.set('score', score);
+  localStorage?.set("score", score);
 };

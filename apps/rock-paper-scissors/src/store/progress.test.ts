@@ -1,44 +1,44 @@
-import { HandType, ResultType } from '@components/constants';
+import { HandType, ResultType } from "@components/constants";
 
-import { store } from './progress';
+import { store } from "./progress";
 
 const mockCallback = vi.fn();
 
-describe('Store: progress', () => {
-  it('returns undefined initial values', () => {
-    expect(store.getProgress('playerChoice')()).toBe(undefined);
-    expect(store.getProgress('houseChoice')()).toBe(undefined);
-    expect(store.getProgress('result')()).toBe(undefined);
+describe("Store: progress", () => {
+  it("returns undefined initial values", () => {
+    expect(store.getProgress("playerChoice")()).toBe(undefined);
+    expect(store.getProgress("houseChoice")()).toBe(undefined);
+    expect(store.getProgress("result")()).toBe(undefined);
   });
 
-  it('sets playerChoice', () => {
+  it("sets playerChoice", () => {
     store.setPlayerChoice(HandType.LIZARD);
-    expect(store.getProgress('playerChoice')()).toBe(HandType.LIZARD);
+    expect(store.getProgress("playerChoice")()).toBe(HandType.LIZARD);
   });
 
-  it('sets houseChoice', () => {
+  it("sets houseChoice", () => {
     store.setHouseChoice(HandType.PAPER);
-    expect(store.getProgress('houseChoice')()).toBe(HandType.PAPER);
+    expect(store.getProgress("houseChoice")()).toBe(HandType.PAPER);
   });
 
-  it('sets result', () => {
+  it("sets result", () => {
     store.setResult(ResultType.WIN);
-    expect(store.getProgress('result')()).toBe(ResultType.WIN);
+    expect(store.getProgress("result")()).toBe(ResultType.WIN);
   });
 
-  it('resets values', () => {
-    expect(store.getProgress('playerChoice')()).toBe(HandType.LIZARD);
-    expect(store.getProgress('houseChoice')()).toBe(HandType.PAPER);
-    expect(store.getProgress('result')()).toBe(ResultType.WIN);
+  it("resets values", () => {
+    expect(store.getProgress("playerChoice")()).toBe(HandType.LIZARD);
+    expect(store.getProgress("houseChoice")()).toBe(HandType.PAPER);
+    expect(store.getProgress("result")()).toBe(ResultType.WIN);
 
     store.reset();
 
-    expect(store.getProgress('playerChoice')()).toBe(undefined);
-    expect(store.getProgress('houseChoice')()).toBe(undefined);
-    expect(store.getProgress('result')()).toBe(undefined);
+    expect(store.getProgress("playerChoice")()).toBe(undefined);
+    expect(store.getProgress("houseChoice")()).toBe(undefined);
+    expect(store.getProgress("result")()).toBe(undefined);
   });
 
-  it('subscribes and emits callback', () => {
+  it("subscribes and emits callback", () => {
     store.subscribe(mockCallback);
 
     store.setPlayerChoice(HandType.LIZARD);
@@ -58,7 +58,7 @@ describe('Store: progress', () => {
     expect(mockCallback).toHaveBeenCalledTimes(4);
   });
 
-  it('returns serverScore', () => {
+  it("returns serverScore", () => {
     expect(store.getServerProgress()).toBe(undefined);
   });
 });

@@ -1,9 +1,8 @@
-import { act, renderHook } from '@testing-library/react';
+import { HandType, ResultType } from "@components/constants";
+import { store } from "@store/progress";
+import { act, renderHook } from "@testing-library/react";
 
-import { HandType, ResultType } from '@components/constants';
-import { store } from '@store/progress';
-
-import { useProgress } from './useProgress';
+import { useProgress } from "./useProgress";
 
 type Options = {
   pause?: boolean;
@@ -12,22 +11,22 @@ type Options = {
 const mockUseRandomChoice = vi.fn();
 const mockUseResult = vi.fn();
 
-vi.mock('./useRandomChoice', () => ({
+vi.mock("./useRandomChoice", () => ({
   useRandomChoice: (p: Options) => mockUseRandomChoice(p) as typeof vi.fn,
 }));
 
-vi.mock('./useResult', () => ({
+vi.mock("./useResult", () => ({
   useResult: (p: Options) => mockUseResult(p) as typeof vi.fn,
 }));
 
-describe('Components: Game: useProgress', () => {
+describe("Components: Game: useProgress", () => {
   beforeEach(() => {
     act(() => store.reset());
     mockUseRandomChoice.mockClear();
     mockUseResult.mockClear();
   });
 
-  it('returns initial value', () => {
+  it("returns initial value", () => {
     const { result } = renderHook(() => useProgress());
 
     expect(result.current).toMatchObject({
@@ -37,7 +36,7 @@ describe('Components: Game: useProgress', () => {
     });
   });
 
-  it('returns expected values', () => {
+  it("returns expected values", () => {
     store.setPlayerChoice(HandType.LIZARD);
     mockUseRandomChoice.mockReturnValueOnce(HandType.SPOCK);
     mockUseResult.mockReturnValueOnce(ResultType.WIN);
@@ -51,34 +50,34 @@ describe('Components: Game: useProgress', () => {
     });
   });
 
-  it('pauses random choice', () => {
+  it("pauses random choice", () => {
     renderHook(() => useProgress());
 
     expect(mockUseRandomChoice).toHaveBeenCalledWith({ pause: true });
   });
 
-  it('does not pause random choice', () => {
+  it("does not pause random choice", () => {
     store.setPlayerChoice(HandType.LIZARD);
     renderHook(() => useProgress());
 
     expect(mockUseRandomChoice).toHaveBeenCalledWith({ pause: false });
   });
 
-  it('pauses result', () => {
+  it("pauses result", () => {
     renderHook(() => useProgress());
 
     expect(mockUseResult).toHaveBeenCalledWith({ pause: true });
   });
 
-  it('does not pause result', () => {
+  it("does not pause result", () => {
     store.setPlayerChoice(HandType.LIZARD);
     mockUseRandomChoice.mockReturnValueOnce(HandType.SPOCK);
     renderHook(() => useProgress());
 
     expect(mockUseResult).toHaveBeenCalledWith({
       pause: false,
-      houseChoice: 'spock',
-      playerChoice: 'lizard',
+      houseChoice: "spock",
+      playerChoice: "lizard",
     });
   });
 });

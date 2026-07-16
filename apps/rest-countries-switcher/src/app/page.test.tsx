@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
 
-import Page from './page';
+import Page from "./page";
 
-vi.mock('@api/fetcher', () => ({
+vi.mock("@api/fetcher", () => ({
   fetcher: vi.fn().mockResolvedValue([]),
 }));
 
@@ -11,14 +11,14 @@ const resolveComponent = async (Component: typeof Page) => {
   return () => ComponentResolved;
 };
 
-describe('App router: Home', () => {
-  it('renders', async () => {
+describe("App router: Home", () => {
+  it("renders", async () => {
     const Component = await resolveComponent(Page);
 
     render(<Component />);
 
-    expect(screen.getByRole('textbox', { name: 'Search for a country' })).toBeVisible();
+    expect(screen.getByRole("textbox", { name: "Search for a country" })).toBeVisible();
 
-    expect(screen.getByRole('button')).toBeVisible();
+    expect(screen.getByRole("button")).toBeVisible();
   });
 });

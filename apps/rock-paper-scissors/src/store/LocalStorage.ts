@@ -15,12 +15,7 @@ export class LocalStorage<T> implements LocalStorageType<T> {
   get<K extends keyof T>(key: K): T[K] | null {
     const value = this.storage?.getItem(key.toString());
 
-    if (
-      value === null ||
-      value === 'null' ||
-      value === undefined ||
-      value === 'undefined'
-    ) {
+    if (value === null || value === "null" || value === undefined || value === "undefined") {
       return null;
     }
 

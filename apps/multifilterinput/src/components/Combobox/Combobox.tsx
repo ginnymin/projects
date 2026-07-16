@@ -1,23 +1,22 @@
+import { Chip } from "@components/Chip";
 import {
-  Combobox as HeadlessCombobox,
   ComboboxInput,
   ComboboxOption,
   ComboboxOptions,
+  Combobox as HeadlessCombobox,
   type ComboboxProps as HeadlessComboboxProps,
 } from "@headlessui/react";
 import clsx from "clsx";
 import {
-  ChangeEvent,
-  InputHTMLAttributes,
-  KeyboardEvent,
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-
-import { Chip } from "@components/Chip";
 
 export interface Option<T = string> {
   id: T;
@@ -60,14 +59,22 @@ type MultiProps<T = string> = Omit<
 type Props<T = string> = SingleProps<T> | MultiProps<T>;
 
 function isNonNullArray<T>(value: T[] | null[]): value is T[] {
-  return value.every(v => v !== null);
+  return value.every((v) => v !== null);
 }
 
-function isSingleOnChange(_onChange: Props["onChange"], multiple: boolean, value: Option | Option[]): _onChange is SingleProps["onChange"] {
+function isSingleOnChange(
+  _onChange: Props["onChange"],
+  multiple: boolean,
+  value: Option | Option[],
+): _onChange is SingleProps["onChange"] {
   return !multiple && !Array.isArray(value);
 }
 
-function isMultipleOnChange(_onChange: Props["onChange"], multiple: boolean, value: Option | Option[]): _onChange is MultiProps["onChange"] {
+function isMultipleOnChange(
+  _onChange: Props["onChange"],
+  multiple: boolean,
+  value: Option | Option[],
+): _onChange is MultiProps["onChange"] {
   return multiple && Array.isArray(value);
 }
 
@@ -85,7 +92,9 @@ export const Combobox = ({
   ...props
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState(!Array.isArray(selectedOptions) ? selectedOptions?.value.toString() ?? "" : "");
+  const [query, setQuery] = useState(
+    !Array.isArray(selectedOptions) ? (selectedOptions?.value.toString() ?? "") : "",
+  );
   const [isStatic, setStatic] = useState(autoFocus ?? false);
 
   const handleChange = useCallback(
@@ -105,7 +114,7 @@ export const Combobox = ({
         onChange(value);
       }
     },
-    [onChange, multiple]
+    [onChange, multiple],
   );
 
   const handleRemoveOption = useCallback(
@@ -114,7 +123,7 @@ export const Combobox = ({
         onRemoveOption(option);
       }
     },
-    [onRemoveOption]
+    [onRemoveOption],
   );
 
   const handleClose = useCallback(() => {
@@ -157,15 +166,7 @@ export const Combobox = ({
         onChange(selectedOptions);
       }
     },
-    [
-      onBackspace,
-      onRemoveOption,
-      query,
-      isStatic,
-      multiple,
-      selectedOptions,
-      onChange,
-    ]
+    [onBackspace, onRemoveOption, query, isStatic, multiple, selectedOptions, onChange],
   );
 
   const filteredOptions = useMemo(
@@ -177,7 +178,7 @@ export const Combobox = ({
               ? option.value.toLowerCase().includes(query.toLowerCase())
               : option.value.toString().includes(query.toLowerCase());
           }),
-    [query, options]
+    [query, options],
   );
 
   useEffect(() => {

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc -b && eslint",
+    "lint": "tsc -b && biome check src",
     "test": "vitest run"
   }
 }

@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Countries } from './Countries';
+import type { Countries } from "./Countries";
 
-export { Countries } from './Countries';
+export { Countries } from "./Countries";
 export type CountriesProps = ComponentProps<typeof Countries>;

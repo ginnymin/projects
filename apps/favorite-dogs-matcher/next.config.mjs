@@ -3,41 +3,39 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    tsconfigPath: './tsconfig.app.json',
+    tsconfigPath: "./tsconfig.app.json",
   },
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'frontend-take-home.fetch.com' },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "frontend-take-home.fetch.com" }],
   },
   // eslint-disable-next-line @typescript-eslint/require-await
   async redirects() {
     return [
       // if fetch-access-token cookie is not present, redirect to /
       {
-        source: '/dashboard',
+        source: "/dashboard",
         missing: [
-          { type: 'cookie', key: 'fetch-access-token' },
-          { type: 'header', key: 'next-action' }, // Exclude Server Actions
+          { type: "cookie", key: "fetch-access-token" },
+          { type: "header", key: "next-action" }, // Exclude Server Actions
         ],
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
       {
-        source: '/match/:id',
+        source: "/match/:id",
         missing: [
-          { type: 'cookie', key: 'fetch-access-token' },
-          { type: 'header', key: 'next-action' }, // Exclude Server Actions
+          { type: "cookie", key: "fetch-access-token" },
+          { type: "header", key: "next-action" }, // Exclude Server Actions
         ],
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
 
       // if fetch-access-token cookie is present, redirect to /dashboard
       {
-        source: '/',
-        has: [{ type: 'cookie', key: 'fetch-access-token' }],
-        destination: '/dashboard',
+        source: "/",
+        has: [{ type: "cookie", key: "fetch-access-token" }],
+        destination: "/dashboard",
         permanent: false,
       },
     ];

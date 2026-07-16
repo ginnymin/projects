@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Flag } from './Flag';
+import type { Flag } from "./Flag";
 
-export { Flag } from './Flag';
+export { Flag } from "./Flag";
 export type FlagProps = ComponentProps<typeof Flag>;

@@ -1,6 +1,6 @@
-import { ComponentProps } from 'react';
+import type { ComponentProps } from "react";
 
-import { Logo } from './Logo';
+import type { Logo } from "./Logo";
 
-export { Logo } from './Logo';
+export { Logo } from "./Logo";
 export type LogoProps = ComponentProps<typeof Logo>;

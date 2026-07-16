@@ -1,8 +1,8 @@
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
-import './globals.scss';
+import "./globals.scss";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (

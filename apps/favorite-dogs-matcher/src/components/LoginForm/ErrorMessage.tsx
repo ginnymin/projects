@@ -1,5 +1,5 @@
-import { FC, HTMLAttributes } from 'react';
-import { useFormStatus } from 'react-dom';
+import type { FC, HTMLAttributes } from "react";
+import { useFormStatus } from "react-dom";
 
 type Props = HTMLAttributes<HTMLParagraphElement>;
 

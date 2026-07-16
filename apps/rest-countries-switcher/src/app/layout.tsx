@@ -1,11 +1,10 @@
-import clsx from 'clsx';
-import { Nunito_Sans } from 'next/font/google';
+import { Header } from "@components/Header";
+import clsx from "clsx";
+import { Nunito_Sans } from "next/font/google";
 
-import { Header } from '@components/Header';
+import "./globals.css";
 
-import './globals.css';
-
-const font = Nunito_Sans({ subsets: ['latin'], weight: ['300', '600', '800'] });
+const font = Nunito_Sans({ subsets: ["latin"], weight: ["300", "600", "800"] });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -21,16 +20,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body
         className={clsx(
-          'min-h-screen flex flex-col',
-          'text-blue-dark-text bg-gray-light',
-          'dark:text-white dark:bg-blue-dark-background',
-          font.className
+          "min-h-screen flex flex-col",
+          "text-blue-dark-text bg-gray-light",
+          "dark:text-white dark:bg-blue-dark-background",
+          font.className,
         )}
       >
         <Header />
-        <main className="flex flex-col flex-1 mx-10 my-8 md:mx-16 md:my-10">
-          {children}
-        </main>
+        <main className="flex flex-col flex-1 mx-10 my-8 md:mx-16 md:my-10">{children}</main>
       </body>
     </html>
   );

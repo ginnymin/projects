@@ -1,8 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from 'react';
-
-import { HandType, ResultType } from '@components/constants';
-import { store } from '@store/progress';
-import { store as score } from '@store/score';
+import { HandType, ResultType } from "@components/constants";
+import { store } from "@store/progress";
+import { store as score } from "@store/score";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 const types = Object.values(HandType);
 
@@ -31,7 +30,7 @@ const resultMap = types.reduce<Record<HandType, HandType[]>>(
 
     return map;
   },
-  {} as Record<HandType, HandType[]>
+  {} as Record<HandType, HandType[]>,
 );
 
 type Options = {
@@ -50,16 +49,11 @@ type Options = {
  * @param houseChoice
  * @param delay - defaults to 3 seconds
  */
-export const useResult = ({
-  playerChoice,
-  houseChoice,
-  delay = 3000,
-  pause = false,
-}: Options) => {
+export const useResult = ({ playerChoice, houseChoice, delay = 3000, pause = false }: Options) => {
   const storeResult = useSyncExternalStore(
     store.subscribe,
-    store.getProgress('result'),
-    store.getServerProgress
+    store.getProgress("result"),
+    store.getServerProgress,
   );
 
   const [result, setResult] = useState<ResultType | undefined>();

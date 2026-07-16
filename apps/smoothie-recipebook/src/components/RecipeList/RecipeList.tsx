@@ -1,22 +1,21 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Input } from "@components/Input";
+import type { Recipe } from "@store/types";
+import { useStore } from "@store/useStore";
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  ChangeEventHandler,
+  type ChangeEventHandler,
+  type FC,
+  type HTMLAttributes,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  type FC,
-  type HTMLAttributes,
-} from 'react';
-import { CgSpinner } from 'react-icons/cg';
-
-import { Input } from '@components/Input';
-import { Recipe } from '@store/types';
-import { useStore } from '@store/useStore';
+} from "react";
+import { CgSpinner } from "react-icons/cg";
 
 type Props = HTMLAttributes<HTMLElement> & {};
 
@@ -24,25 +23,19 @@ export const RecipeList: FC<Props> = () => {
   const pathname = usePathname();
   const { getAll } = useStore();
   const [data, setData] = useState<Recipe[] | undefined>();
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
 
   const filteredData = useMemo(
     () =>
-      filter.trim() !== ''
-        ? data?.filter(
-            (recipe) =>
-              recipe.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-          )
+      filter.trim() !== ""
+        ? data?.filter((recipe) => recipe.name.toLowerCase().indexOf(filter.toLowerCase()) > -1)
         : data,
-    [data, filter]
+    [data, filter],
   );
 
-  const handleFilter: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      setFilter(e.target.value);
-    },
-    []
-  );
+  const handleFilter: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    setFilter(e.target.value);
+  }, []);
 
   useEffect(() => {
     const run = async () => {
@@ -50,19 +43,17 @@ export const RecipeList: FC<Props> = () => {
       setData(result);
     };
 
-    if (pathname === '/') {
+    if (pathname === "/") {
       void run();
     }
   }, [getAll, pathname]);
 
-  const containerClass = 'bg-slate-100 rounded-lg p-4 min-h-48';
+  const containerClass = "bg-slate-100 rounded-lg p-4 min-h-48";
 
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-2">
-        <h2 className="px-4 font-semibold text-xl mb-2 sm:mb-0">
-          My smoothies
-        </h2>
+        <h2 className="px-4 font-semibold text-xl mb-2 sm:mb-0">My smoothies</h2>
         <Input
           placeholder="Search..."
           label="Filter smoothies by name"
@@ -78,9 +69,7 @@ export const RecipeList: FC<Props> = () => {
         />
       </div>
       {data === undefined ? (
-        <div
-          className={clsx(containerClass, 'flex justify-center items-center')}
-        >
+        <div className={clsx(containerClass, "flex justify-center items-center")}>
           <CgSpinner className="size-12 animate-spin" />
           <p className="sr-only">Loading...</p>
         </div>
@@ -92,10 +81,7 @@ export const RecipeList: FC<Props> = () => {
         <ul className={containerClass}>
           {filteredData?.map((recipe) => (
             <li key={recipe.id}>
-              <Link
-                href={`/recipe/${recipe.id}`}
-                className="hover:text-teal-600"
-              >
+              <Link href={`/recipe/${recipe.id}`} className="hover:text-teal-600">
                 {recipe.name}
               </Link>
             </li>

@@ -1,6 +1,6 @@
-import type { FC, HTMLAttributes } from 'react';
+import type { FC, HTMLAttributes } from "react";
 
-import styles from './ComponentName.module.scss';
+import styles from "./ComponentName.module.scss";
 
 type Props = HTMLAttributes<HTMLElement> & {
   property?: string;

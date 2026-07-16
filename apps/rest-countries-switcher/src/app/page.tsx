@@ -1,24 +1,23 @@
-import { unstable_serialize } from 'swr';
-
-import { fetcher } from '@api/fetcher';
-import { Countries } from '@components/Countries';
-import { CountryProvider } from '@components/CountryProvider';
-import { RegionSelector } from '@components/RegionSelector';
-import { Search } from '@components/Search';
-import { SWRProvider } from '@components/SWRProvider';
+import { fetcher } from "@api/fetcher";
+import { Countries } from "@components/Countries";
+import { CountryProvider } from "@components/CountryProvider";
+import { RegionSelector } from "@components/RegionSelector";
+import { Search } from "@components/Search";
+import { SWRProvider } from "@components/SWRProvider";
+import { unstable_serialize } from "swr";
 
 export const metadata = {
-  title: 'ginnymin',
-  description: 'A fun little project from ginnymin.com',
+  title: "ginnymin",
+  description: "A fun little project from ginnymin.com",
 };
 
 const Page = async () => {
-  const countries = await fetcher(['']);
+  const countries = await fetcher([""]);
 
   return (
     <SWRProvider
       value={{
-        fallback: { [unstable_serialize(['', undefined])]: countries },
+        fallback: { [unstable_serialize(["", undefined])]: countries },
       }}
     >
       <CountryProvider>

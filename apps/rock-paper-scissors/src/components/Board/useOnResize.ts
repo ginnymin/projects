@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Adds an event listener for window resize events with an optional throttle delay.
@@ -22,10 +22,10 @@ export const useOnResize = (callback: () => void, delay = 0) => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [callback, delay]);
 };

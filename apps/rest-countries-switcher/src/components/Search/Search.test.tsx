@@ -1,15 +1,14 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { CountryProvider } from "@components/CountryProvider";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import { CountryProvider } from '@components/CountryProvider';
-
-import { Search } from '.';
+import { Search } from ".";
 
 const mockSetRegion = vi.fn();
 const mockSetSearch = vi.fn();
 
 /* eslint-disable */
-vi.mock('react', async (importOriginal) => {
+vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal();
   return {
     // @ts-expect-error
@@ -28,42 +27,40 @@ const SearchComponent = () => (
   </CountryProvider>
 );
 
-describe('Components: Search', () => {
+describe("Components: Search", () => {
   beforeEach(() => {
     mockSetRegion.mockClear();
     mockSetSearch.mockClear();
   });
 
-  it('renders input', () => {
+  it("renders input", () => {
     render(<SearchComponent />);
 
-    expect(
-      screen.getByRole('textbox', { name: 'Search for a country' })
-    ).toBeVisible();
+    expect(screen.getByRole("textbox", { name: "Search for a country" })).toBeVisible();
   });
 
-  it('calls setRegion and setSearch', async () => {
+  it("calls setRegion and setSearch", async () => {
     render(<SearchComponent />);
 
-    await userEvent.type(screen.getByRole('textbox'), 'united');
+    await userEvent.type(screen.getByRole("textbox"), "united");
 
     await waitFor(
       () => {
         expect(mockSetRegion).toHaveBeenCalledWith(undefined);
-        expect(mockSetSearch).toHaveBeenCalledWith('united');
+        expect(mockSetSearch).toHaveBeenCalledWith("united");
       },
-      { timeout: 1100 }
+      { timeout: 1100 },
     );
   });
 
-  it('resets the search input', async () => {
+  it("resets the search input", async () => {
     render(<SearchComponent />);
 
-    const input = screen.getByRole<HTMLInputElement>('textbox');
+    const input = screen.getByRole<HTMLInputElement>("textbox");
 
-    await userEvent.type(input, 'un');
+    await userEvent.type(input, "un");
 
-    await waitFor(() => expect(mockSetSearch).toHaveBeenCalledWith('un'), {
+    await waitFor(() => expect(mockSetSearch).toHaveBeenCalledWith("un"), {
       timeout: 1100,
     });
 
@@ -76,7 +73,7 @@ describe('Components: Search', () => {
       },
       {
         timeout: 1100,
-      }
+      },
     );
   });
 });

@@ -1,6 +1,6 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
-import { Filter } from "./Filter";
+import type { Filter } from "./Filter";
 
 export { Filter } from "./Filter";
 export type FilterProps = ComponentProps<typeof Filter>;

@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { CgSpinner } from 'react-icons/cg';
-
-import { RecipeForm } from '@components/RecipeForm';
-import { Recipe as RecipeType } from '@store/types';
-import { useStore } from '@store/useStore';
+import { RecipeForm } from "@components/RecipeForm";
+import type { Recipe as RecipeType } from "@store/types";
+import { useStore } from "@store/useStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CgSpinner } from "react-icons/cg";
 
 type Props = {
   id: string | undefined;
@@ -18,11 +17,11 @@ export const Recipe = ({ id }: Props) => {
   const [nameError, setNameError] = useState(false);
   const router = useRouter();
 
-  const handleSave = (data: Omit<RecipeType, 'id'>) => {
+  const handleSave = (data: Omit<RecipeType, "id">) => {
     setNameError(false);
 
     const sameNameRecipe = getAllRecipes()?.some(
-      (r) => r.name === data.name && r.id !== Number(id)
+      (r) => r.name === data.name && r.id !== Number(id),
     );
 
     if (sameNameRecipe) {

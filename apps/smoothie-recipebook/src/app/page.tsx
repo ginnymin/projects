@@ -1,9 +1,9 @@
-import { Button } from '@components/Button';
-import { RecipeList } from '@components/RecipeList';
+import { Button } from "@components/Button";
+import { RecipeList } from "@components/RecipeList";
 
 export const metadata = {
-  title: 'Smoothie Recipebook',
-  description: 'Create and manage your smoothie recipes',
+  title: "Smoothie Recipebook",
+  description: "Create and manage your smoothie recipes",
 };
 
 const Page = () => {

@@ -1,7 +1,6 @@
-import { useEffect, useState, useSyncExternalStore } from 'react';
-
-import { HandType } from '@components/constants';
-import { store } from '@store/progress';
+import { HandType } from "@components/constants";
+import { store } from "@store/progress";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 type Options = {
   pause?: boolean;
@@ -18,8 +17,8 @@ type Options = {
 export const useRandomChoice = ({ pause = false, delay = 3000 }: Options) => {
   const storeHouseChoice = useSyncExternalStore(
     store.subscribe,
-    store.getProgress('houseChoice'),
-    store.getServerProgress
+    store.getProgress("houseChoice"),
+    store.getServerProgress,
   );
 
   const [choice, setChoice] = useState<HandType | undefined>();

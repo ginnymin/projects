@@ -1,18 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { CountryProvider, type CountryProviderProps } from "@components/CountryProvider";
+import { render, screen } from "@testing-library/react";
 
-import { CountryProvider, CountryProviderProps } from '@components/CountryProvider';
-
-import { Countries } from '.';
+import { Countries } from ".";
 
 const mockUseFetchCountries = vi.fn();
 
-vi.mock('next/navigation', () => ({
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
   }),
 }));
 
-vi.mock('@api/hooks', () => ({
+vi.mock("@api/hooks", () => ({
   useFetchCountries: (...args: (string | undefined)[]) =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     mockUseFetchCountries(...args),
@@ -24,63 +23,63 @@ const Component = (props: CountryProviderProps) => (
   </CountryProvider>
 );
 
-describe('Components: Countries', () => {
+describe("Components: Countries", () => {
   beforeEach(() => {
     mockUseFetchCountries.mockClear();
     mockUseFetchCountries.mockReturnValue({
       data: [
         {
-          id: 'USA',
-          name: 'United States',
+          id: "USA",
+          name: "United States",
           population: 300000000,
-          region: 'Americas',
+          region: "Americas",
           flag: {
-            src: 'svg.svg',
-            alt: 'Stars and stripes',
+            src: "svg.svg",
+            alt: "Stars and stripes",
           },
         },
       ],
     });
   });
 
-  it('renders', () => {
+  it("renders", () => {
     render(<Component />);
 
-    expect(screen.getByRole('link', { name: 'United States' })).toBeVisible();
+    expect(screen.getByRole("link", { name: "United States" })).toBeVisible();
   });
 
-  it('renders loading', () => {
+  it("renders loading", () => {
     mockUseFetchCountries.mockReturnValue({
       data: undefined,
     });
 
     render(<Component />);
 
-    expect(screen.getByRole('heading', { name: 'Loading...' })).toBeVisible();
+    expect(screen.getByRole("heading", { name: "Loading..." })).toBeVisible();
   });
 
-  it('calls useFetchCountries hook with expected default args', () => {
+  it("calls useFetchCountries hook with expected default args", () => {
     render(<Component />);
 
-    expect(mockUseFetchCountries).toHaveBeenCalledWith('', undefined);
+    expect(mockUseFetchCountries).toHaveBeenCalledWith("", undefined);
   });
 
-  it('calls useFetchCountries hook with expected search args', () => {
+  it("calls useFetchCountries hook with expected search args", () => {
     render(<Component search="uni" />);
 
-    expect(mockUseFetchCountries).toHaveBeenCalledWith('/names.common', 'uni');
+    expect(mockUseFetchCountries).toHaveBeenCalledWith("/names.common", "uni");
   });
 
-  it('calls useFetchCountries hook with expected region args', () => {
+  it("calls useFetchCountries hook with expected region args", () => {
     render(<Component region="Americas" />);
 
-    expect(mockUseFetchCountries).toHaveBeenCalledWith('/region', 'Americas');
+    expect(mockUseFetchCountries).toHaveBeenCalledWith("/region", "Americas");
   });
 
-  it('defaults to search when both search and region are provided', () => {
+  it("defaults to search when both search and region are provided", () => {
     render(<Component search="uni" region="Americas" />);
 
-    expect(mockUseFetchCountries).toHaveBeenCalledWith('/names.common', 'uni');
-    expect(mockUseFetchCountries).not.toHaveBeenCalledWith('/region', 'Americas');
+    expect(mockUseFetchCountries).toHaveBeenCalledWith("/names.common", "uni");
+    expect(mockUseFetchCountries).not.toHaveBeenCalledWith("/region", "Americas");
   });
 });

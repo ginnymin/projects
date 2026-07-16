@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
+import { CountryContext } from "@components/CountryProvider";
+import clsx from "clsx";
 import {
-  ChangeEventHandler,
-  useCallback,
-  useContext,
+  type ChangeEventHandler,
   type FC,
   type HTMLAttributes,
-} from 'react';
-import { HiOutlineSearch } from 'react-icons/hi';
+  useCallback,
+  useContext,
+} from "react";
+import { HiOutlineSearch } from "react-icons/hi";
 
-import { CountryContext } from '@components/CountryProvider';
-
-import { useDebounce } from './useDebounce';
+import { useDebounce } from "./useDebounce";
 
 type Props = HTMLAttributes<HTMLElement>;
 
@@ -23,7 +22,7 @@ export const Search: FC<Props> = ({ className }) => {
     (event) => {
       const value = event.target.value;
 
-      if (value.trim() === '') {
+      if (value.trim() === "") {
         setSearch(undefined);
       } else {
         setSearch(value);
@@ -31,23 +30,16 @@ export const Search: FC<Props> = ({ className }) => {
 
       setRegion(undefined);
     },
-    [setRegion, setSearch]
+    [setRegion, setSearch],
   );
 
   const debouncedChange = useDebounce(handleChange, 1000);
 
   return (
-    <div
-      className={clsx(
-        'relative w-full md:max-w-[375px] lg:max-w-[475px]',
-        className
-      )}
-    >
+    <div className={clsx("relative w-full md:max-w-[375px] lg:max-w-[475px]", className)}>
       <HiOutlineSearch className="absolute size-5 left-5 top-[calc(50%-10px)]" />
       <input
-        className={clsx(
-          'container-shadow container-shadow-focus px-12 sm:px-14 py-4 w-full'
-        )}
+        className={clsx("container-shadow container-shadow-focus px-12 sm:px-14 py-4 w-full")}
         placeholder="Search for a country..."
         aria-label="Search for a country"
         onChange={debouncedChange}

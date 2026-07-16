@@ -13,17 +13,7 @@ export interface MultiKey {
 
 export type Key = SingleKey | MultiKey;
 
-type Operator =
-  | "="
-  | "!="
-  | "set"
-  | "!set"
-  | "contains"
-  | "!contains"
-  | "<"
-  | ">"
-  | "<="
-  | ">=";
+type Operator = "=" | "!=" | "set" | "!set" | "contains" | "!contains" | "<" | ">" | "<=" | ">=";
 
 export interface OperatorDefinition {
   id: string;
