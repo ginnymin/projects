@@ -1,0 +1,50 @@
+@reference "tailwindcss";
+
+.reset-button {
+  @apply bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg;
+}
+
+.correct,
+.present,
+.absent {
+  color: white;
+}
+
+.correct {
+  background-color: var(--color-correct);
+}
+
+.present {
+  background-color: var(--color-present);
+}
+
+.absent {
+  background-color: var(--color-absent);
+}
+
+.square {
+  @apply flex items-center justify-center font-bold aspect-square;
+  width: var(--square-size);
+  border: 2px solid var(--color-default);
+  font-size: 1.8rem;
+
+  &.correct {
+    border-color: var(--color-correct);
+  }
+
+  &.present {
+    border-color: var(--color-present);
+  }
+
+  &.absent {
+    border-color: var(--color-absent);
+  }
+}
+
+.letter {
+  @apply font-bold px-2 py-1 rounded-sm;
+
+  &.default {
+    background-color: var(--color-default);
+  }
+}
