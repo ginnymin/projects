@@ -20,8 +20,10 @@
     "test": "yarn workspaces run test --silent",
     "dev:countries": "yarn workspace rest-countries-switcher dev",
     "dev:dogs": "yarn workspace favorite-dogs-matcher dev",
+    "dev:multifilterinput": "yarn workspace multifilterinput dev",
     "dev:rock": "yarn workspace rock-paper-scissors dev",
-    "dev:smoothies": "yarn workspace smoothie-recipebook dev"
+    "dev:smoothies": "yarn workspace smoothie-recipebook dev",
+    "dev:wordle": "yarn workspace wordle dev"
   },
   "dependencies": {
     "@headlessui/react": "2.2.10",
