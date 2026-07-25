@@ -1,5 +1,7 @@
 # Projects
 
+Random small apps and projects.
+
 ## Aplications
 
 [Wordle](./apps/wordle/)
