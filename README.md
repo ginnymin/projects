@@ -41,3 +41,4 @@ Random small apps and projects.
 - `yarn lint` - Runs lint and type checks across all applications
 
 Other available commands can be found in the root `package.json`
+

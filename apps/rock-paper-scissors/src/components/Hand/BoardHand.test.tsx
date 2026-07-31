@@ -17,7 +17,7 @@ describe("Components: BoardHand", () => {
     render(<BoardHand type={HandType.LIZARD} index={0} style={{ opacity: 0.5 }} />);
 
     expect(screen.getByRole("button", { name: "lizard" })).toHaveStyle({
-      left: "-77.99999999999999px",
+      left: "-78px",
       top: "-224px",
       opacity: 0.5,
     });
