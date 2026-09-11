@@ -25,7 +25,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["@testing-library/jest-dom", "vitest/globals"]
+    "types": ["@testing-library/jest-dom/vitest", "vitest/globals"]
   },
   "exclude": ["node_modules", ".next", "build"]
 }
