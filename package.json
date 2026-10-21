@@ -2,6 +2,9 @@
   "name": "projects",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=24.22.1 <25"
+  },
   "workspaces": [
     "apps/favorite-dogs-matcher",
     "apps/multifilterinput",
