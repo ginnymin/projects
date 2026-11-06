@@ -10,7 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "set-cookie-parser": "3.2.1",
+    "set-cookie-parser": "3.2.2",
     "swr": "2.5.1"
   },
   "devDependencies": {
